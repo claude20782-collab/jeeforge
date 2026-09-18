@@ -1,0 +1,352 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============ AUTH & USERS ============
+
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  username          String    @unique
+  passwordHash      String
+  role              String    @default("USER") // USER | ADMIN
+  status            String    @default("ACTIVE") // ACTIVE | SUSPENDED | BANNED
+  displayName       String?
+  avatarUrl         String? // data URL (resized client-side, <=256px) or generated initial avatar if null
+  bio               String?
+  targetYear        Int?
+  profilePublic     Boolean   @default(true) // profile page visible to others
+  leaderboardVisible Boolean  @default(true) // included in leaderboards
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  sessions          Session[]
+  attempts          Attempt[]
+  groupMemberships  GroupMember[]
+  groupMessages     GroupMessage[]
+  conversationsA   DirectConversation[] @relation("userA")
+  conversationsB   DirectConversation[] @relation("userB")
+  sentMessages      DirectMessage[] @relation("sender")
+  notifications     Notification[]
+  reportsFiled      Report[] @relation("reporter")
+  moderationActions ModerationAction[] @relation("admin")
+  blocksInitiated   Block[] @relation("blocker")
+  blocksReceived    Block[] @relation("blocked")
+  resetTokens       PasswordResetToken[]
+  ownedGroups       Group[] @relation("owner")
+
+  @@index([status])
+}
+
+model Session {
+  id         String    @id @default(uuid()) // = jti in JWT
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userAgent  String?
+  ip         String?
+  createdAt  DateTime  @default(now())
+  lastSeenAt DateTime  @default(now())
+  revokedAt  DateTime?
+
+  @@index([userId, lastSeenAt])
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+}
+
+// ============ SYLLABUS / CONTENT ============
+
+model Chapter {
+  id       String  @id @default(cuid())
+  subject  String // PHYSICS | CHEMISTRY | MATHEMATICS
+  slug     String
+  name     String
+  order    Int     @default(0)
+  topics   Topic[]
+  questions Question[]
+
+  @@unique([subject, slug])
+  @@index([subject])
+}
+
+model Topic {
+  id        String   @id @default(cuid())
+  chapterId String
+  chapter   Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  slug      String
+  name      String
+  order     Int      @default(0)
+  questions Question[]
+
+  @@unique([chapterId, slug])
+}
+
+model Question {
+  id             String   @id @default(cuid())
+  subject        String // PHYSICS | CHEMISTRY | MATHEMATICS
+  section        String // A = MCQ (4 options), B = numerical
+  text           String // markdown with inline/embedded $...$ LaTeX
+  options        Json? // string[4] for section A, null for B
+  correctAnswer  String // "A"|"B"|"C"|"D" for A; canonical numeric string for B
+  solutionText   String // complete verified step-by-step markdown solution (MANDATORY, no placeholders)
+  formulaConcept String // formula / concept used
+  difficulty     String // EASY | MODERATE | HARD | VERY_HARD
+  chapterId      String
+  chapter        Chapter  @relation(fields: [chapterId], references: [id])
+  topicId        String
+  topic          Topic    @relation(fields: [topicId], references: [id])
+  sourceType     String // PYQ | ORIGINAL
+  pyqYear        Int?
+  pyqShift       String? // e.g. "24 Jan Shift 1" (only when verified true)
+  sourceNote     String?
+  diagram        Json? // DiagramSpec — typed JSON rendered by /components/diagram
+  contentHash    String   @unique // normalized text hash → global dedupe across all mocks
+  isVerified     Boolean  @default(false)
+  marksCorrect   Int      @default(4)
+  marksWrong     Int      @default(-1)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  mockQuestions  MockQuestion[]
+  attemptAnswers AttemptAnswer[]
+
+  @@index([subject, difficulty])
+  @@index([chapterId])
+  @@index([topicId])
+}
+
+model Mock {
+  id             String    @id @default(cuid())
+  mockNumber     Int       @unique
+  title          String
+  scheduledAt    DateTime // unlock time (00:00 IST of scheduled date)
+  durationMinutes Int      @default(180)
+  totalMarks     Int       @default(300)
+  questionCount  Int       @default(75)
+  status         String    @default("DRAFT") // DRAFT | PUBLISHED | RETRACTED
+  publishedAt    DateTime?
+  validationJson Json? // last validation snapshot { passed, errors[], warnings[], checkedAt }
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  questions      MockQuestion[]
+  attempts       Attempt[]
+
+  @@index([status, scheduledAt])
+}
+
+model MockQuestion {
+  id         String   @id @default(cuid())
+  mockId     String
+  mock       Mock     @relation(fields: [mockId], references: [id], onDelete: Cascade)
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  order      Int // 1..75 (1-25 Physics, 26-50 Chemistry, 51-75 Mathematics)
+
+  @@unique([mockId, questionId])
+  @@unique([mockId, order])
+  @@index([questionId])
+}
+
+// ============ ATTEMPTS & SCORING ============
+
+model Attempt {
+  id               String    @id @default(cuid())
+  userId           String
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mockId           String
+  mock             Mock      @relation(fields: [mockId], references: [id], onDelete: Cascade)
+  status           String    @default("IN_PROGRESS") // IN_PROGRESS | SUBMITTED
+  startedAt        DateTime  @default(now())
+  deadlineAt       DateTime // startedAt + 180 min — SERVER authoritative
+  submittedAt      DateTime?
+  autoSubmitted    Boolean   @default(false)
+  // Server-computed scores (immutable after submit)
+  score            Int?
+  physicsScore     Int?
+  chemistryScore   Int?
+  mathsScore       Int?
+  correctCount     Int?
+  wrongCount       Int?
+  unattemptedCount Int?
+  accuracy         Float? // correct / (correct+wrong) * 100, null if none attempted
+  timeUsedSeconds  Int?
+  ip               String?
+  userAgent        String?
+  suspiciousFlags  Json? // logged anomalies { multipleActiveSessions: bool, ... }
+
+  answers          AttemptAnswer[]
+
+  @@unique([userId, mockId]) // one attempt per user per mock
+  @@index([mockId, status])
+  @@index([userId, submittedAt])
+  @@index([mockId, score])
+}
+
+model AttemptAnswer {
+  id               String    @id @default(cuid())
+  attemptId        String
+  attempt          Attempt   @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  questionId       String
+  question         Question  @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  selectedAnswer   String? // null = not answered; "A".."D" or numeric string
+  isCorrect        Boolean?
+  markedForReview  Boolean   @default(false)
+  visited          Boolean   @default(false)
+  timeSpentSeconds Int       @default(0) // accumulated server-side from client deltas
+  mistakeTag       String? // user self-classification: CONCEPT_GAP|FORMULA_ERROR|CALCULATION_ERROR|SILLY_MISTAKE|MISREAD_QUESTION|TIME_PRESSURE|GUESS|OTHER
+  firstVisitedAt   DateTime?
+  updatedAt        DateTime  @updatedAt
+
+  @@unique([attemptId, questionId])
+  @@index([questionId])
+}
+
+// ============ COMMUNITY ============
+
+model Group {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  isPrivate   Boolean   @default(false)
+  ownerId     String
+  owner       User      @relation("owner", fields: [ownerId], references: [id])
+  createdAt   DateTime  @default(now())
+  members     GroupMember[]
+  messages    GroupMessage[]
+}
+
+model GroupMember {
+  id         String    @id @default(cuid())
+  groupId    String
+  group      Group     @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role       String    @default("MEMBER") // OWNER | MODERATOR | MEMBER
+  muted      Boolean   @default(false)
+  lastReadAt DateTime  @default(now())
+  joinedAt   DateTime  @default(now())
+
+  @@unique([groupId, userId])
+  @@index([userId])
+}
+
+model GroupMessage {
+  id         String    @id @default(cuid())
+  groupId    String
+  group      Group     @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content    String // <= 2000 chars, sanitized on render
+  replyToId  String? // GroupMessage id
+  deletedAt  DateTime?
+  deletedBy  String? // admin id
+  createdAt  DateTime  @default(now())
+
+  @@index([groupId, createdAt])
+}
+
+model DirectConversation {
+  id           String   @id @default(cuid())
+  userAId      String // always the lexicographically smaller user id
+  userBId      String
+  userA        User     @relation("userA", fields: [userAId], references: [id], onDelete: Cascade)
+  userB        User     @relation("userB", fields: [userBId], references: [id], onDelete: Cascade)
+  lastMessageAt DateTime @default(now())
+  createdAt    DateTime @default(now())
+
+  messages     DirectMessage[]
+
+  @@unique([userAId, userBId])
+}
+
+model DirectMessage {
+  id             String             @id @default(cuid())
+  conversationId String
+  conversation   DirectConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String
+  sender         User               @relation("sender", fields: [senderId], references: [id], onDelete: Cascade)
+  content        String
+  readAt         DateTime?
+  deletedAt      DateTime?
+  createdAt      DateTime           @default(now())
+
+  @@index([conversationId, createdAt])
+}
+
+model Block {
+  blockerId String
+  blocker   User   @relation("blocker", fields: [blockerId], references: [id], onDelete: Cascade)
+  blockedId String
+  blocked   User   @relation("blocked", fields: [blockedId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([blockerId, blockedId])
+  @@index([blockedId])
+}
+
+// ============ NOTIFICATIONS / MODERATION ============
+
+model Notification {
+  id             String    @id @default(cuid())
+  userId         String
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type           String // GROUP_MESSAGE | DIRECT_MESSAGE | MENTION | GROUP_ACTIVITY | MOCK_ANNOUNCEMENT | SYSTEM | REPORT_STATUS
+  title          String
+  body           String?
+  link           String? // hash route e.g. "#/group/xyz"
+  actorId        String?
+  groupId        String?
+  conversationId String?
+  mockId         String?
+  readAt         DateTime?
+  createdAt      DateTime  @default(now())
+
+  @@index([userId, readAt, createdAt])
+  @@index([userId, createdAt])
+}
+
+model Report {
+  id              String    @id @default(cuid())
+  reporterId      String
+  reporter        User      @relation("reporter", fields: [reporterId], references: [id], onDelete: Cascade)
+  targetType      String // USER | GROUP_MESSAGE | DIRECT_MESSAGE | GROUP
+  targetUserId    String?
+  targetMessageId String?
+  targetGroupId   String?
+  reason          String // SPAM | ABUSE | HARASSMENT | CHEATING | INAPPROPRIATE | OTHER
+  details         String?
+  status          String    @default("OPEN") // OPEN | RESOLVED | DISMISSED
+  resolvedBy      String?
+  resolutionNote  String?
+  createdAt       DateTime  @default(now())
+  resolvedAt      DateTime?
+
+  @@index([status, createdAt])
+}
+
+model ModerationAction {
+  id         String   @id @default(cuid())
+  adminId    String
+  admin      User     @relation("admin", fields: [adminId], references: [id], onDelete: Cascade)
+  actionType String // SUSPEND_USER | BAN_USER | RESTORE_USER | RESET_PASSWORD | DELETE_GROUP_MESSAGE | DELETE_DIRECT_MESSAGE | PUBLISH_MOCK | UNPUBLISH_MOCK | RESOLVE_REPORT | DISMISS_REPORT | ANNOUNCEMENT
+  targetType String
+  targetId   String
+  note       String?
+  createdAt  DateTime @default(now())
+
+  @@index([adminId, createdAt])
+}

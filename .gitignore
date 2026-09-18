@@ -1,2 +1,90 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+local-*
+.claude
+.z-ai-config
+*.log
+dev.log
+dev.out.log
+test
+prompt
+
+server.log
+# Skills directory
+/skills/.env
+
+# secrets & env — NEVER commit
+.env
+.env.*
+!.env.example
+
+# database
+db/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# logs
+dev.log
+server.log
+service.log
+*.log
+
+# artifacts
+agent-ctx/
+upload/
+download/
+tests/
+/tests
+
+# mini service build artifacts
+mini-services/*/node_modules
+.dtest-shots/
+.zscripts/
 skills/
-node_modules/
+"skills
+tool-results/
+tmp-scripts/
+t2-verify/
+agent-ctx/
