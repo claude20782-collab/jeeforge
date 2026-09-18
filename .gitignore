@@ -88,3 +88,6 @@ tool-results/
 tmp-scripts/
 t2-verify/
 agent-ctx/
+*.tmp.ts
+dtest-seed.tmp.ts
+etest-t5c-seed.ts
