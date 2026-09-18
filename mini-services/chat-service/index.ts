@@ -37,17 +37,19 @@ const warn = (...a: unknown[]) => console.warn(new Date().toISOString(), '[warn]
 // ---------------------------------------------------------------------------
 async function initDb(): Promise<void> {
   try {
-    await db.$queryRawUnsafe('PRAGMA journal_mode=WAL;')
+    if ((process.env.DATABASE_URL || '').startsWith('file:')) await db.$queryRawUnsafe('PRAGMA journal_mode=WAL;')
     log('db: journal_mode=WAL ok')
   } catch (e) {
     warn('db: PRAGMA journal_mode=WAL failed (continuing):', (e as Error).message)
   }
-  try {
-    // $queryRawUnsafe, not $executeRawUnsafe: PRAGMA statements return a result row.
-    await db.$queryRawUnsafe('PRAGMA busy_timeout = 5000;')
-    log('db: busy_timeout=5000 ok')
-  } catch (e) {
-    warn('db: PRAGMA busy_timeout failed (continuing):', (e as Error).message)
+  if ((process.env.DATABASE_URL || '').startsWith('file:')) {
+    try {
+      // $queryRawUnsafe, not $executeRawUnsafe: PRAGMA statements return a result row.
+      await db.$queryRawUnsafe('PRAGMA busy_timeout = 5000;')
+      log('db: busy_timeout=5000 ok')
+    } catch (e) {
+      warn('db: PRAGMA busy_timeout failed (continuing):', (e as Error).message)
+    }
   }
 }
 

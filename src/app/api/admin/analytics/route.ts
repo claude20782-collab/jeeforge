@@ -37,7 +37,7 @@ export async function GET() {
   const [questionRows, subjectRows, difficultyRows, scoreAgg, submittedScores, mockLinks] = await Promise.all([
     db.$queryRawUnsafe<QuestionStatRow[]>( `
       SELECT q.id, q.text, q.subject, q.difficulty, COUNT(*) as attempts,
-             (SUM(CASE WHEN aa.isCorrect = 1 THEN 1 ELSE 0 END) * 1.0 / COUNT(*)) * 100 as correctRate,
+             (SUM(CASE WHEN aa.isCorrect = TRUE THEN 1 ELSE 0 END) * 1.0 / COUNT(*)) * 100 as correctRate,
              AVG(aa.timeSpentSeconds) as avgTime
       FROM AttemptAnswer aa
       JOIN Attempt a ON a.id = aa.attemptId AND a.status = 'SUBMITTED'
@@ -49,8 +49,8 @@ export async function GET() {
     `),
     db.$queryRawUnsafe<SubjectRow[]>( `
       SELECT q.subject,
-             SUM(CASE WHEN aa.isCorrect = 1 THEN 1 ELSE 0 END) as correct,
-             SUM(CASE WHEN aa.isCorrect = 0 THEN 1 ELSE 0 END) as wrong,
+             SUM(CASE WHEN aa.isCorrect = TRUE THEN 1 ELSE 0 END) as correct,
+             SUM(CASE WHEN aa.isCorrect = FALSE THEN 1 ELSE 0 END) as wrong,
              AVG(aa.timeSpentSeconds) as avgTime
       FROM AttemptAnswer aa
       JOIN Attempt a ON a.id = aa.attemptId AND a.status = 'SUBMITTED'
@@ -61,7 +61,7 @@ export async function GET() {
     db.$queryRawUnsafe<DifficultyRow[]>( `
       SELECT q.difficulty,
              COUNT(*) as attempted,
-             SUM(CASE WHEN aa.isCorrect = 1 THEN 1 ELSE 0 END) as correct,
+             SUM(CASE WHEN aa.isCorrect = TRUE THEN 1 ELSE 0 END) as correct,
              AVG(aa.timeSpentSeconds) as avgTime
       FROM AttemptAnswer aa
       JOIN Attempt a ON a.id = aa.attemptId AND a.status = 'SUBMITTED'

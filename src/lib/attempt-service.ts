@@ -543,7 +543,8 @@ export function notificationDto(n: Notification): NotificationDTO {
 export function broadcastToRoom(event: string, room: string, payload: unknown): void {
   const key = process.env.INTERNAL_API_KEY
   if (!key) return
-  fetch('http://localhost:3003/internal/broadcast', {
+  const base = process.env.CHAT_INTERNAL_URL || 'http://localhost:3003'
+  fetch(`${base}/internal/broadcast`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-internal-key': key },
     body: JSON.stringify({ event, room, payload }),
@@ -625,7 +626,7 @@ export async function adminQuestionDtos(
     db.mockQuestion.findMany({ where: { questionId: { in: ids } }, include: { mock: { select: { mockNumber: true } } } }),
     db.$queryRaw<Array<{ questionId: string; attempts: bigint; correct: bigint; avgTime: number | null }>>`
       SELECT aa.questionId, COUNT(*) as attempts,
-             SUM(CASE WHEN aa.isCorrect = 1 THEN 1 ELSE 0 END) as correct,
+             SUM(CASE WHEN aa.isCorrect = TRUE THEN 1 ELSE 0 END) as correct,
              AVG(aa.timeSpentSeconds) as avgTime
       FROM AttemptAnswer aa JOIN Attempt a ON a.id = aa.attemptId
       WHERE a.status = 'SUBMITTED' AND aa.selectedAnswer IS NOT NULL AND aa.questionId IN (${Prisma.join(ids)})

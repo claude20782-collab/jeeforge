@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JEEForge — Free JEE Main 2027 Mock Test Series (40 Full-Length CBTs)</title>
+<meta name="description" content="40 free full-length JEE Main mock tests (Sep–Dec 2026) with a realistic CBT interface, complete verified solutions for every question, deep analytics, leaderboards and a student community.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23171310'/><text x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' text-anchor='middle' fill='%23d9a94f'>J</text></svg>">
+<style>
+  :root {
+    --bg: #16120e; --bg2: #1d1813; --card: #211b15; --card2: #26201a;
+    --fg: #efe9dd; --muted: #a89e8c; --border: #383025;
+    --gold: #d9a94f; --gold-soft: #e8c37e; --green: #4cbb8c; --red: #d0705e;
+    --violet: #a78bda;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--fg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", Georgia, sans-serif; line-height: 1.6; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+  a { color: inherit; text-decoration: none; }
+
+  header { position: sticky; top: 0; z-index: 50; background: rgba(22,18,14,.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; letter-spacing: -.02em; }
+  .logo .mark { width: 30px; height: 30px; border-radius: 8px; background: var(--gold); color: #171310; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 17px; }
+  .logo em { font-style: normal; color: var(--gold); }
+  .navlinks { display: flex; gap: 22px; font-size: 14px; color: var(--muted); }
+  .navlinks a:hover { color: var(--fg); }
+  @media (max-width: 640px) { .navlinks { display: none; } }
+
+  .hero { padding: 84px 0 60px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; inset: -40% -20% auto; height: 130%; background: radial-gradient(ellipse at 50% 0%, rgba(217,169,79,.16), transparent 60%); pointer-events: none; }
+  .badge { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); background: var(--card); border-radius: 999px; padding: 6px 14px; font-size: 13px; color: var(--gold-soft); margin-bottom: 22px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: .4 } }
+  h1 { font-size: clamp(34px, 6vw, 58px); line-height: 1.08; font-weight: 800; letter-spacing: -.03em; }
+  h1 em { font-style: normal; background: linear-gradient(120deg, var(--gold-soft), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sub { color: var(--muted); font-size: clamp(15px, 2.4vw, 18px); max-width: 640px; margin: 18px auto 0; }
+  .cta { margin-top: 30px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn { display: inline-block; padding: 13px 26px; border-radius: 10px; font-weight: 700; font-size: 15px; border: 1px solid transparent; transition: transform .15s ease, box-shadow .15s ease; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-gold { background: var(--gold); color: #171310; box-shadow: 0 8px 30px -8px rgba(217,169,79,.5); }
+  .btn-ghost { border-color: var(--border); color: var(--fg); background: var(--card); }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 54px 0 8px; }
+  .stat { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px 16px; }
+  .stat b { display: block; font-size: 26px; color: var(--gold); letter-spacing: -.02em; }
+  .stat span { font-size: 13px; color: var(--muted); }
+
+  section { padding: 64px 0; }
+  .kicker { color: var(--gold); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .14em; }
+  h2 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; letter-spacing: -.02em; margin: 8px 0 12px; }
+  .lead { color: var(--muted); max-width: 640px; }
+
+  .feats { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 34px; }
+  .feat { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; transition: border-color .2s; }
+  .feat:hover { border-color: rgba(217,169,79,.45); }
+  .feat .ic { font-size: 24px; }
+  .feat h3 { font-size: 17px; margin: 10px 0 6px; }
+  .feat p { color: var(--muted); font-size: 14px; }
+
+  .months { margin-top: 30px; display: grid; gap: 22px; }
+  .month h3 { font-size: 14px; color: var(--gold-soft); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 12px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(225px, 1fr)); gap: 10px; }
+  .mock { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+  .n { font-weight: 800; color: var(--gold); font-size: 15px; min-width: 64px; }
+  .d { font-size: 13.5px; color: var(--muted); }
+  .live { margin-left: auto; font-size: 10.5px; font-weight: 800; letter-spacing: .06em; padding: 3px 8px; border-radius: 6px; }
+  .live-on { background: rgba(76,187,140,.14); color: var(--green); border: 1px solid rgba(76,187,140,.4); }
+
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 34px; counter-reset: step; }
+  .step { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; position: relative; counter-increment: step; }
+  .step::before { content: counter(step); position: absolute; top: -12px; left: 20px; background: var(--gold); color: #171310; width: 26px; height: 26px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+  .step h3 { font-size: 15px; margin: 8px 0 6px; }
+  .step p { color: var(--muted); font-size: 13.5px; }
+
+  details { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; margin-top: 10px; }
+  summary { cursor: pointer; font-weight: 600; font-size: 15px; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  summary::after { content: "+"; color: var(--gold); font-size: 18px; }
+  details[open] summary::after { content: "–"; }
+  details p { color: var(--muted); font-size: 14px; margin-top: 10px; }
+
+  .status { background: linear-gradient(140deg, var(--card2), var(--card)); border: 1px solid var(--border); border-radius: 18px; padding: 30px; margin-top: 34px; }
+  .status h3 { font-size: 18px; margin-bottom: 8px; }
+  .status p { color: var(--muted); font-size: 14.5px; margin-top: 8px; }
+  .status code { background: var(--bg); border: 1px solid var(--border); padding: 2px 7px; border-radius: 6px; font-size: 13px; color: var(--gold-soft); }
+
+  footer { border-top: 1px solid var(--border); padding: 36px 0 44px; margin-top: 40px; color: var(--muted); font-size: 13.5px; }
+  .frow { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; align-items: center; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#"><span class="mark">J</span>JEE<em>Forge</em></a>
+    <nav class="navlinks">
+      <a href="#features">Features</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/claude20782-collab/jeeforge" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero wrap">
+  <div class="badge"><span class="dot"></span> Mock Test 01 is LIVE — unlocked 19 Sep 2026, 12:00 AM IST</div>
+  <h1>Crack JEE Main 2027 with<br><em>40 free full-length mocks</em></h1>
+  <p class="sub">A serious, completely free practice platform: NTA-style computer-based tests, complete verified solutions for <b>every</b> question, chapter-wise analytics, all-India leaderboards and a prep community — from 19 September to 31 December 2026.</p>
+  <div class="cta">
+    <a class="btn btn-gold" href="https://github.com/claude20782-collab/jeeforge" target="_blank" rel="noreferrer">Star on GitHub</a>
+    <a class="btn btn-ghost" href="#schedule">See the 40-mock schedule</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><b>40</b><span>full-length mocks · Sep–Dec 2026</span></div>
+    <div class="stat"><b>3,000</b><span>questions, each with a complete solution</span></div>
+    <div class="stat"><b>75 × 180</b><span>questions × minutes, NTA pattern (300 marks)</span></div>
+    <div class="stat"><b>+4 / −1</b><span>exact JEE Main marking, server-side scoring</span></div>
+  </div>
+</div>
+
+<section id="features">
+  <div class="wrap">
+    <div class="kicker">Why JEEForge</div>
+    <h2>Built like the real thing</h2>
+    <p class="lead">Every mock is a faithful JEE Main CBT — Physics, Chemistry and Mathematics, 25 questions each (20 MCQ + 5 numerical), timed on a server-authoritative clock.</p>
+    <div class="feats">
+      <div class="feat"><div class="ic">🖥️</div><h3>Realistic CBT engine</h3><p>Question palette with all five NTA states, Save &amp; Next, Mark for Review, subject tabs, a server-synced countdown and auto-submit at 00:00 — works smoothly on phones, tablets and desktops.</p></div>
+      <div class="feat"><div class="ic">✅</div><h3>Solutions before publication</h3><p>No question goes live without a complete, verified step-by-step solution — formula, reasoning, full calculations and why each wrong option fails. Publication is blocked by a strict validator otherwise.</p></div>
+      <div class="feat"><div class="ic">📊</div><h3>Deep performance analytics</h3><p>Score, accuracy and attempt-rate trends; chapter-wise and topic-wise breakdowns; difficulty analysis; fast/slow and overtime question buckets; mistake self-tagging with potential-score projection.</p></div>
+      <div class="feat"><div class="ic">🏆</div><h3>Leaderboards &amp; profiles</h3><p>Current-mock, weekly, monthly and all-time leaderboards with fair tie-breaks (score → accuracy → earlier submission). Public profiles with streaks and best ranks. Opt out anytime.</p></div>
+      <div class="feat"><div class="ic">💬</div><h3>Prep community</h3><p>Create or join study groups with real-time chat, mentions and muting; direct messages with read receipts and blocking; notifications for everything that matters.</p></div>
+      <div class="feat"><div class="ic">🛡️</div><h3>Fair-play by design</h3><p>Server-side timing and scoring (client clocks are never trusted), one attempt per mock, immutable submissions, rate limiting and moderation tooling with report/block.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="schedule">
+  <div class="wrap">
+    <div class="kicker">The plan</div>
+    <h2>40 mocks. 104 days. Zero cost.</h2>
+    <p class="lead">Each mock unlocks at 12:00 AM IST on its date and stays open — attempt at your own time, in one sitting of 3 hours. Missing a day? The paper (and its solutions) remain available forever.</p>
+    <div class="months">
+      <div class="month"><h3>September 2026 — 8 mocks</h3>
+        <div class="grid">
+          <div class="mock"><span class="n">Mock 01</span><span class="d">Sun, 19 Sep</span><span class="live live-on">LIVE</span></div>
+          <div class="mock"><span class="n">Mock 02</span><span class="d">Mon, 20 Sep</span></div>
+          <div class="mock"><span class="n">Mock 03</span><span class="d">Wed, 23 Sep</span></div>
+          <div class="mock"><span class="n">Mock 04</span><span class="d">Thu, 24 Sep</span></div>
+          <div class="mock"><span class="n">Mock 05</span><span class="d">Fri, 25 Sep</span></div>
+          <div class="mock"><span class="n">Mock 06</span><span class="d">Sat, 26 Sep</span></div>
+          <div class="mock"><span class="n">Mock 07</span><span class="d">Sun, 27 Sep</span></div>
+          <div class="mock"><span class="n">Mock 08</span><span class="d">Tue, 29 Sep</span></div>
+        </div>
+      </div>
+      <div class="month"><h3>October 2026 — 11 mocks</h3>
+        <div class="grid">
+          <div class="mock"><span class="n">Mock 09</span><span class="d">Fri, 2 Oct</span></div>
+          <div class="mock"><span class="n">Mock 10</span><span class="d">Sun, 4 Oct</span></div>
+          <div class="mock"><span class="n">Mock 11</span><span class="d">Fri, 9 Oct</span></div>
+          <div class="mock"><span class="n">Mock 12</span><span class="d">Sun, 11 Oct</span></div>
+          <div class="mock"><span class="n">Mock 13</span><span class="d">Fri, 16 Oct</span></div>
+          <div class="mock"><span class="n">Mock 14</span><span class="d">Sun, 18 Oct</span></div>
+          <div class="mock"><span class="n">Mock 15</span><span class="d">Fri, 23 Oct</span></div>
+          <div class="mock"><span class="n">Mock 16</span><span class="d">Sat, 24 Oct</span></div>
+          <div class="mock"><span class="n">Mock 17</span><span class="d">Sun, 25 Oct</span></div>
+          <div class="mock"><span class="n">Mock 18</span><span class="d">Fri, 30 Oct</span></div>
+          <div class="mock"><span class="n">Mock 19</span><span class="d">Sat, 31 Oct</span></div>
+        </div>
+      </div>
+      <div class="month"><h3>November 2026 — 9 mocks</h3>
+        <div class="grid">
+          <div class="mock"><span class="n">Mock 20</span><span class="d">Sun, 1 Nov</span></div>
+          <div class="mock"><span class="n">Mock 21</span><span class="d">Fri, 6 Nov</span></div>
+          <div class="mock"><span class="n">Mock 22</span><span class="d">Sun, 8 Nov</span></div>
+          <div class="mock"><span class="n">Mock 23</span><span class="d">Fri, 13 Nov</span></div>
+          <div class="mock"><span class="n">Mock 24</span><span class="d">Sun, 15 Nov</span></div>
+          <div class="mock"><span class="n">Mock 25</span><span class="d">Fri, 20 Nov</span></div>
+          <div class="mock"><span class="n">Mock 26</span><span class="d">Sun, 22 Nov</span></div>
+          <div class="mock"><span class="n">Mock 27</span><span class="d">Fri, 27 Nov</span></div>
+          <div class="mock"><span class="n">Mock 28</span><span class="d">Sun, 29 Nov</span></div>
+        </div>
+      </div>
+      <div class="month"><h3>December 2026 — 12 mocks</h3>
+        <div class="grid">
+          <div class="mock"><span class="n">Mock 29</span><span class="d">Fri, 4 Dec</span></div>
+          <div class="mock"><span class="n">Mock 30</span><span class="d">Sun, 6 Dec</span></div>
+          <div class="mock"><span class="n">Mock 31</span><span class="d">Fri, 11 Dec</span></div>
+          <div class="mock"><span class="n">Mock 32</span><span class="d">Sun, 13 Dec</span></div>
+          <div class="mock"><span class="n">Mock 33</span><span class="d">Fri, 18 Dec</span></div>
+          <div class="mock"><span class="n">Mock 34</span><span class="d">Sun, 20 Dec</span></div>
+          <div class="mock"><span class="n">Mock 35</span><span class="d">Thu, 24 Dec</span></div>
+          <div class="mock"><span class="n">Mock 36</span><span class="d">Fri, 25 Dec</span></div>
+          <div class="mock"><span class="n">Mock 37</span><span class="d">Sat, 26 Dec</span></div>
+          <div class="mock"><span class="n">Mock 38</span><span class="d">Sun, 27 Dec</span></div>
+          <div class="mock"><span class="n">Mock 39</span><span class="d">Wed, 30 Dec</span></div>
+          <div class="mock"><span class="n">Mock 40</span><span class="d">Thu, 31 Dec</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="kicker">How it works</div>
+    <h2>From unlocked to analysed in minutes</h2>
+    <div class="steps">
+      <div class="step"><h3>Pick a mock</h3><p>Mocks unlock at midnight IST on schedule day. Mock 01 is live now; one attempt per mock per account.</p></div>
+      <div class="step"><h3>Take the 3-hour CBT</h3><p>75 questions, NTA palette, server-side timer that survives refreshes and auto-submits at 00:00.</p></div>
+      <div class="step"><h3>Get your scorecard</h3><p>Instant result: /300 score, subject splits, accuracy, negative marks, rank and percentile-style positioning.</p></div>
+      <div class="step"><h3>Study the solutions</h3><p>Every question opens into a full solution with diagrams, key formulas, PYQ/original tags and your own timing.</p></div>
+      <div class="step"><h3>Tag your mistakes</h3><p>Classify errors (concept gap, calculation, silly, misread…) and see the score you left on the table.</p></div>
+      <div class="step"><h3>Track &amp; compete</h3><p>Progress dashboards, chapter trends and leaderboards keep the pressure on until 31 December.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="kicker">FAQ</div>
+    <h2>Questions, answered</h2>
+    <details><summary>Is it really free?</summary><p>Yes — every mock, every solution, every feature. No paywalls, no locked analytics, no "premium" tiers. The source code is public on GitHub too.</p></details>
+    <details><summary>What is the question level?</summary><p>Genuine JEE Main difficulty, following the 2025–26 syllabus. The series ramps from hard JEE Main (Mocks 01–10) to very hard (Mocks 31–40) — multi-concept applications, tricky-but-fair patterns, no out-of-syllabus traps.</p></details>
+    <details><summary>Are solutions available for every question?</summary><p>Yes — and it is enforced technically: a mock physically cannot be published unless all 75 of its questions carry complete, verified solutions, answers, chapter/topic tags, difficulty and (for at least 20 questions) meaningful diagrams.</p></details>
+    <details><summary>What devices are supported?</summary><p>The CBT is designed mobile-first (Android phones), with a particularly polished tablet experience (palette side-sheet) and a full desktop layout. Slow connections are handled — answers save incrementally and resume after refresh.</p></details>
+    <details><summary>How is cheating handled?</summary><p>Reasonable, non-invasive protections: server-authoritative timers, one active attempt per mock, immutable submissions, server-side scoring, session anomaly logging, and rate limiting. No cameras, no surveillance.</p></details>
+    <details><summary>Can I attempt a mock after its unlock date?</summary><p>Yes — once unlocked, a paper (and its solutions) stays available forever. The schedule only controls when a mock first opens.</p></details>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="status">
+      <h3>Platform status</h3>
+      <p><b style="color:var(--fg)">Content engine: live.</b> Mock 01 (75 questions, 22 diagram-based, complete solutions) is published and unlocked. Mocks 02–40 are being populated and validated on schedule — each publishes only after passing the strict 24-point publication validator.</p>
+      <p><b style="color:var(--fg)">Interactive app:</b> the full application (auth, CBT, solutions, analytics, community) is deployed and continuously updated — source code: <a href="https://github.com/claude20782-collab/jeeforge" target="_blank" rel="noreferrer" style="color:var(--gold)">github.com/claude20782-collab/jeeforge</a>. Production database: Supabase Postgres (region: Southeast Asia).</p>
+      <p><b style="color:var(--fg)">Data:</b> student accounts, attempts and scores are stored server-side only; emails are never shown publicly, and leaderboard participation is opt-out.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap frow">
+    <div><b style="color:var(--fg)">JEE<span style="color:var(--gold)">Forge</span></b> · Free JEE Main 2027 mock series · 19 Sep – 31 Dec 2026</div>
+    <div>Schedule · +4/−1 marking · 180 minutes · 300 marks</div>
+    <div><a href="https://github.com/claude20782-collab/jeeforge" target="_blank" rel="noreferrer" style="color:var(--gold)">GitHub ↗</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
