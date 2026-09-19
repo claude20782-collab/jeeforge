@@ -1,0 +1,225 @@
+src/content/banks/mock-03/math.ts:12:    text: `The number of one-one functions from a set containing 3 elements to a set containing 5 elements is:`,
+src/content/banks/mock-03/math.ts:31:    text: `If z = x + iy satisfies |z - 1| = |z + i|, the locus of z in the Argand plane is:`,
+src/content/banks/mock-03/math.ts:72:    text: `If the equations x^2 + bx + c = 0 and x^2 + cx + b = 0 (b \\neq c) have exactly one common root, then:`,
+src/content/banks/mock-03/math.ts:94:    text: `An infinite geometric series has first term 3 and sum 4. The common ratio is:`,
+src/content/banks/mock-03/math.ts:112:    text: `Five distinct prizes are to be distributed among four students so that **each student gets at least one** prize. The numb
+src/content/banks/mock-03/math.ts:134:    text: `The middle term in the binomial expansion of (1 + x)^{10} is:`,
+src/content/banks/mock-03/math.ts:150:    text: `If A = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}, then A^{64} equals:`,
+src/content/banks/mock-03/math.ts:181:    text: `The function f(x) = \\begin{cases} \\dfrac{1 - \\cos 4x}{x^2}, & x \\neq 0 \\\\ k, & x = 0 \\end{cases} is continuous at 
+src/content/banks/mock-03/math.ts:216:    text: `The points on the curve y = x^3 - 3x + 4 at which the tangent is parallel to the x-axis are:`,
+src/content/banks/mock-03/math.ts:255:    text: `\\displaystyle\\int \\frac{dx}{x^2 + 4} equals:`,
+src/content/banks/mock-03/math.ts:271:    text: `The order and degree of the differential equation \\left(\\dfrac{d^2y}{dx^2}\\right)^3 + \\left(\\dfrac{dy}{dx}\\right)^5
+src/content/banks/mock-03/math.ts:287:    text: `A line with positive intercepts passes through (2, 3) and makes equal intercepts on the axes. Its equation is:`,
+src/content/banks/mock-03/math.ts:331:    text: `The radical axis of the circles x^2 + y^2 = 4 and x^2 + y^2 - 6x + 8 = 0 is:`,
+src/content/banks/mock-03/math.ts:372:    text: `The focus of the parabola y^2 = 12x is:`,
+src/content/banks/mock-03/math.ts:415:    text: `If |\\vec a| = 3, |\\vec b| = 4 and \\vec a \\cdot \\vec b = 6, then |\\vec a \\times \\vec b| equals:`,
+src/content/banks/mock-03/math.ts:433:    text: `The angle between two lines whose direction ratios are (1, 1, 0) and (0, 1, 1) is:`,
+src/content/banks/mock-03/math.ts:452:    text: `A bag contains 3 red and 2 black balls. Two balls are drawn at random **without replacement**. The probability that both 
+src/content/banks/mock-03/math.ts:469:    text: `The arithmetic mean of the first 20 even natural numbers is:`,
+src/content/banks/mock-03/math.ts:488:    text: `The number of solutions of 2\\sin^2\\theta - 3\\sin\\theta + 1 = 0 in the interval [0, 2\\pi) is:`,
+src/content/banks/mock-03/math.ts:507:    text: `In a right triangle with legs 6 and 8 (hypotenuse 10), the circumradius of the triangle is:`,
+src/content/banks/mock-03/math.ts:552:    text: `The roots of x^2 - 5x + k = 0 differ by 1. The value of k is:`,
+src/content/banks/mock-03/math.ts:567:    text: `For an AP, the sum of n terms is S_n = 2n^2 + 3n. The common difference of the AP is:`,
+src/content/banks/mock-03/math.ts:583:    text: `The value of \\displaystyle\\int_0^{\\pi} \\sin x\\ dx is:`,
+src/content/banks/mock-03/math.ts:595:    text: `A fair die is rolled 4 times. The probability (round off to two decimals) of getting exactly one six is:`,
+src/content/banks/mock-03/math.ts:609:    text: `Line L_1 passes through (1, 2, 3) along the x-axis direction; line L_2 passes through (2, 4, 5) along the y-axis directio
+src/content/banks/mock-03/chemistry.ts:12:    text: `The molarity of pure water (density 1\\ \g/mL}) is:`,
+src/content/banks/mock-03/chemistry.ts:28:    text: `The ratio of the radius of the second Bohr orbit of H(Z=1) to that of the third orbit of \Li}^{2+} (Z=3) is: (radius 
+src/content/banks/mock-03/chemistry.ts:62:    text: `The shape of the \SF}_4 molecule is:`,
+src/content/banks/mock-03/chemistry.ts:94:    text: `For a reaction, \\Delta H = -40\\ \kJ mol}^{-1} and \\Delta S = -100\\ \J K}^{-1}\mol}^{-1}. The temperature (in K) a
+src/content/banks/mock-03/chemistry.ts:130:    text: `1 mol of liquid A (p^\\circ_A = 100\\ \mm Hg}) is mixed with 3 mol of liquid B (p^\\circ_B = 80\\ \mm Hg}) to form a
+src/content/banks/mock-03/chemistry.ts:166:    text: `A buffer contains 0.2\\ \M} acetic acid and 0.1\\ \M} sodium acetate. Taking pK_a = 4.74 for acetic acid, the pH of 
+src/content/banks/mock-03/chemistry.ts:184:    text: `Given the limiting molar conductivities \\Lambda^\\circ_m(\HCl}) = 426, \\Lambda^\\circ_m(\CH}_3\COONa}) = 91 and \\
+src/content/banks/mock-03/chemistry.ts:202:    text: `The units of the rate constant k for a **zero-order** reaction are:`,
+src/content/banks/mock-03/chemistry.ts:222:    text: `The element with the **highest electron affinity** (electron gain enthalpy, most negative) is:`,
+src/content/banks/mock-03/chemistry.ts:237:    text: `Among the oxoacids of chlorine — \HClO}, \HClO}_2, \HClO}_3, \HClO}_4 — the strongest acid is:`,
+src/content/banks/mock-03/chemistry.ts:266:    text: `The **highest oxidation state** exhibited by an element of the 3d transition series is:`,
+src/content/banks/mock-03/chemistry.ts:281:    text: `The number of **geometrical isomers** possible for the complex ion [\Co}(\NH}_3)_4\Cl}_2]^+ is:`,
+src/content/banks/mock-03/chemistry.ts:300:    text: `The most **stable carbocation** among the following is:`,
+src/content/banks/mock-03/chemistry.ts:315:    text: `The major monobromination product of 2-methylbutane under free-radical conditions (\Br}_2, h\\nu) is:`,
+src/content/banks/mock-03/chemistry.ts:353:    text: `2-bromo-2-methylbutane is heated with alcoholic KOH. Following Saytzeff's rule, the major alkene formed is:`,
+src/content/banks/mock-03/chemistry.ts:371:    text: `The correct Williamson synthesis for preparing **ethyl tert-butyl ether** is:`,
+src/content/banks/mock-03/chemistry.ts:393:    text: `The correct order of reactivity towards **nucleophilic addition** reactions is:`,
+src/content/banks/mock-03/chemistry.ts:415:    text: `Benzenediazonium chloride is converted to chlorobenzene using:`,
+src/content/banks/mock-03/chemistry.ts:442:    text: `Among the following vitamins, the one that is **fat-soluble** is:`,
+src/content/banks/mock-03/chemistry.ts:460:    text: `0.30 g of an organic compound on complete combustion gives 0.44 g of \CO}_2 and 0.18 g of \H}_2\O}. The percentages 
+src/content/banks/mock-03/chemistry.ts:496:    text: `A weak monobasic acid HA has K_a = 1\\times10^{-5} and concentration 0.1\\ \M}. The pH of its solution is:`,
+src/content/banks/mock-03/chemistry.ts:511:    text: `The number of moles of electrons required to reduce one mole of \Cr}_2\O}_7^{2-} to \Cr}^{3+} in acidic medium is:`,
+src/content/banks/mock-03/chemistry.ts:528:    text: `A first-order reaction has a half-life of 10\\ \min}. The time (in minutes, round off to one decimal) required for 9
+src/content/banks/mock-03/chemistry.ts:543:    text: `The osmotic pressure (in atm, round off to two decimals) of a 0.1\\ \M} aqueous NaCl solution at 300\\ \K} is: (assu
+src/content/banks/mock-03/chemistry.ts:560:    text: `An organic acid has vapour density 30. Combustion analysis shows it contains 40\\% carbon and 6.67\\% hydrogen by ma
+src/content/banks/mock-03/physics.ts:13:    text: `In an experiment to determine resistance, the potential difference across a resistor is measured as (100 \\pm 2)\\ \V} 
+src/content/banks/mock-03/physics.ts:31:    text: `Two projectiles are launched from level ground with the same speed 20\\ \m/s} at 30^\\circ and 60^\\circ to the horizon
+src/content/banks/mock-03/physics.ts:76:    text: `A conical pendulum has a string of length 1\\ \m} making 60^\\circ with the vertical. The time period of the bob's revo
+src/content/banks/mock-03/physics.ts:96:    text: `A 2\\ \kg} block is released from rest from a height of 1.0\\ \m} above the top of a vertical spring of stiffness 2000\
+src/content/banks/mock-03/physics.ts:134:    text: `The moment of inertia of a uniform square lamina of mass M and side a about an axis **along one of its diagonals** (in
+src/content/banks/mock-03/physics.ts:152:    text: `A planet orbits a star in a circular orbit of radius r with period T. Another planet orbits the same star at radius 4r
+src/content/banks/mock-03/physics.ts:172:    text: `A spherical raindrop of radius r falls through air with terminal velocity v. A drop of the same liquid with radius 2r 
+src/content/banks/mock-03/physics.ts:193:    text: `One mole of an ideal gas expands **isothermally and reversibly** at 300\\ \K} from volume V to 2V. The work done **by*
+src/content/banks/mock-03/physics.ts:211:    text: `The rms speed of oxygen molecules in a container is v at 27^\\circ\C}. If the temperature is raised to 927^\\circ\C}, 
+src/content/banks/mock-03/physics.ts:229:    text: `A simple pendulum has period T in a stationary lift. When the lift accelerates **upward** with acceleration g, the new
+src/content/banks/mock-03/physics.ts:270:    text: `A transverse wave travelling along +x is described by y = 0.04\\sin\\big(2\\pi(2t - 0.01x)\\big) (SI units). The speed
+src/content/banks/mock-03/physics.ts:298:    text: `A point charge q is placed at one **corner** of a cube. The electric flux through the whole cube is:`,
+src/content/banks/mock-03/physics.ts:315:    text: `A copper wire carries a steady current I with drift speed v_d. If the same current is passed through a wire of the sam
+src/content/banks/mock-03/physics.ts:335:    text: `A wire bent as a circular arc of radius R subtending 120^\\circ at the centre carries a current I. The magnetic field 
+src/content/banks/mock-03/physics.ts:384:    text: `For a short bar magnet, the ratio of the magnetic field on its **axis** at distance d to the field on its **equatorial
+src/content/banks/mock-03/physics.ts:402:    text: `In an AC generator with a coil rotating in a uniform magnetic field, the induced emf is **maximum** when the plane of 
+src/content/banks/mock-03/physics.ts:426:    text: `An ideal transformer steps 220\\ \V} down to 11\\ \V}. If the primary draws 0.5\\ \A}, the secondary current (to the l
+src/content/banks/mock-03/physics.ts:444:    text: `For a plane electromagnetic wave in vacuum, the ratio of the amplitude of the electric field to the amplitude of the m
+src/content/banks/mock-03/physics.ts:461:    text: `A person with a near point of 25\\ \cm} uses a converging lens of focal length 5\\ \cm} as a simple microscope, with t
+src/content/banks/mock-03/physics.ts:481:    text: `In a single-slit diffraction experiment, the slit width is 2\\lambda (twice the wavelength). The angular width of the 
+src/content/banks/mock-03/physics.ts:528:    text: `Light of photon energy 3.5\\ \eV} falls on a metal of work function 2.5\\ \eV}. The stopping potential (in volts) for 
+src/content/banks/mock-03/physics.ts:562:    text: `The wavelength (in nm) of the photon emitted when an electron in a hydrogen atom falls from the n = 4 level to the n =
+src/content/banks/mock-03/physics.ts:579:    text: `The mass of a ^{4}_{2}\He} nucleus is 4.0026\\ \u}, the proton is 1.0078\\ \u} and the neutron 1.0087\\ \u}. The bindi
+src/content/banks/mock-03/physics.ts:598:    text: `A silicon diode (forward drop 0.7\\ \V}) is connected in series with a 1\\ \k}\\Omega resistor and an ideal 5\\ \V} ba
+src/content/banks/mock-03/physics.ts:640:    text: `A steel wire of length 2\\ \m} and cross-sectional area 1\\ \mm}^2 is fixed at one end and a 1\\ \kg} load is hung fro
+src/content/banks/mock-02/math.ts:12:    text: `The number of reflexive relations possible on a set containing 3 elements is:`,
+src/content/banks/mock-02/math.ts:27:    text: `The value of (1 + i)^8, where i = \\sqrt{-1}, is:`,
+src/content/banks/mock-02/math.ts:44:    text: `If \\alpha and \\beta are the roots of x^2 - 2x + 4 = 0, then \\alpha^3 + \\beta^3 equals:`,
+src/content/banks/mock-02/math.ts:66:    text: `The sum 1^2 + 3^2 + 5^2 + \\dots + 19^2 (squares of the first 10 odd natural numbers) is:`,
+src/content/banks/mock-02/math.ts:85:    text: `5 boys and 5 girls are to be seated in a row so that no two girls sit together. The number of arrangements is:`,
+src/content/banks/mock-02/math.ts:107:    text: `The coefficient of x^5 in the expansion of (x + 2)^8 is:`,
+src/content/banks/mock-02/math.ts:123:    text: `If A is a 3 \\times 3 matrix with |A| = 4, then |2A| equals:`,
+src/content/banks/mock-02/math.ts:138:    text: `The value of \\displaystyle\\lim_{x \\to 0} \\frac{\\sin x - x}{x^3} is:`,
+src/content/banks/mock-02/math.ts:172:    text: `The local maximum value of the function f(x) = x^3 - 12x + 5 is:`,
+src/content/banks/mock-02/math.ts:209:    text: `The value of \\displaystyle\\int_0^{\\pi/2} \\frac{dx}{1 + \\tan x} is:`,
+src/content/banks/mock-02/math.ts:230:    text: `The general solution of the differential equation \\dfrac{dy}{dx} + y = e^{-x} is:`,
+src/content/banks/mock-02/math.ts:254:    text: `The distance between the parallel lines 3x + 4y - 9 = 0 and 6x + 8y + 15 = 0 is:`,
+src/content/banks/mock-02/math.ts:270:    text: `The length of the tangent drawn from the point (5, 4) to the circle x^2 + y^2 + 4x - 2y - 5 = 0 is:`,
+src/content/banks/mock-02/math.ts:310:    text: `The eccentricity of the ellipse \\dfrac{x^2}{25} + \\dfrac{y^2}{16} = 1 is:`,
+src/content/banks/mock-02/math.ts:350:    text: `If \\vec a = \\hat i + \\hat j, \\vec b = \\hat j + \\hat k and \\vec c = \\hat k + \\hat i, then the volume of the paral
+src/content/banks/mock-02/math.ts:394:    text: `The distance of the point (1, 2, 3) from the plane 2x - y + 2z - 5 = 0 is:`,
+src/content/banks/mock-02/math.ts:426:    text: `A binomial variate X has mean 4 and variance 2. The probability of exactly 2 successes is:`,
+src/content/banks/mock-02/math.ts:444:    text: `The variance of the first 10 natural numbers is:`,
+src/content/banks/mock-02/math.ts:474:    text: `The value of \\tan^{-1} 1 + \\tan^{-1} 2 + \\tan^{-1} 3 is:`,
+src/content/banks/mock-02/math.ts:490:    text: `In a triangle ABC with sides a = 5, b = 12, c = 13, the inradius r of the triangle is:`,
+src/content/banks/mock-02/math.ts:531:    text: `The number of real solutions of the equation x^2 - 5|x| + 6 = 0 is:`,
+src/content/banks/mock-02/math.ts:552:    text: `If A is a non-singular 3 \\times 3 matrix with |A| = 5, then |\\operatorname{adj} A| equals:`,
+src/content/banks/mock-02/math.ts:570:    text: `The area (in square units, round off to two decimals) of the region bounded by the curves y = x^2 and y = 2x is:`,
+src/content/banks/mock-02/math.ts:603:    text: `A man is known to speak the truth 3 times out of 4. He throws a die and reports that a six showed up. The probability tha
+src/content/banks/mock-02/math.ts:626:    text: `If \\vec a + \\vec b + \\vec c = \\vec 0 with |\\vec a| = 3, |\\vec b| = 5 and |\\vec c| = 7, then the angle (in degrees)
+src/content/banks/mock-02/chemistry.ts:12:    text: `The percentage by mass of water of crystallisation in washing soda, \Na}_2\CO}_3 \\cdot 10\H}_2\O}, is closest to: (\
+src/content/banks/mock-02/chemistry.ts:43:    text: `The number of radial nodes in a 4p orbital is:`,
+src/content/banks/mock-02/chemistry.ts:61:    text: `Among the following dioxygen species, the one that is **diamagnetic** with bond order 1 is:`,
+src/content/banks/mock-02/chemistry.ts:94:    text: `Given:
+src/content/banks/mock-02/chemistry.ts:119:    text: `18 g of glucose (M = 180\\ \g/mol}) is dissolved in 500 g of water (K_f = 1.86\\ \K·kg·mol}^{-1}). The freezing po
+src/content/banks/mock-02/chemistry.ts:159:    text: `For a sparingly soluble salt AB_2 with solubility product K_{sp} = 3.2 \\times 10^{-11}, the molar solubility s (in 
+src/content/banks/mock-02/chemistry.ts:181:    text: `For the cell
+src/content/banks/mock-02/chemistry.ts:221:    text: `A first-order reaction has a half-life of 20 minutes. The time required for 75% completion of the reaction is:`,
+src/content/banks/mock-02/chemistry.ts:239:    text: `The correct order of **first ionisation enthalpy** (increasing) among B, Be, N, O is:`,
+src/content/banks/mock-02/chemistry.ts:257:    text: `Among the following oxides, the one that is **amphoteric** is:`,
+src/content/banks/mock-02/chemistry.ts:273:    text: `The spin-only magnetic moment of \Fe}^{3+} (atomic number 26) is:`,
+src/content/banks/mock-02/chemistry.ts:303:    text: `The number of unpaired electrons in the complex [\Fe(CN)}_6]^{3-} is:`,
+src/content/banks/mock-02/chemistry.ts:323:    text: `The total number of **structural isomers** (chain + position) of monohydric alcohols with molecular formula \C}_4\H}
+src/content/banks/mock-02/chemistry.ts:357:    text: `2-methylbut-2-ene is subjected to ozonolysis followed by reductive workup (Zn/H₂O). The carbonyl products formed a
+src/content/banks/mock-02/chemistry.ts:393:    text: `The halide that undergoes solvolysis (S_N1) **most rapidly** in aqueous ethanol is:`,
+src/content/banks/mock-02/chemistry.ts:408:    text: `The strongest acid among the following is:`,
+src/content/banks/mock-02/chemistry.ts:436:    text: `The compound that gives a positive **iodoform test** (I₂/NaOH) is:`,
+src/content/banks/mock-02/chemistry.ts:452:    text: `In aqueous solution, the strongest base among the following is:`,
+src/content/banks/mock-02/chemistry.ts:471:    text: `Sucrose is a non-reducing sugar because:`,
+src/content/banks/mock-02/chemistry.ts:493:    text: `In Lassaigne\u2019s test for nitrogen, the blue colour obtained on adding ferric chloride to the extract is due to t
+src/content/banks/mock-02/chemistry.ts:512:    text: `The rate constant of a reaction doubles when the temperature rises from 300\\ \K} to 310\\ \K}. The activation energ
+src/content/banks/mock-02/chemistry.ts:531:    text: `\PCl}_5 dissociates as \PCl}_5(\g}) \\rightleftharpoons \PCl}_3(\g}) + \Cl}_2(\g}). Starting from pure \PCl}_5 at an
+src/content/banks/mock-02/chemistry.ts:559:    text: `The quantity of charge (in coulombs) required to deposit one mole of aluminium from a solution of \Al}_2(\SO}_4)_3 i
+src/content/banks/mock-02/chemistry.ts:576:    text: `Benzoic acid (M = 122\\ \g/mol}) dimerises in benzene to the extent of 80\\%. The observed molar mass of the acid in
+src/content/banks/mock-02/chemistry.ts:595:    text: `0.1 mol of an open-chain hydrocarbon (an alkene) on complete combustion yields 17.6\\ \g} of \CO}_2 and 7.2\\ \g} of
+src/content/banks/mock-02/physics.ts:13:    text: `The coefficient of viscosity \\eta relates the viscous force to the velocity gradient through F = \\eta A \\dfrac{dv}{d
+src/content/banks/mock-02/physics.ts:31:    text: `Rain is falling vertically with a speed of 5\\ \m/s}. A man walks on a horizontal road with a speed of 5\\sqrt{3}\\ \m/
+src/content/banks/mock-02/physics.ts:48:    text: `A uniform ladder of mass 10\\ \kg} and length L rests against a smooth vertical wall at an angle 60^\\circ with the rou
+src/content/banks/mock-02/physics.ts:89:    text: `A ball of mass m moving with speed u collides head-on and elastically with a stationary ball of mass 3m. The fraction o
+src/content/banks/mock-02/physics.ts:108:    text: `A uniform rod of mass 2m and length L rotates freely in a horizontal plane about a vertical axis through its centre. A
+src/content/banks/mock-02/physics.ts:129:    text: `The escape speed from the surface of the Earth is 11.2\\ \km/s}. The speed of a satellite in a circular orbit of radiu
+src/content/banks/mock-02/physics.ts:150:    text: `A cubical block of relative density 0.9 floats at the interface of water and an oil of relative density 0.8 poured abo
+src/content/banks/mock-02/physics.ts:170:    text: `One mole of an ideal monatomic gas is taken around the cycle A \\to B \\to C \\to D \\to A shown in the P–V diagram 
+src/content/banks/mock-02/physics.ts:212:    text: `Two moles of helium (monatomic) are mixed with one mole of oxygen (diatomic, rigid rotor) at the same temperature. The
+src/content/banks/mock-02/physics.ts:228:    text: `The velocity–time graph of a particle executing SHM along a straight line is shown (the motion repeats every 2\\ \s}
+src/content/banks/mock-02/physics.ts:268:    text: `A closed organ pipe of length 0.35\\ \m} resonates with a source at 250\\ \Hz} and with the next higher resonance at 7
+src/content/banks/mock-02/physics.ts:288:    text: `In the network shown, C_1 = 2\\ \\mu\F} and C_2 = 4\\ \\mu\F} are in series, and that combination is in parallel with 
+src/content/banks/mock-02/physics.ts:333:    text: `In a potentiometer experiment, a standard cell of emf 2.00\\ \V} is balanced at 250\\ \cm} of the wire. When the stand
+src/content/banks/mock-02/physics.ts:351:    text: `A proton and an alpha particle are accelerated from rest through the same potential difference and then enter a unifor
+src/content/banks/mock-02/physics.ts:370:    text: `A conducting rod of length 2\\ \m} slides at a constant speed of 5\\ \m/s} on frictionless rails perpendicular to a un
+src/content/banks/mock-02/physics.ts:393:    text: `In a series LCR circuit at resonance, three voltmeters read V_R = 120\\ \V} across the resistor, V_L = 80\\ \V} across
+src/content/banks/mock-02/physics.ts:411:    text: `In a hydrogen atom, an electron makes a transition from the n = 3 level to the ground state (energy levels shown, to s
+src/content/banks/mock-02/physics.ts:450:    text: `A ray passes through an equilateral glass prism (\\mu = \\sqrt{3}) placed in air, suffering minimum deviation. The ang
+src/content/banks/mock-02/physics.ts:483:    text: `In Young's double-slit experiment with sodium light (\\lambda = 600\\ \nm}), the fringe width on a screen is 0.60\\ \m
+src/content/banks/mock-02/physics.ts:504:    text: `The Boolean expression Y = (A + B)\\,(A' + B') simplifies to: (+ denotes OR, juxtaposition denotes AND, X' denotes NOT
+src/content/banks/mock-02/physics.ts:531:    text: `A train moving at 20\\ \m/s} sounds a whistle of frequency 600\\ \Hz} while approaching a stationary listener standing
+src/content/banks/mock-02/physics.ts:558:    text: `A battery of emf 10\\ \V} and internal resistance 3\\ \\Omega is connected across an external resistor R. The terminal
+src/content/banks/mock-02/physics.ts:576:    text: `An electron is accelerated from rest through a potential difference of 100\\ \V}. Taking the de Broglie wavelength of 
+src/content/banks/mock-02/physics.ts:593:    text: `The activity of a radioactive sample falls to one-eighth of its initial value in 24\\ \days}. The percentage of the sa
+src/content/banks/mock-02/physics.ts:611:    text: `Two thin lenses are kept in contact: a converging lens of focal length 20\\ \cm} and a diverging lens of focal length 
+src/content/banks/mock-01/math.ts:12:    text: `If \\alpha and \\beta are the roots of x^2 - x + 1 = 0, then the value of \\alpha^{2057} + \\beta^{2057} is:`,
+src/content/banks/mock-01/math.ts:35:    text: `The sum \\displaystyle\\sum_{n=1}^{\\infty} \\frac{n(n+1)}{2^n} equals:`,
+src/content/banks/mock-01/math.ts:53:    text: `The number of ways to distribute 10 identical candies among 4 children such that each child receives at least one candy an
+src/content/banks/mock-01/math.ts:75:    text: `The coefficient of x^5 in the expansion of (1+x)^2 + (1+x)^3 + \\dots + (1+x)^{50} is:`,
+src/content/banks/mock-01/math.ts:99:    text: `If A is a 3 \\times 3 matrix with \\det(A) = 2, then \\det\\left(\adj}\\left(A^{-1}\\right)\\right) equals:`,
+src/content/banks/mock-01/math.ts:119:    text: `If z is a complex number with |z| = 2, then the **maximum** value of |z + \\tfrac{1}{z}| is:`,
+src/content/banks/mock-01/math.ts:157:    text: `A set A has 5 elements. The number of relations on A that are **both reflexive and symmetric** is:`,
+src/content/banks/mock-01/math.ts:176:    text: `\\displaystyle\\lim_{x \\to 0} \\frac{\\sin x - x + \\dfrac{x^3}{6}}{x^5} equals:`,
+src/content/banks/mock-01/math.ts:195:    text: `The minimum value of (x-1)^4 + (x+3)^4 for real x is:`,
+src/content/banks/mock-01/math.ts:217:    text: `The value of \\displaystyle\\int_0^{\\pi/2} \\frac{dx}{1 + \\tan^3 x} is:`,
+src/content/banks/mock-01/math.ts:240:    text: `The area of the region bounded by the parabola y^2 = 4x and the line y = 2x - 4 (shown) is:`,
+src/content/banks/mock-01/math.ts:279:    text: `The order and degree of the differential equation
+src/content/banks/mock-01/math.ts:305:    text: `The image of the point (1, 6) in the line y = x + 1 (shown) is:`,
+src/content/banks/mock-01/math.ts:344:    text: `The radical axis of the circles x^2 + y^2 = 4 and x^2 + y^2 - 4x + 2y - 4 = 0 is:`,
+src/content/banks/mock-01/math.ts:362:    text: `For the parabola y^2 = 12x (shown), the focal distance of the point on it whose ordinate is 6 is:`,
+src/content/banks/mock-01/math.ts:401:    text: `If the length of the latus rectum of an ellipse is equal to half of its minor axis, then the eccentricity of the ellipse 
+src/content/banks/mock-01/math.ts:441:    text: `If \\vec{a} = \\hat{i} + \\hat{j}, \\vec{b} = \\hat{j} + \\hat{k} and \\vec{c} = \\hat{k} + \\hat{i}, then \\vec{a}\\cdot
+src/content/banks/mock-01/math.ts:460:    text: `The angle between two lines whose direction ratios are (2, 3, 6) and (1, 2, 2) (vectors shown) is:`,
+src/content/banks/mock-01/math.ts:497:    text: `A box contains three coins: two fair coins and one double-headed coin. A coin is selected at random and tossed. Given tha
+src/content/banks/mock-01/math.ts:521:    text: `The marks obtained by 30 students are shown in the frequency table. The mean of the data is:`,
+src/content/banks/mock-01/math.ts:554:    text: `If \\theta \\in (second quadrant) and \\sin\\theta + \\cos\\theta = \\dfrac{1}{5}, then the value of \\sin\\theta is: (ro
+src/content/banks/mock-01/math.ts:577:    text: `The value of \\displaystyle\\int_{-\\pi/4}^{\\pi/4} \\left(x^3 + x\\cos x + \\tan^2 x\\right)\\,dx is: (round off to two 
+src/content/banks/mock-01/math.ts:600:    text: `The distance between the parallel planes 2x - y + 2z = 4 and 2x - y + 2z = 13 is:`,
+src/content/banks/mock-01/math.ts:617:    text: `In an arithmetic progression, the 3rd term is 7 and the 7th term is 19. The sum of the first 20 terms is:`,
+src/content/banks/mock-01/math.ts:636:    text: `A fair coin is tossed 10 times. Let X denote the number of heads. The variance of X is: (round off to one decimal place)`
+src/content/banks/mock-01/chemistry.ts:12:    text: `25 mL of 0.5 M HCl is mixed with 75 mL of 0.1 M NaOH solution. The pH of the resulting solution is:`,
+src/content/banks/mock-01/chemistry.ts:36:    text: `Which of the following sets of quantum numbers (n,\\ l,\\ m_l,\\ m_s) is **NOT** possible for an electron in an atom?
+src/content/banks/mock-01/chemistry.ts:57:    text: `The shape of the \SF}_4 molecule (shown) and the hybridisation of sulphur in it are:`,
+src/content/banks/mock-01/chemistry.ts:92:    text: `Among the following diatomic species, which one has the **highest** bond order?`,
+src/content/banks/mock-01/chemistry.ts:111:    text: `The enthalpy of neutralisation of a strong acid with a strong base is -57.3\\ \kJ mol}^{-1}. The enthalpy of ionisat
+src/content/banks/mock-01/chemistry.ts:132:    text: `For the equilibrium A \\rightleftharpoons B at temperature T, the equilibrium constant is K_c = 4. The equilibrium c
+src/content/banks/mock-01/chemistry.ts:154:    text: `For the cell reaction \Zn}(s) + \Cu}^{2+}(aq) \\to \Zn}^{2+}(aq) + \Cu}(s), E^\\circ_{\cell}} = 1.10\\ \V}. The EMF 
+src/content/banks/mock-01/chemistry.ts:173:    text: `A first-order reaction is 75\\% complete in 40 minutes. Its half-life is:`,
+src/content/banks/mock-01/chemistry.ts:194:    text: `Among the hydrides of group 15 elements — \NH}_3, \PH}_3, \AsH}_3 and \BiH}_3 — the **strongest reducing agent**
+src/content/banks/mock-01/chemistry.ts:211:    text: `The complex K_3[\Fe(CN)}_6] contains the octahedral ion [\Fe(CN)}_6]^{3-} (shown). The number of unpaired electrons 
+src/content/banks/mock-01/chemistry.ts:244:    text: `The reaction of tert-butyl bromide, (\CH}_3)_3\C–Br} (shown), with aqueous NaOH proceeds predominantly by:`,
+src/content/banks/mock-01/chemistry.ts:276:    text: `The four compounds shown are: (A) phenol, (B) p-nitrophenol, (C) p-cresol (p-methylphenol) and (D) ethanol. The **mo
+src/content/banks/mock-01/chemistry.ts:309:    text: `Which of the following compounds does **NOT** give a positive iodoform test?`,
+src/content/banks/mock-01/chemistry.ts:326:    text: `The correct order of basic strength in **aqueous solution** for the ethylamines is:`,
+src/content/banks/mock-01/chemistry.ts:347:    text: `In proteins, the \\alpha-helix structure is stabilised by:`,
+src/content/banks/mock-01/chemistry.ts:364:    text: `Aniline is immiscible with water and volatile with steam. The technique shown in the figure — used to purify anili
+src/content/banks/mock-01/chemistry.ts:399:    text: `Four aqueous solutions are prepared as in the table. Which one has the **highest boiling point**? (Assume complete d
+src/content/banks/mock-01/chemistry.ts:434:    text: `The species \N}^{3-}, \O}^{2-}, \F}^- and \Na}^+ are isoelectronic (10 electrons each). The correct order of their *
+src/content/banks/mock-01/chemistry.ts:453:    text: `For an **ideal** binary solution of liquids A and B, which one of the following statements is **false**?`,
+src/content/banks/mock-01/chemistry.ts:474:    text: `The four aromatic compounds shown are: (A) toluene, (B) chlorobenzene, (C) nitrobenzene and (D) benzene. Which of th
+src/content/banks/mock-01/chemistry.ts:508:    text: `2.0 g of pure limestone (\CaCO}_3, M = 100\\ \g mol}^{-1}) is completely decomposed by heating:
+src/content/banks/mock-01/chemistry.ts:528:    text: `The ionisation constant of acetic acid is K_a = 1.8 \\times 10^{-5}. The pH of a 0.1 M acetic acid solution is: (rou
+src/content/banks/mock-01/chemistry.ts:546:    text: `A current of 2 A is passed through a solution of \CuSO}_4 for 965 s using inert electrodes. The mass of copper depos
+src/content/banks/mock-01/chemistry.ts:567:    text: `The number of **structural isomers** of \C}_4\H}_{10}\O} that are **alcohols** (not ethers) is:`,
+src/content/banks/mock-01/chemistry.ts:588:    text: `A first-order reaction is 50\\% complete in 30 minutes. The time required for 90\\% completion is: (in minutes; roun
+src/content/banks/mock-01/physics.ts:12:    text: `A particle moves along the x-axis. Its velocity–time graph is shown in the figure. The total distance travelled by th
+src/content/banks/mock-01/physics.ts:58:    text: `A block A of mass 2\\ \kg} lies on a rough 37^\\circ incline with coefficient of kinetic friction \\mu = 0.25. It is co
+src/content/banks/mock-01/physics.ts:101:    text: `A rigid body rolls without slipping down a rough inclined plane of inclination 30^\\circ. Its centre of mass has accel
+src/content/banks/mock-01/physics.ts:123:    text: `Two planets have the same mean density but their radii are in the ratio 2:1. The ratio of their escape velocities from
+src/content/banks/mock-01/physics.ts:142:    text: `A block of mass 2\\ \kg} is released from rest at the top of a smooth incline of height 1.25\\ \m}. At the bottom, it 
+src/content/banks/mock-01/physics.ts:167:    text: `A block of mass m is attached to two springs (one on either side) each of stiffness k, and oscillates on a frictionles
+src/content/banks/mock-01/physics.ts:189:    text: `A pipe closed at one end resonates at frequencies 250\\ \Hz} and 350\\ \Hz}, with **no** resonance frequency in betwee
+src/content/banks/mock-01/physics.ts:206:    text: `A dipole of dipole moment p = q\\cdot 2a lies along the x-axis with +q at x = +a and -q at x = -a. P is a point on the
+src/content/banks/mock-01/physics.ts:242:    text: `A 6\\ \\mu\F} capacitor charged to 100\\ \V} and a 3\\ \\mu\F} capacitor charged to 50\\ \V} are connected in parallel
+src/content/banks/mock-01/physics.ts:285:    text: `In the Wheatstone bridge circuit shown, the four arms have resistances 3\\ \\Omega, 4\\ \\Omega, 6\\ \\Omega and 8\\ \
+src/content/banks/mock-01/physics.ts:337:    text: `An infinite straight wire carries a current I_1 = 10\\ \A}. A rectangular loop of dimensions 20\\ \cm} \\times 10\\ \c
+src/content/banks/mock-01/physics.ts:361:    text: `The magnetic flux through each turn of a 50-turn coil varies with time as \\phi = (6t^2 - 4t + 1) weber. The magnitude
+src/content/banks/mock-01/physics.ts:383:    text: `In the series LCR circuit shown, R = 40\\ \\Omega, X_L = 100\\ \\Omega and X_C = 70\\ \\Omega. The power factor of the
+src/content/banks/mock-01/physics.ts:424:    text: `A convex lens of focal length 20\\ \cm} is kept in contact with a concave lens of focal length 30\\ \cm}. The combinat
+src/content/banks/mock-01/physics.ts:442:    text: `Two coherent sources, each of intensity I_0, produce waves that arrive at a point with a phase difference of \\pi/3 (t
+src/content/banks/mock-01/physics.ts:472:    text: `The stopping potential V_s versus frequency f of incident light on a metal surface is plotted from photoelectric data,
+src/content/banks/mock-01/physics.ts:513:    text: `A Zener diode with breakdown voltage V_Z = 5\\ \V} is connected to regulate the voltage across a 1\\ \k}\\Omega load. 
+src/content/banks/mock-01/physics.ts:534:    text: `In a hydrogen atom, an electron makes a transition from the level n = 4 to the level n = 2. The wavelength of the emit
+src/content/banks/mock-01/physics.ts:553:    text: `If force (F), velocity (v) and time (T) are chosen as the fundamental quantities, the dimensions of energy are:`,
+src/content/banks/mock-01/physics.ts:576:    text: `A spherical metal ball of radius r and density \\rho falls through a liquid of density \\sigma (\\sigma < \\rho) and a
+src/content/banks/mock-01/physics.ts:599:    text: `A radioactive nuclide has a half-life of 10 days. What percentage of the initial sample decays in 30 days? (Round off 
+src/content/banks/mock-01/physics.ts:619:    text: `One mole of an ideal monatomic gas at 300\\ \K} expands adiabatically and reversibly until its temperature falls to 20
+src/content/banks/mock-01/physics.ts:640:    text: `A ball is thrown vertically upward with a speed of 20\\ \m/s} from the top of a tower of height 25\\ \m}. Taking g = 1
+src/content/banks/mock-01/physics.ts:657:    text: `Three point charges of 10\\ \\mu\C} each are placed at the three corners of an equilateral triangle of side 2\\ \m}. T
+src/content/banks/mock-01/physics.ts:675:    text: `A uniform disc of mass 2\\ \kg} and radius 0.5\\ \m} rotates about its central symmetry axis with an angular velocity 
