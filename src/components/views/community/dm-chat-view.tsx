@@ -139,25 +139,26 @@ export function DmChatView({ conversationId }: { conversationId: string }) {
   const reportOpenRef = useRef(false)
   useEffect(() => { reportOpenRef.current = reportOpen }, [reportOpen])
 
-  const sendMessage = async (content: string) => {
+  const sendMessage = async (content: string): Promise<boolean> => {
     const ack = await emitSocketAck<{ ok: boolean; message?: ChatMessageDTO; error?: string }>(
       'dm:send', conversationId, content,
     )
     if (ack?.ok && ack.message) {
       appendMessage(ack.message)
       void queryClient.invalidateQueries({ queryKey: qk.conversations })
-      return
+      return true
     }
     if (ack && !ack.ok) {
       if (ack.error?.includes('cannot send')) setSendBlocked(true)
       toast.error(ack.error ?? 'Message rejected')
-      return
+      return false
     }
     // REST fallback
     try {
       const res = await api.post<{ message: ChatMessageDTO }>(`/conversations/${conversationId}/messages`, { content })
       appendMessage(res.message)
       void queryClient.invalidateQueries({ queryKey: qk.conversations })
+      return true
     } catch (e) {
       if (e instanceof ApiError && e.status === 403) {
         setSendBlocked(true)
@@ -165,6 +166,7 @@ export function DmChatView({ conversationId }: { conversationId: string }) {
       } else {
         toast.error(e instanceof ApiError ? e.message : 'Could not send the message')
       }
+      return false
     }
   }
 

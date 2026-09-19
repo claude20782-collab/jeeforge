@@ -17,7 +17,7 @@ import { useSocketEvent } from '@/components/chat/socket'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import {
-  AtSign, Bell, BellOff, CheckCheck, Info, Megaphone, MessageCircle, UserPlus, Users,
+  AtSign, Bell, BellOff, CheckCheck, Info, Megaphone, MessageCircle, ShieldAlert, Users,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -25,10 +25,10 @@ const TYPE_ICON = {
   GROUP_MESSAGE: Users,
   DIRECT_MESSAGE: MessageCircle,
   MENTION: AtSign,
-  GROUP_ACTIVITY: UserPlus,
+  GROUP_ACTIVITY: Users,
   MOCK_ANNOUNCEMENT: Megaphone,
   SYSTEM: Info,
-  REPORT_STATUS: CheckCheck,
+  REPORT_STATUS: ShieldAlert,
 } as const
 
 const PAGE = 15

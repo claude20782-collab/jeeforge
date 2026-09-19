@@ -9,6 +9,7 @@ import type {
   FieldDiagram, GeometryDiagram, BarsDiagram, TableDiagram, MoleculeDiagram,
   OrganicDiagram, ApparatusDiagram, V3dDiagram,
 } from '@/lib/types'
+import React from 'react'
 import { cn } from '@/lib/utils'
 
 const FG = 'var(--foreground)'
@@ -20,9 +21,22 @@ const CORAL = 'var(--chart-3)'
 const VIOLET = 'var(--chart-4)'
 const TEAL = 'var(--chart-5)'
 
+class DiagramErrorBoundary extends React.Component<
+  { children: React.ReactNode; fallback: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: React.ReactNode; fallback: React.ReactNode }) {
+    super(props)
+    this.state = { hasError: false }
+  }
+  static getDerivedStateFromError() { return { hasError: true } }
+  render() { return this.state.hasError ? this.props.fallback : this.props.children }
+}
+
 export function QuestionDiagram({ spec, className, compact }: { spec: DiagramSpec; className?: string; compact?: boolean }) {
-  try {
-    return (
+  const fallback = <div className="my-2 rounded border border-destructive/40 bg-destructive/10 p-2 text-xs text-destructive">Diagram unavailable</div>
+  return (
+    <DiagramErrorBoundary fallback={fallback}>
       <figure className={cn('my-3 flex justify-center', className)}>
         <div className={cn(
           'inline-block rounded-lg border bg-card/60 px-2 py-2 sm:px-3',
@@ -31,10 +45,8 @@ export function QuestionDiagram({ spec, className, compact }: { spec: DiagramSpe
           {render(spec)}
         </div>
       </figure>
-    )
-  } catch {
-    return <div className="my-2 rounded border border-destructive/40 bg-destructive/10 p-2 text-xs text-destructive">Diagram unavailable</div>
-  }
+    </DiagramErrorBoundary>
+  )
 }
 
 function render(spec: DiagramSpec) {
@@ -769,7 +781,7 @@ function Molecule({ D }: { D: MoleculeDiagram }) {
           return <polygon key={i} points={`${sx},${sy} ${ex + px * 6},${ey + py * 6} ${ex - px * 6},${ey - py * 6}`} fill={FG} />
         }
         if (b.type === 'hash') {
-          return <g>{Array.from({ length: 5 }).map((_, j) => {
+          return <g key={i}>{Array.from({ length: 5 }).map((_, j) => {
             const t = (j + 0.5) / 5
             const w = 2 + t * 7
             const bx = sx + (dx / len) * t * (len - 2 * gap)

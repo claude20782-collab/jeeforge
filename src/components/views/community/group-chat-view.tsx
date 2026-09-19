@@ -123,18 +123,18 @@ export function GroupChatView({ groupId }: { groupId: string }) {
     setReportOpen(true)
   }
 
-  const sendMessage = async (content: string, replyToId: string | null) => {
+  const sendMessage = async (content: string, replyToId: string | null): Promise<boolean> => {
     const ack = await emitSocketAck<{ ok: boolean; message?: ChatMessageDTO; error?: string }>(
       'group:message', groupId, content, replyToId ?? undefined,
     )
     if (ack?.ok && ack.message) {
       appendMessage(ack.message)
       setReplyTo(null)
-      return
+      return true
     }
     if (ack && !ack.ok) {
       toast.error(ack.error ?? 'Message rejected')
-      return
+      return false
     }
     // socket unavailable → REST fallback (server broadcasts to other members)
     try {
@@ -143,8 +143,10 @@ export function GroupChatView({ groupId }: { groupId: string }) {
       })
       appendMessage(res.message)
       setReplyTo(null)
+      return true
     } catch (e) {
       toast.error(e instanceof ApiError ? e.message : 'Could not send the message')
+      return false
     }
   }
 

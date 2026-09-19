@@ -205,3 +205,18 @@ Work Log:
 Stage Summary:
 - All 5 views (exact export names kept) verified end-to-end against the REAL published Mock 01 (75 real questions, 22 diagrams, real KaTeX solutions, all-ORIGINAL sourcing) with a real UI-driven attempt + 2 API-driven companion attempts; every number cross-checked against the APIs; charts VLM-verified; tag persistence proven across reload; cleanup proven with before/after counts; DB left pristine for other agents (mock/questions untouched).
 - Features live (unchanged from prior run, now real-data-verified): ResultView hero/stats/subjects/actions + autoSubmitted notice; SolutionsView one-shot 75-Q load, client filters (status/subject/60-chapter dropdown), colored nav grid + marked rings, keyboard/deep-link nav, diagrams + KaTeX, option state styling, Section B values, 8-tag mistake tagger (persisted + cache-synced), collapsible solution + formula card; AnalysisView 8 time buckets + 75-bar time chart, sortable/filterable chapter+topic tables with accuracy bars, difficulty grouped-bar+table, 3-series radar+table, inline mistake tagging with optimistic potential recompute; ProgressView 6 stat tiles + trend/histogram/rank charts + deep-linked recent attempts + empty state; LeaderboardView 5 scopes, mock selector, medals, me-highlight, tie-break note, empty states.
+
+---
+Task ID: T8
+Agent: orchestrator
+Task: Deploy live
+Work Log:
+- GitHub repo created & pushed: github.com/claude20782-collab/jeeforge (public; .env/db/logs/secrets verified excluded; secrets scan clean)
+- Supabase project created (jeeforge-db, ap-southeast-1, Postgres 17): schema pushed via prisma/schema.production.prisma, seeded (admin, syllabus, 40 mocks, Mock 01 PUBLISHED)
+- SECURITY: enabled RLS deny-all on all 19 tables + revoked anon/authenticated grants (Prisma tables would otherwise be readable via Supabase PostgREST)
+- Render: web services BLOCKED by workspace billing ("payment information required" — team workspace policy). Static sites deploy free → created jeeforge static site
+- **LIVE PUBLIC SITE: https://jeeforge-static.onrender.com** — polished landing + full 40-mock schedule + features + FAQ + platform status; auto-deploys from main
+- Production fixes shipped: dialect-portable SQL (TRUE/FALSE literals), CHAT_INTERNAL_URL env for broadcasts, chat-service PRAGMA guards, production postgres schemas, DEPLOYMENT.md with one-click full-app config
+- Cloudflare token provided by user is INVALID (api returns 1000 Invalid API Token on /user/tokens/verify) — pages.dev deploy not possible
+Stage Summary:
+- Site is live (landing). Full interactive app remains live in sandbox; one-click Render deploy ready the moment a card is added to the workspace (or a valid CF token lets us tunnel). Sandbox app = fully functional via Preview Panel.

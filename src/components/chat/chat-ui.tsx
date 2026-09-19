@@ -179,7 +179,9 @@ export function MessageRow({ message, mine, showHeader, readReceipt, onReply, on
 
 // ---------------------------------------------------------------------------
 export interface ChatInputProps {
-  onSend: (content: string, replyToId: string | null) => void | Promise<void>
+  /** Send handler — resolve `true` when the message went through; `false` (or
+   *  a throw) restores the draft in the composer so nothing typed is lost. */
+  onSend: (content: string, replyToId: string | null) => boolean | void | Promise<boolean | void>
   replyTo: { id: string; sender: string; content: string } | null
   onCancelReply: () => void
   onTyping: () => void
@@ -249,12 +251,19 @@ export function ChatInput({
     setValue('')
     setMention(null)
     requestAnimationFrame(autoResize)
+    let ok = true
     try {
-      await onSend(content, replyTo?.id ?? null)
-    } finally {
-      setSending(false)
-      taRef.current?.focus()
+      ok = (await onSend(content, replyTo?.id ?? null)) !== false
+    } catch {
+      ok = false
     }
+    if (!ok) {
+      // send failed — restore the draft so the user doesn't lose their text
+      setValue(content)
+      requestAnimationFrame(autoResize)
+    }
+    setSending(false)
+    taRef.current?.focus()
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
