@@ -267,3 +267,14 @@ Stage Summary:
 - QA: full E2E cycle re-verified post-recovery; all 24 new diagrams render.
 - New user-facing features: journey tracker, percentile badge, stat-card polish.
 - NEXT ROUND PRIORITIES: (1) author mock-03 bank (unlocks 22 Sep — nextActionable in unlock-date order; mock-03 comes after mock-02 per schedule.ts), (2) re-verify services, (3) continue feature polish. NOTE: subagent Task dispatch returned empty responses twice this round — if it recurs, author banks directly (this round proves the pattern works).
+
+---
+Task ID: R2-ops
+Agent: orchestrator
+Task: hand-off ops notes (append to R2)
+Work Log:
+- Dev server (:3000) died once at ~02:49 (known silent OOM pattern) → restarted via (nohup bun run dev >> dev.log 2>&1 &); healthy.
+- Accidentally SIGTERM'd the chat-service parent while cleaning a zombie bun parent (both run as `bun run dev` — ALWAYS check the cwd of the bun parent before killing: the chat one lives in mini-services/chat-service). Chat service restarted, :3003 healthy again.
+- Final state at hand-off: :3000 ✓, :3003 ✓, gateway :81 ✓, 2 bun dev parents (next + chat), git pushed 8ce9df7, lint 0 problems, DB: 1 user (admin), 2 PUBLISHED mocks (01 unlocked, 02 unlocks 20 Sep 00:00 IST), 150 questions, 0 attempts.
+Stage Summary:
+- Everything green at hand-off. Next round: author mock-03 bank (unlocks 22 Sep per schedule.ts).
