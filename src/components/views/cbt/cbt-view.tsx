@@ -26,11 +26,14 @@ import { QuestionPane, NUMERIC_RE } from './question-pane'
 import {
   Palette, PaletteLegend, paletteCounts, type PaletteAnswer, type PaletteStatus,
 } from './palette'
+import {
+  Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle,
+} from '@/components/ui/dialog'
 import { SubmitDialog } from './submit-dialog'
 import { useMediaQuery } from './use-media-query'
 import {
   AlertTriangle, BookmarkPlus, CheckCheck, ChevronLeft, ChevronRight, Eraser,
-  LayoutGrid, ListChecks, Loader2, Save,
+  Keyboard, LayoutGrid, ListChecks, Loader2, Save,
 } from 'lucide-react'
 
 type Phase = 'loading' | 'error' | 'active' | 'submitting'
@@ -49,6 +52,7 @@ export function CbtView({ attemptId }: { attemptId: string }) {
   const [endAtMs, setEndAtMs] = useState(0)
   const [paletteOpen, setPaletteOpen] = useState(false)
   const [submitOpen, setSubmitOpen] = useState(false)
+  const [helpOpen, setHelpOpen] = useState(false)
 
   // ---- refs (stable action closures; interval-safe) ----
   const questionsRef = useRef<AttemptFull['questions']>([])
@@ -63,7 +67,7 @@ export function CbtView({ attemptId }: { attemptId: string }) {
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => { phaseRef.current = phase }, [phase])
-  useEffect(() => { submitOpenRef.current = submitOpen }, [submitOpen])
+  useEffect(() => { submitOpenRef.current = submitOpen || helpOpen }, [submitOpen, helpOpen])
 
   const questions = attempt?.questions ?? []
   const total = questions.length
@@ -336,12 +340,19 @@ export function CbtView({ attemptId }: { attemptId: string }) {
     return () => clearTimeout(t)
   }, [index, phase, putUpdate, updateAnswerLocal])
 
-  // ============ keyboard shortcuts: 1–4 / A–D select MCQ option ============
+  // ============ keyboard shortcuts: 1–4 / A–D select MCQ option, ? = help ============
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey) return
       const t = e.target as HTMLElement | null
       if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return
+      if (e.key === '?') {
+        if (phaseRef.current !== 'active') return
+        e.preventDefault()
+        setHelpOpen(o => !o)
+        return
+      }
+      if (e.key === 'Escape') { setHelpOpen(false); return }
       if (phaseRef.current !== 'active' || submitOpenRef.current) return
       const q = questionsRef.current[indexRef.current]
       if (!q || q.section !== 'A' || !q.options) return
@@ -675,6 +686,42 @@ export function CbtView({ attemptId }: { attemptId: string }) {
         onSubmit={() => { void doSubmit('USER') }}
       />
 
+      {/* ---------- keyboard shortcuts help (? key) ---------- */}
+      <Dialog open={helpOpen} onOpenChange={setHelpOpen}>
+        <DialogContent className="max-w-sm rounded-xl border-border bg-card p-0">
+          <DialogHeader className="border-b border-border/70 px-5 py-4">
+            <DialogTitle className="flex items-center gap-2 text-base">
+              <Keyboard className="size-4 text-primary" aria-hidden /> Keyboard shortcuts
+            </DialogTitle>
+            <DialogDescription className="sr-only">Available keyboard shortcuts during the test</DialogDescription>
+          </DialogHeader>
+          <div className="px-5 py-4">
+            <ul className="space-y-3 text-sm">
+              <li className="flex items-center justify-between gap-3">
+                <span className="text-muted-foreground">Select an option (Section A)</span>
+                <span className="flex gap-1"><Kbd>1</Kbd><Kbd>2</Kbd><Kbd>3</Kbd><Kbd>4</Kbd></span>
+              </li>
+              <li className="flex items-center justify-between gap-3">
+                <span className="text-muted-foreground">Select an option (letters)</span>
+                <span className="flex gap-1"><Kbd>A</Kbd><Kbd>B</Kbd><Kbd>C</Kbd><Kbd>D</Kbd></span>
+              </li>
+              <li className="flex items-center justify-between gap-3">
+                <span className="text-muted-foreground">Open or close this help</span>
+                <Kbd>?</Kbd>
+              </li>
+              <li className="flex items-center justify-between gap-3">
+                <span className="text-muted-foreground">Close a dialog</span>
+                <Kbd>Esc</Kbd>
+              </li>
+            </ul>
+            <p className="mt-4 rounded-lg bg-secondary/60 px-3 py-2 text-xs leading-relaxed text-muted-foreground">
+              Save with <span className="font-semibold text-foreground">Save &amp; Next</span> — an option
+              stays a draft until you save it. Marked questions are still evaluated.
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       {/* ---------- submitting overlay ---------- */}
       {phase === 'submitting' && (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-3 bg-background/85 backdrop-blur-sm">
@@ -685,6 +732,10 @@ export function CbtView({ attemptId }: { attemptId: string }) {
       )}
     </div>
   )
+}
+
+function Kbd({ children }: { children: React.ReactNode }) {
+  return <kbd className="inline-flex h-6 min-w-6 items-center justify-center rounded-md border border-border bg-secondary px-1.5 font-mono text-xs font-semibold text-foreground shadow-[0_1px_0_rgba(255,255,255,0.08)_inset]">{children}</kbd>
 }
 
 function CbtErrorCard({ message }: { message: string }) {

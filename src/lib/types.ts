@@ -353,6 +353,8 @@ export interface PublicProfile {
     bestRank: number | null
   }
   recentAttempts: Array<{ mockNumber: number; mockTitle: string; score: number; submittedAt: string; rank: number | null }>
+  /** sparse per-day study activity (days with ≥1 attempt started/submitted) for heatmap rendering */
+  activity?: Array<{ date: string; count: number }>
   isSelf: boolean
   blocked: boolean
 }

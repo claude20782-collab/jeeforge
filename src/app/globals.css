@@ -195,3 +195,38 @@
 input.numeric-answer::-webkit-outer-spin-button,
 input.numeric-answer::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 input.numeric-answer { -moz-appearance: textfield; appearance: textfield; }
+
+/* ============ Print: clean scorecard (result page) ============ */
+@media print {
+  :root { color-scheme: light; }
+  html, body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+  /* hide app chrome + interactive bits */
+  header, footer, nav,
+  [data-print="hide"],
+  .no-print { display: none !important; }
+  button { display: none !important; }
+  /* cards: flat white with hairlines */
+  [class*="card"], [class*="Card"] {
+    background: #fff !important;
+    border: 1px solid #d4d4d4 !important;
+    box-shadow: none !important;
+    color: #111 !important;
+    break-inside: avoid;
+  }
+  /* text + muted variants flip to print-ink */
+  * {
+    color: #111 !important;
+    border-color: #d4d4d4 !important;
+  }
+  /* keep hero score prominent */
+  .gold-gradient-text {
+    background: none !important;
+    color: #111 !important;
+    -webkit-text-fill-color: #111 !important;
+  }
+  main { padding: 0 !important; }
+  a[href]::after { content: "" !important; }
+}

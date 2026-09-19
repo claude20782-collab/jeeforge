@@ -20,6 +20,27 @@ export async function GET(_req: Request, { params }: { params: Promise<{ usernam
     orderBy: { submittedAt: 'desc' },
   })
 
+  // sparse per-day activity map (any attempt event: started or submitted) for the heatmap
+  // grouped by IST calendar date (UTC+5:30) — the platform's audience timezone
+  const istDateKey = (d: Date) => {
+    const ist = new Date(d.getTime() + 5.5 * 60 * 60 * 1000)
+    return `${ist.getUTCFullYear()}-${String(ist.getUTCMonth() + 1).padStart(2, '0')}-${String(ist.getUTCDate()).padStart(2, '0')}`
+  }
+  const activityMap = new Map<string, number>()
+  for (const a of await db.attempt.findMany({
+    where: { userId: user.id },
+    select: { startedAt: true, submittedAt: true },
+  })) {
+    for (const d of [a.startedAt, a.submittedAt]) {
+      if (!d) continue
+      const key = istDateKey(d)
+      activityMap.set(key, (activityMap.get(key) ?? 0) + 1)
+    }
+  }
+  const activity = [...activityMap.entries()]
+    .map(([date, count]) => ({ date, count }))
+    .sort((x, y) => (x.date < y.date ? -1 : 1))
+
   const ranked = await Promise.all(attempts.map(async a => ({ a, ...(await attemptRank(a)) })))
   const scores = attempts.map(a => a.score ?? 0)
   const correct = attempts.reduce((s, a) => s + (a.correctCount ?? 0), 0)
@@ -52,6 +73,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ usernam
       submittedAt: (r.a.submittedAt ?? r.a.startedAt).toISOString(),
       rank: r.rank,
     })),
+    activity,
     isSelf,
     blocked,
   }

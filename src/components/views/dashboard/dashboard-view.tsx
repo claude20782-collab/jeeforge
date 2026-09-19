@@ -145,6 +145,11 @@ export function DashboardView() {
           <RecentAttempts profile={profile} mocks={mocks} />
         )}
       </section>
+
+      {/* study activity heatmap */}
+      <section aria-label="Study activity" className="mt-8">
+        <ActivityHeatmap activity={profile?.activity ?? []} streak={profile?.stats.streak ?? 0} loading={loading && !profile} />
+      </section>
     </div>
   )
 }
@@ -448,4 +453,139 @@ function getGreeting(): string {
   if (h < 17) return 'Good afternoon'
   if (h < 21) return 'Good evening'
   return 'Good night'
+}
+
+/* ---------------------------- activity heatmap ---------------------------- */
+
+const HEATMAP_WEEKS = 16
+
+function ActivityHeatmap({ activity, streak, loading }: {
+  activity: Array<{ date: string; count: number }>
+  streak: number
+  loading: boolean
+}) {
+  const { weeks, activeDays, totalEvents, monthLabels } = useMemo(() => {
+    const byDate = new Map(activity.map(a => [a.date, a.count]))
+    // anchor: the Sunday ending the current week, so the last column is "this week"
+    const today = new Date()
+    const end = new Date(today)
+    end.setUTCHours(0, 0, 0, 0)
+    // shift to that week's Sunday (0=Sun … 6=Sat)
+    end.setUTCDate(end.getUTCDate() + (6 - end.getUTCDay()))
+    const cols: Array<Array<{ key: string; count: number }>> = []
+    const labels: Array<{ col: number; label: string }> = []
+    for (let w = HEATMAP_WEEKS - 1; w >= 0; w--) {
+      const col: Array<{ key: string; count: number }> = []
+      const sunday = new Date(end)
+      sunday.setUTCDate(end.getUTCDate() - w * 7)
+      for (let d = 0; d < 7; d++) {
+        const day = new Date(sunday)
+        day.setUTCDate(sunday.getUTCDate() + d)
+        const key = `${day.getUTCFullYear()}-${String(day.getUTCMonth() + 1).padStart(2, '0')}-${String(day.getUTCDate()).padStart(2, '0')}`
+        col.push({ key, count: byDate.get(key) ?? 0 })
+      }
+      // month label on the column whose 1st row starts a new month vs previous column
+      if (w < HEATMAP_WEEKS - 1) {
+        const prev = cols[cols.length - 1]
+        const prevMonth = prev ? Number(prev[0].key.slice(5, 7)) : -1
+        const thisMonth = Number(col[0].key.slice(5, 7))
+        if (prevMonth !== thisMonth) labels.push({ col: cols.length, label: MONTHS[thisMonth - 1] })
+      }
+      cols.push(col)
+    }
+    return {
+      weeks: cols,
+      activeDays: activity.length,
+      totalEvents: activity.reduce((s, a) => s + a.count, 0),
+      monthLabels: labels,
+    }
+  }, [activity])
+
+  if (loading) return <Skeleton className="h-44 rounded-xl" />
+
+  return (
+    <Card className="rounded-xl p-4 sm:p-6">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <h2 className="flex items-center gap-2 text-lg font-semibold sm:text-xl">
+            <CalendarClock className="h-5 w-5 text-primary" aria-hidden /> Study activity
+          </h2>
+          <p className="mt-0.5 text-sm text-muted-foreground">
+            Last {HEATMAP_WEEKS} weeks — one square per day, lit by every mock you start or submit.
+          </p>
+        </div>
+        <div className="flex items-center gap-4 text-sm">
+          {streak > 0 && (
+            <span className="flex items-center gap-1.5 font-medium text-primary">
+              <Flame className="h-4 w-4" aria-hidden /> {streak}-day streak
+            </span>
+          )}
+          <span className="text-muted-foreground">
+            <span className="font-semibold text-foreground">{activeDays}</span> active {activeDays === 1 ? 'day' : 'days'}
+          </span>
+        </div>
+      </div>
+
+      <div className="mt-5 overflow-x-auto pb-1">
+        <div className="min-w-[480px]">
+          {/* month labels */}
+          <div className="relative mb-1 h-4" aria-hidden>
+            {monthLabels.map(m => (
+              <span
+                key={m.col}
+                className="absolute text-[11px] font-medium text-muted-foreground"
+                style={{ left: `calc(${m.col} * 16px)` }}
+              >
+                {m.label}
+              </span>
+            ))}
+          </div>
+          <div className="flex gap-1">
+            {weeks.map((col, ci) => (
+              <div key={ci} className="flex flex-col gap-1">
+                {col.map(cell => {
+                  const lvl = cell.count === 0 ? 0 : cell.count === 1 ? 1 : cell.count === 2 ? 2 : 3
+                  return (
+                    <div
+                      key={cell.key}
+                      className={HEAT_LEVELS[lvl].cls}
+                      title={`${fmtHeatDate(cell.key)} — ${cell.count === 0 ? 'no activity' : `${cell.count} ${cell.count === 1 ? 'event' : 'events'}`}`}
+                      role="img"
+                      aria-label={`${fmtHeatDate(cell.key)}: ${cell.count} activity ${cell.count === 1 ? 'event' : 'events'}`}
+                    />
+                  )
+                })}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-4 flex items-center justify-between gap-3 text-xs text-muted-foreground">
+        <span>
+          {totalEvents === 0
+            ? 'Your grid lights up as you attempt mocks — today is a great day to start.'
+            : `${totalEvents} attempt ${totalEvents === 1 ? 'event' : 'events'} in this window`}
+        </span>
+        <span className="flex items-center gap-1.5" aria-hidden>
+          Less
+          {HEAT_LEVELS.map((l, i) => <span key={i} className={l.cls} />)}
+          More
+        </span>
+      </div>
+    </Card>
+  )
+}
+
+const HEAT_LEVELS = [
+  { cls: 'h-3 w-3 rounded-[3px] bg-foreground/[0.06]' },
+  { cls: 'h-3 w-3 rounded-[3px] bg-primary/30' },
+  { cls: 'h-3 w-3 rounded-[3px] bg-primary/60' },
+  { cls: 'h-3 w-3 rounded-[3px] bg-primary shadow-[0_0_6px_rgba(232,182,76,0.45)]' },
+]
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+function fmtHeatDate(key: string): string {
+  const [y, m, d] = key.split('-').map(Number)
+  return `${d} ${MONTHS[m - 1]} ${y}`
 }

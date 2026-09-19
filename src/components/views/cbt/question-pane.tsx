@@ -98,7 +98,7 @@ export const QuestionPane = memo(function QuestionPane({
             )
           })}
           <p className="hidden pt-1 text-xs text-muted-foreground lg:block">
-            Tip: press <kbd className="rounded border bg-muted px-1 font-mono">1</kbd>–<kbd className="rounded border bg-muted px-1 font-mono">4</kbd> or <kbd className="rounded border bg-muted px-1 font-mono">A</kbd>–<kbd className="rounded border bg-muted px-1 font-mono">D</kbd> to select an option
+            Tip: press <kbd className="rounded border bg-muted px-1 font-mono">1</kbd>–<kbd className="rounded border bg-muted px-1 font-mono">4</kbd> or <kbd className="rounded border bg-muted px-1 font-mono">A</kbd>–<kbd className="rounded border bg-muted px-1 font-mono">D</kbd> to select an option · <kbd className="rounded border bg-muted px-1 font-mono">?</kbd> for all shortcuts
           </p>
         </div>
       ) : (
