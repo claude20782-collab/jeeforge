@@ -327,7 +327,7 @@ function Check({ ok, children }: { ok: boolean; children: React.ReactNode }) {
 // ================= QUESTIONS =================
 function QuestionsTab({ qc }: { qc: ReturnType<typeof useQueryClient> }) {
   const { data: chapters } = useQuery({ queryKey: ['admin-chapters'], queryFn: () => api.get<{ chapters: Array<{ id: string; subject: string; name: string; topics: Array<{ id: string; name: string }> }> }>('/admin/chapters') })
-  const [mockId, setMockId] = useState<string> | null>(null)
+  const [mockId, setMockId] = useState<string | null>(null)
   const { data: mocks } = useQuery({ queryKey: ['admin-mocks'], queryFn: () => api.get<{ mocks: AdminMock[] }>('/admin/mocks') })
   const [editorOpen, setEditorOpen] = useState(false)
   const [editing, setEditing] = useState<AdminQuestionDTO | null>(null)
