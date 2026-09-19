@@ -330,6 +330,30 @@ function CircuitElem({ c }: { c: CircuitDiagram['components'][number] }) {
       <circle cx={c.x} cy={c.y} r={6} fill={stroke} opacity={0.18} />
       <circle cx={c.x} cy={c.y} r={3.4} fill={stroke} />
     </g>
+    case 'arrow': return <g>
+      <line x1={c.x1} y1={c.y1} x2={c.x2} y2={c.y2} stroke={c.color ?? CORAL} strokeWidth={2} markerEnd="url(#ckt)" strokeLinecap="round" style={{ stroke: c.color ?? CORAL }} />
+      {c.label && <HText x={(c.x1 + c.x2) / 2 + 6} y={(c.y1 + c.y2) / 2 - 7} text={c.label} fontSize={11.5} italic fill={c.color ?? CORAL} />}
+    </g>
+    case 'diode': {
+      // IEC-style: filled triangle pointing along forward direction + cathode bar
+      const mx = (c.x1 + c.x2) / 2, my = (c.y1 + c.y2) / 2
+      const dx = c.x2 - c.x1, dy = c.y2 - c.y1
+      const len = Math.hypot(dx, dy) || 1
+      const ux = dx / len, uy = dy / len
+      const px = -uy, py = ux
+      const a = 14
+      const ax = mx - ux * a, ay = my - uy * a // triangle base (anode side)
+      const tx = mx + ux * 3, ty = my + uy * 3 // triangle tip / bar position
+      return <g>
+        <line x1={c.x1} y1={c.y1} x2={ax} y2={ay} stroke={stroke} strokeWidth={2} />
+        <line x1={tx} y1={ty} x2={c.x2} y2={c.y2} stroke={stroke} strokeWidth={2} />
+        <polygon points={`${tx},${ty} ${ax + px * 9},${ay + py * 9} ${ax - px * 9},${ay - py * 9}`} fill={FG} fillOpacity={0.85} stroke={stroke} strokeWidth={1.4} strokeLinejoin="round" />
+        <line x1={tx + px * 10} y1={ty + py * 10} x2={tx - px * 10} y2={ty - py * 10} stroke={stroke} strokeWidth={2.4} strokeLinecap="round" />
+        <HText x={ax - px * 13} y={ay - py * 13 + 3.5} text="A" fontSize={9.5} anchor="middle" fill={MUT} />
+        <HText x={c.x2 + ux * 5 - px * 13} y={c.y2 + uy * 5 - py * 13 + 3.5} text="K" fontSize={9.5} anchor="middle" fill={MUT} />
+        {(c.label || c.value) && <Chip x={mx - px * 32} y={my - py * 32} text={[c.label, c.value].filter(Boolean).join(' = ')} color={GOLD} />}
+      </g>
+    }
     case 'resistor': {
       const pts = zigzag(c.x1, c.y1, c.x2, c.y2, 7)
       return <g>
@@ -587,7 +611,11 @@ function hatch(x: number, cy: number, h: number, side = 1) {
 // ================= FBD =================
 function Fbd({ D }: { D: FbdDiagram }) {
   const xs: number[] = [], ys: number[] = []
-  D.bodies.forEach(b => { xs.push(b.x, b.x + (b.w ?? 60)); ys.push(b.y, b.y + (b.h ?? 60)) })
+  D.bodies.forEach(b => {
+    const bx2 = b.x2 !== undefined ? b.x2 : b.x + (b.w ?? 60)
+    const by2 = b.y2 !== undefined ? b.y2 : b.y + (b.h ?? 60)
+    xs.push(b.x, bx2); ys.push(b.y, by2)
+  })
   D.forces.forEach(f => { xs.push(f.from[0], f.to[0]); ys.push(f.from[1], f.to[1]) })
   D.dims?.forEach(d => { xs.push(d.from[0], d.to[0]); ys.push(d.from[1], d.to[1]) })
   const minX = Math.min(...xs) - 72, maxX = Math.max(...xs) + 72, minY = Math.min(...ys) - 62, maxY = Math.max(...ys) + 62
@@ -639,6 +667,15 @@ function FbdBody({ b }: { b: FbdDiagram['bodies'][number] }) {
       <line x1={b.x} y1={b.y} x2={b.x + (b.w ?? 90)} y2={b.y} stroke={stroke} strokeWidth={4} strokeLinecap="round" />
       <line x1={b.x} y1={b.y} x2={b.x + (b.w ?? 90)} y2={b.y} stroke="var(--secondary)" strokeWidth={1.4} />
     </g>
+    case 'spring': {
+      // coil from (x,y) to (x2,y2) — natural for block-on-spring / pendulum-spring scenes (R5-b3, additive)
+      const ex = b.x2 ?? b.x + (b.w ?? 60), ey = b.y2 ?? b.y
+      const pts = coil(b.x, b.y, ex, ey, 7)
+      return <g>
+        <polyline points={pts.map(p => p.join(',')).join(' ')} fill="none" stroke={stroke} strokeWidth={1.8} strokeLinejoin="round" strokeLinecap="round" />
+        {b.label && <HText x={(b.x + ex) / 2 + 26} y={(b.y + ey) / 2} text={b.label} fontSize={11} italic fill={MUT} />}
+      </g>
+    }
     case 'pulley': return <g>
       <circle cx={b.x} cy={b.y} r={(b.r ?? 16) + 3.5} fill={FG} opacity={0.15} />
       <circle cx={b.x} cy={b.y} r={b.r ?? 16} fill={CARD} stroke={stroke} strokeWidth={2} />
@@ -1288,9 +1325,19 @@ function OrganicPartView({ p }: { p: OrganicPart }) {
         pts.push([x, y])
       })
       return <g>
-        {pts.slice(0, -1).map((pt, i) => (
-          <line key={i} x1={pt[0]} y1={pt[1]} x2={pts[i + 1][0]} y2={pts[i + 1][1]} stroke={FG} strokeWidth={1.9} />
-        ))}
+        {pts.slice(0, -1).map((pt, i) => {
+          const nb = pts[i + 1]
+          const dx = nb[0] - pt[0], dy = nb[1] - pt[1]
+          const len = Math.hypot(dx, dy) || 1
+          const px = -dy / len, py = dx / len
+          const inset = Math.min(7, len * 0.22)
+          const isDouble = p.double?.includes(i) ?? false
+          return <g key={i}>
+            <line x1={pt[0]} y1={pt[1]} x2={nb[0]} y2={nb[1]} stroke={FG} strokeWidth={1.9} />
+            {isDouble && <line x1={pt[0] + px * 5.5 + (dx / len) * inset} y1={pt[1] + py * 5.5 + (dy / len) * inset}
+              x2={nb[0] + px * 5.5 - (dx / len) * inset} y2={nb[1] + py * 5.5 - (dy / len) * inset} stroke={FG} strokeWidth={1.6} />}
+          </g>
+        })}
         {p.atoms.map((a, i) => a.sym !== 'C' ? (
           <g key={i}>
             <circle cx={pts[i][0]} cy={pts[i][1]} r={10.5} fill={CARD} stroke={elemColor(a.sym)} strokeWidth={1.5} />

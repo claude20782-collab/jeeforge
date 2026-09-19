@@ -1,10 +1,14 @@
 import { db } from '../src/lib/db'
 async function main(){
-  const m1 = await db.mock.findUnique({ where: { mockNumber: 1 }, include: { questions: { include: { question: { select: { subject:true, section:true, diagram:true } } } } } })
-  if (!m1) { console.log('NO MOCK 1'); return }
-  const bySubj: Record<string, number> = {}
-  let diagrams = 0
-  for (const mq of m1.questions) { const q = mq.question; bySubj[q.subject] = (bySubj[q.subject]||0)+1; if (q.diagram) diagrams++ }
-  console.log('RESULT: total', m1.questions.length, 'bySubj:', JSON.stringify(bySubj), 'diagrams:', diagrams)
+  for (const n of [1, 2, 3]) {
+    const m = await db.mock.findUnique({ where: { mockNumber: n }, include: { questions: { include: { question: { select: { section: true, correctAnswer: true } } }, orderBy: { order: 'asc' } } } })
+    if (!m) continue
+    const dist: Record<string, number> = {}
+    for (const mq of m.questions) {
+      const key = mq.question.section === 'A' ? mq.question.correctAnswer : 'NUM'
+      dist[key] = (dist[key] || 0) + 1
+    }
+    console.log(`DB mock-${n} key distribution:`, JSON.stringify(dist))
+  }
 }
 main().finally(()=>db.$disconnect())

@@ -10,8 +10,8 @@ export const PHYSICS_MOCK01: SeedQuestion[] = [
   {
     subject: 'PHYSICS', section: 'A',
     text: `A particle moves along the $x$-axis. Its velocity–time graph is shown in the figure. The total distance travelled by the particle in the time interval $t = 0$ to $t = 18\\ \\text{s}$ is:`,
-    options: ['104 m', '72 m', '40 m', '136 m'],
-    correctAnswer: 'A',
+    options: ['72 m', '40 m', '104 m', '136 m'],
+    correctAnswer: 'C',
     solutionText: `The distance travelled equals the **sum of the areas of all regions between the $v$–$t$ graph and the time axis, taking every area as positive** (displacement would use signed areas).
 
 **Reading the graph (piecewise-linear):**
@@ -31,19 +31,33 @@ $$d = 16 + 48 + 8 + 8 + 16 + 8 = 104\\ \\text{m}$$
     sourceType: 'ORIGINAL', sourceNote: 'Graph-reading trap: distance vs displacement.',
     diagram: {
       kind: 'graph',
-      xAxis: { label: 't (s)', min: 0, max: 18, ticks: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18] },
+      title: 'Velocity–time graph',
+      showGrid: true,
+      xAxis: { label: 't (s)', min: 0, max: 19, ticks: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18] },
       yAxis: { label: 'v (m/s)', min: -10, max: 10, ticks: [-10, -8, -5, 0, 5, 8, 10] },
       curves: [
-        { type: 'line', color: 'var(--gold)', points: [[0, 0], [4, 8], [10, 8], [12, 0], [14, -8], [16, -8], [18, 0]] },
+        { type: 'line', color: 'var(--gold)', label: 'v(t)', points: [[0, 0], [1, 2], [2, 4], [3, 6], [4, 8], [5, 8], [6, 8], [7, 8], [8, 8], [9, 8], [10, 8], [11, 4], [12, 0], [13, -4], [14, -8], [15, -8], [16, -8], [17, -4], [18, 0]] },
       ],
-      markers: [{ x: 4, y: 8, label: '(4, 8)' }, { x: 12, y: 0, label: '(12, 0)' }, { x: 14, y: -8, label: '(14, −8)' }],
+      markers: [
+        { x: 4, y: 8, label: '(4, 8)' }, { x: 10, y: 8, label: '(10, 8)' },
+        { x: 12, y: 0, label: '(12, 0)' }, { x: 14, y: -8, label: '(14, −8)' },
+        { x: 16, y: -8, label: '(16, −8)' }, { x: 18, y: 0, label: '(18, 0)' },
+      ],
+      shadedRegions: [
+        { points: [[0, 0], [4, 8], [4, 0]], color: 'var(--gold)', label: '+16' },
+        { points: [[4, 0], [4, 8], [10, 8], [10, 0]], color: 'var(--gold)', label: '+48' },
+        { points: [[10, 0], [10, 8], [12, 0]], color: 'var(--gold)', label: '+8' },
+        { points: [[12, 0], [14, -8], [14, 0]], color: 'var(--chart-3)', label: '−8' },
+        { points: [[14, 0], [14, -8], [16, -8], [16, 0]], color: 'var(--chart-3)', label: '−16' },
+        { points: [[16, 0], [16, -8], [18, 0]], color: 'var(--chart-3)', label: '−8' },
+      ],
     },
   },
   {
     subject: 'PHYSICS', section: 'A',
     text: `A block $A$ of mass $2\\ \\text{kg}$ lies on a rough $37^\\circ$ incline with coefficient of kinetic friction $\\mu = 0.25$. It is connected by a light inextensible string, over a frictionless pulley, to a hanging block $B$ of mass $3\\ \\text{kg}$ as shown. Taking $g = 10\\ \\text{m/s}^2$, the acceleration of the system is:`,
-    options: ['2.8 m/s², with B descending', '3.2 m/s², with B descending', '2.0 m/s², with A sliding down the incline', '4.0 m/s², with B descending'],
-    correctAnswer: 'A',
+    options: ['3.2 m/s², with B descending', '2.0 m/s², with A sliding down the incline', '4.0 m/s², with B descending', '2.8 m/s², with B descending'],
+    correctAnswer: 'D',
     solutionText: `First check the direction of motion. The weight of $B$ pulls with $3g = 30$ N; the forces resisting motion up the incline are the component of $A$'s weight down the incline plus friction:
 $$mg\\sin 37^\\circ = 2 \\times 10 \\times 0.6 = 12\\ \\text{N}, \\qquad f = \\mu mg\\cos 37^\\circ = 0.25 \\times 2 \\times 10 \\times 0.8 = 4\\ \\text{N}$$
 Since $30 > 12 + 4$, block $B$ descends and $A$ moves **up** the incline (friction then acts down the incline, opposing $A$'s motion up).
@@ -57,7 +71,7 @@ $$30 - 16 = 5a \\implies a = \\frac{14}{5} = 2.8\\ \\text{m/s}^2$$
 
 So the system accelerates at $2.8\\ \\text{m/s}^2$ with $B$ descending. (Check: $T = 3(10-2.8) = 21.6$ N, and $T - 16 = 5.6 = 2(2.8)$ ✓)
 
-**Why the others are wrong:** (B) forgets friction ($30-12 = 18 = 5a = 3.6$); (C) assumes $A$ slides down; (D) assumes a frictionless plane *and* the wrong direction bookkeeping.`,
+**Why the others are wrong:** (A) forgets friction ($30-12 = 18 = 5a = 3.6$); (B) assumes $A$ slides down; (C) assumes a frictionless plane *and* the wrong direction bookkeeping.`,
     formulaConcept: "Newton's second law for connected bodies: $a = \\dfrac{m_B g - m_A g(\\sin\\theta + \\mu\\cos\\theta)}{m_A + m_B}$",
     difficulty: 'HARD', chapterSlug: 'laws-of-motion', topicSlug: 'newtons-laws',
     sourceType: 'ORIGINAL', sourceNote: 'Standard incline–pulley system with friction.',
@@ -65,16 +79,20 @@ So the system accelerates at $2.8\\ \\text{m/s}^2$ with $B$ descending. (Check: 
       kind: 'fbd',
       bodies: [
         { type: 'ground', x: 20, y: 232, w: 260 },
-        { type: 'incline', x: 55, y: 152, w: 155, h: 80, angle: 37, label: '37°' },
-        { type: 'block', x: 72, y: 132, w: 34, h: 22, label: 'A' },
+        { type: 'incline', x: 55, y: 152, w: 155, h: 80, angle: 37, label: '37°, μ = 0.25' },
+        { type: 'block', x: 72, y: 132, w: 34, h: 22, label: 'A (2 kg)' },
         { type: 'pulley', x: 218, y: 112, r: 13 },
-        { type: 'block', x: 246, y: 176, w: 26, h: 22, label: 'B' },
+        { type: 'block', x: 246, y: 176, w: 26, h: 22, label: 'B (3 kg)' },
       ],
       forces: [
-        { from: [89, 143], to: [132, 143], label: 'T', color: 'var(--chart-2)' },
-        { from: [233, 125], to: [259, 150], label: 'T', color: 'var(--chart-2)' },
-        { from: [259, 198], to: [259, 232], label: '3g', color: 'var(--chart-3)' },
-        { from: [89, 154], to: [124, 170], label: 'mg sinθ', color: 'var(--chart-3)' },
+        { from: [89, 143], to: [134, 143], label: 'T', color: 'var(--chart-2)' },
+        { from: [89, 154], to: [126, 172], label: 'mg sinθ = 12 N', color: 'var(--chart-3)' },
+        { from: [89, 148], to: [66, 122], label: 'N', color: 'var(--chart-5)' },
+        { from: [104, 150], to: [84, 168], label: 'f = 4 N', color: 'var(--chart-4)' },
+        { from: [233, 125], to: [261, 152], label: 'T', color: 'var(--chart-2)' },
+        { from: [259, 198], to: [259, 230], label: '3g = 30 N', color: 'var(--chart-3)' },
+        { from: [26, 196], to: [70, 168], label: 'motion of A', color: 'var(--gold)', dashed: true },
+        { from: [292, 170], to: [292, 206], label: 'motion of B', color: 'var(--gold)', dashed: true },
       ],
     },
   },
@@ -103,8 +121,8 @@ Hence the body is a solid cylinder.`,
   {
     subject: 'PHYSICS', section: 'A',
     text: `Two planets have the same mean density but their radii are in the ratio $2:1$. The ratio of their escape velocities from the surfaces is:`,
-    options: ['2 : 1', '1 : 2', '4 : 1', '$\\sqrt{2}$ : 1'],
-    correctAnswer: 'A',
+    options: ['1 : 2', '2 : 1', '4 : 1', '$\\sqrt{2}$ : 1'],
+    correctAnswer: 'B',
     solutionText: `Escape velocity from the surface of a planet is
 $$v_e = \\sqrt{\\frac{2GM}{R}}$$
 
@@ -122,8 +140,8 @@ The escape velocity from the larger planet is twice that from the smaller one. (
   {
     subject: 'PHYSICS', section: 'A',
     text: `A block of mass $2\\ \\text{kg}$ is released from rest at the top of a smooth incline of height $1.25\\ \\text{m}$. At the bottom, it slides onto a rough horizontal surface ($\\mu = 0.1$) and compresses a spring of stiffness $1000\\ \\text{N/m}$. The maximum compression of the spring is (take $g = 10\\ \\text{m/s}^2$):`,
-    options: ['0.22 m', '0.16 m', '0.25 m', '0.31 m'],
-    correctAnswer: 'A',
+    options: ['0.16 m', '0.25 m', '0.31 m', '0.22 m'],
+    correctAnswer: 'D',
     solutionText: `Use the **work–energy theorem** between the release point and the point of maximum compression (where the block is momentarily at rest).
 
 **Energy released by gravity:**
@@ -169,8 +187,8 @@ $$\\frac{T}{T_0} = \\sqrt{\\frac{2k}{5k}} = \\sqrt{\\frac{2}{5}} \\implies T = T
   {
     subject: 'PHYSICS', section: 'A',
     text: `A pipe closed at one end resonates at frequencies $250\\ \\text{Hz}$ and $350\\ \\text{Hz}$, with **no** resonance frequency in between. The fundamental frequency of the pipe is:`,
-    options: ['50 Hz', '100 Hz', '150 Hz', '25 Hz'],
-    correctAnswer: 'A',
+    options: ['100 Hz', '150 Hz', '50 Hz', '25 Hz'],
+    correctAnswer: 'C',
     solutionText: `A pipe closed at one end supports only **odd harmonics**: $f_n = (2n+1)f_1$, i.e. $f_1, 3f_1, 5f_1, 7f_1, \\dots$
 
 Since $250$ Hz and $350$ Hz are *consecutive* resonances with nothing between them, they must be consecutive odd harmonics. Their difference is
@@ -186,8 +204,8 @@ $$f_{n+1} - f_n = 2f_1 = 350 - 250 = 100\\ \\text{Hz} \\implies f_1 = 50\\ \\tex
   {
     subject: 'PHYSICS', section: 'A',
     text: `A dipole of dipole moment $p = q\\cdot 2a$ lies along the $x$-axis with $+q$ at $x = +a$ and $-q$ at $x = -a$. $P$ is a point on the axis at distance $r \\gg a$ from the centre, and $Q$ is on the perpendicular bisector at the same distance $r$, as shown. The ratio of the magnitudes of the electric field at $P$ and at $Q$ is:`,
-    options: ['2 : 1', '1 : 2', '$\\sqrt{2}$ : 1', '1 : 1'],
-    correctAnswer: 'A',
+    options: ['1 : 2', '2 : 1', '$\\sqrt{2}$ : 1', '1 : 1'],
+    correctAnswer: 'B',
     solutionText: `For a short dipole ($r \\gg a$):
 
 **Field on the axial line (point $P$):**
@@ -211,16 +229,19 @@ This 2:1 ratio is independent of $p$ and $r$ (as long as $r \\gg a$).`,
         { x: -0.8, y: 0, q: -1, label: '−q' },
       ],
       vectors: [
-        { x: 3.2, y: 0, label: 'P' },
-        { x: 0, y: 2.4, label: 'Q' },
+        { x: 3.2, y: 0, label: 'P (axial point, dist. r)' },
+        { x: 0, y: 2.4, label: 'Q (equatorial, dist. r)' },
+        { x: 2.2, y: 0, label: 'E ∝ 2kp/r³' },
+        { x: 0, y: 1.6, label: 'E ∝ kp/r³' },
       ],
+      showLines: true,
     },
   },
   {
     subject: 'PHYSICS', section: 'A',
     text: `A $6\\ \\mu\\text{F}$ capacitor charged to $100\\ \\text{V}$ and a $3\\ \\mu\\text{F}$ capacitor charged to $50\\ \\text{V}$ are connected in parallel by joining plates of like polarity, as shown. The final common potential difference is:`,
-    options: ['83.3 V', '75 V', '50 V', '100 V'],
-    correctAnswer: 'A',
+    options: ['75 V', '50 V', '100 V', '83.3 V'],
+    correctAnswer: 'D',
     solutionText: `When capacitors are connected in parallel with like polarities joined, charge redistributes until both have the same potential. **Total charge is conserved** (and the connection is ideal):
 
 **Initial charges:**
@@ -247,15 +268,23 @@ So the common potential is $\\approx 83.3$ V.
         { type: 'capacitor', x1: 280, y1: 100, x2: 280, y2: 170, label: 'C₂', value: '3 μF' },
         { type: 'wire', x1: 280, y1: 100, x2: 280, y2: 80 },
         { type: 'switch', x1: 150, y1: 40, x2: 200, y2: 40, label: 'S (open)', closed: false },
-        { type: 'label', x: 175, y: 130, text: 'C₁ charged to 100 V, C₂ to 50 V' },
+        { type: 'junction', x: 70, y: 40 },
+        { type: 'junction', x: 70, y: 170 },
+        { type: 'junction', x: 280, y: 40 },
+        { type: 'junction', x: 280, y: 170 },
+        { type: 'arrow', x1: 208, y1: 40, x2: 250, y2: 40, label: 'charge flows on closing S', color: 'var(--chart-2)' },
+        { type: 'arrow', x1: 258, y1: 170, x2: 216, y2: 170, label: '', color: 'var(--chart-2)' },
+        { type: 'label', x: 175, y: 130, text: 'C₁: 100 V · Q₁ = 600 μC' },
+        { type: 'label', x: 175, y: 152, text: 'C₂: 50 V · Q₂ = 150 μC' },
+        { type: 'label', x: 175, y: 196, text: 'like polarities joined → V = ΣQ/ΣC' },
       ],
     },
   },
   {
     subject: 'PHYSICS', section: 'A',
     text: `In the Wheatstone bridge circuit shown, the four arms have resistances $3\\ \\Omega$, $4\\ \\Omega$, $6\\ \\Omega$ and $8\\ \\Omega$ as marked, and a $10\\ \\text{V}$ battery drives the bridge. The current through the galvanometer (resistance $10\\ \\Omega$) connected across $B$ and $D$ is:`,
-    options: ['zero, because the bridge is balanced', '0.1 A', '0.05 A', '0.2 A'],
-    correctAnswer: 'A',
+    options: ['0.1 A', '0.05 A', 'zero, because the bridge is balanced', '0.2 A'],
+    correctAnswer: 'C',
     solutionText: `**Check the balance condition.** A Wheatstone bridge carries no current through the galvanometer when
 $$\\frac{P}{Q} = \\frac{R}{S} \\quad \\Longleftrightarrow \\quad P\\cdot S = Q\\cdot R$$
 
@@ -289,10 +318,17 @@ $$I_g = 0$$
         { type: 'wire', x1: 60, y1: 250, x2: 160, y2: 250 },
         { type: 'wire', x1: 160, y1: 250, x2: 260, y2: 250 },
         { type: 'battery', x1: 160, y1: 215, x2: 160, y2: 250, label: 'E', value: '10 V' },
-        { type: 'label', x: 60, y: 175, text: 'B' },
-        { type: 'label', x: 262, y: 175, text: 'D' },
+        { type: 'junction', x: 160, y: 60 },
+        { type: 'junction', x: 160, y: 250 },
         { type: 'junction', x: 60, y: 150 },
         { type: 'junction', x: 260, y: 150 },
+        { type: 'label', x: 44, y: 175, text: 'B' },
+        { type: 'label', x: 266, y: 175, text: 'D' },
+        { type: 'label', x: 150, y: 50, text: 'A' },
+        { type: 'label', x: 150, y: 266, text: 'C' },
+        { type: 'arrow', x1: 100, y1: 60, x2: 140, y2: 60, label: 'I₁', color: 'var(--chart-2)' },
+        { type: 'arrow', x1: 60, y1: 100, x2: 60, y2: 140, label: 'I₂', color: 'var(--chart-2)' },
+        { type: 'label', x: 160, y: 288, text: 'P·S = Q·R = 24 ⇒ balanced ⇒ V_B = V_D ⇒ I_G = 0' },
       ],
     },
   },
@@ -323,8 +359,8 @@ The loop is pulled *towards* the wire. (Forgetting the far side entirely gives t
   {
     subject: 'PHYSICS', section: 'A',
     text: `The magnetic flux through each turn of a 50-turn coil varies with time as $\\phi = (6t^2 - 4t + 1)$ weber. The magnitude of the induced EMF at $t = 2\\ \\text{s}$ is:`,
-    options: ['400 V', '20 V', '16 V', '4 V'],
-    correctAnswer: 'A',
+    options: ['20 V', '400 V', '16 V', '4 V'],
+    correctAnswer: 'B',
     solutionText: `By Faraday's law, the induced EMF in an $N$-turn coil is
 $$|\\varepsilon| = N\\left|\\frac{d\\phi}{dt}\\right|$$
 
@@ -345,8 +381,8 @@ $$|\\varepsilon| = 50 \\times 20 = 400\\ \\text{V}$$
   {
     subject: 'PHYSICS', section: 'A',
     text: `In the series LCR circuit shown, $R = 40\\ \\Omega$, $X_L = 100\\ \\Omega$ and $X_C = 70\\ \\Omega$. The power factor of the circuit, and the nature of the circuit, are:`,
-    options: ['0.8, lagging', '0.8, leading', '0.6, lagging', '0.6, leading'],
-    correctAnswer: 'A',
+    options: ['0.8, leading', '0.6, lagging', '0.6, leading', '0.8, lagging'],
+    correctAnswer: 'D',
     solutionText: `**Net reactance:**
 $$X = X_L - X_C = 100 - 70 = 30\\ \\Omega$$
 
@@ -374,6 +410,12 @@ So the power factor is $0.8$ lagging. (A *leading* power factor would require $X
         { type: 'inductor', x1: 250, y1: 40, x2: 330, y2: 40, label: 'X_L', value: '100 Ω' },
         { type: 'capacitor', x1: 400, y1: 100, x2: 400, y2: 160, label: 'X_C', value: '70 Ω' },
         { type: 'acsource', x1: 90, y1: 90, x2: 90, y2: 180, label: 'ac source' },
+        { type: 'junction', x: 90, y: 40 },
+        { type: 'junction', x: 400, y: 40 },
+        { type: 'junction', x: 90, y: 210 },
+        { type: 'junction', x: 400, y: 210 },
+        { type: 'arrow', x1: 340, y1: 210, x2: 290, y2: 210, label: 'I (lags V)', color: 'var(--chart-2)' },
+        { type: 'label', x: 245, y: 240, text: 'X_L > X_C ⇒ net inductive ⇒ current lags voltage' },
       ],
     },
   },
@@ -398,8 +440,8 @@ The equivalent focal length is **positive** — the combination is net **converg
   {
     subject: 'PHYSICS', section: 'A',
     text: `Two coherent sources, each of intensity $I_0$, produce waves that arrive at a point with a phase difference of $\\pi/3$ (the second wave leads by $60^\\circ$, as shown). The resultant intensity at that point is:`,
-    options: ['$3I_0$', '$2I_0$', '$4I_0$', '$I_0/2$'],
-    correctAnswer: 'A',
+    options: ['$2I_0$', '$4I_0$', '$3I_0$', '$I_0/2$'],
+    correctAnswer: 'C',
     solutionText: `For two coherent waves of equal amplitude (equal intensity $I_0 \\propto a^2$) with phase difference $\\phi$, the resultant amplitude is
 $$A_R = 2a\\cos\\frac{\\phi}{2}$$
 
@@ -415,19 +457,21 @@ The resultant intensity is $3I_0$. ($4I_0$ occurs only at $\\phi = 0$ — fully 
     sourceType: 'ORIGINAL', sourceNote: 'Phase-difference intensity from wave diagram.',
     diagram: {
       kind: 'wave',
-      title: 'Two coherent waves, phase difference π/3',
+      title: 'Two coherent waves, phase difference π/3 (60°)',
       waves: [
         { type: 'sine', amplitude: 1, cycles: 2, label: 'Wave 1', color: 'var(--gold)' },
         { type: 'sine', amplitude: 1, cycles: 2, phase: Math.PI / 3, label: 'Wave 2 (leads 60°)', color: 'var(--chart-2)', dashed: true },
+        { type: 'sine', amplitude: 1.73, cycles: 2, phase: Math.PI / 6, label: 'Resultant: A_R = 2a cos 30° = √3 a', color: 'var(--chart-3)' },
       ],
       xAxis: { label: 'distance →' },
+      yAxis: { label: 'displacement' },
     },
   },
   {
     subject: 'PHYSICS', section: 'A',
     text: `The stopping potential $V_s$ versus frequency $f$ of incident light on a metal surface is plotted from photoelectric data, as shown. The straight line passes through $f_0 = 5\\times10^{14}\\ \\text{Hz}$ on the frequency axis and through the point $(10^{15}\\ \\text{Hz},\\ 2\\ \\text{V})$. The work function of the metal is:`,
-    options: ['2.07 eV', '1.03 eV', '4.14 eV', '3.10 eV'],
-    correctAnswer: 'A',
+    options: ['1.03 eV', '2.07 eV', '4.14 eV', '3.10 eV'],
+    correctAnswer: 'B',
     solutionText: `Einstein's photoelectric equation gives
 $$eV_s = hf - \\phi \\quad\\Longleftrightarrow\\quad V_s = \\frac{h}{e}f - \\frac{\\phi}{e}$$
 
@@ -448,12 +492,20 @@ $$\\phi = \\frac{3.315\\times10^{-19}}{1.602\\times10^{-19}} \\approx 2.07\\ \\t
     sourceType: 'ORIGINAL', sourceNote: 'Graph-based work-function extraction.',
     diagram: {
       kind: 'graph',
+      title: 'Photoelectric: stopping potential vs frequency',
+      showGrid: true,
       xAxis: { label: 'f (×10¹⁴ Hz)', min: 0, max: 12, ticks: [0, 2, 4, 5, 6, 8, 10, 12] },
       yAxis: { label: 'Vₛ (V)', min: 0, max: 4, ticks: [0, 1, 2, 3, 4] },
       curves: [
-        { type: 'line', color: 'var(--gold)', points: [[5, 0], [10, 2], [11.6, 2.64]] },
+        { type: 'line', color: 'var(--gold)', label: 'Vₛ = (h/e)f − φ/e', points: [[5, 0], [6, 0.4], [7, 0.8], [8, 1.2], [9, 1.6], [10, 2], [11, 2.4], [11.6, 2.64]] },
       ],
-      markers: [{ x: 5, y: 0, label: 'f₀' }, { x: 10, y: 2, label: '(10, 2)' }],
+      markers: [
+        { x: 5, y: 0, label: 'f₀ = 5×10¹⁴ Hz (threshold)', color: 'var(--chart-3)' },
+        { x: 10, y: 2, label: '(10, 2)' },
+      ],
+      shadedRegions: [
+        { points: [[5, 0], [10, 0], [10, 2]], color: 'var(--chart-5)', label: 'slope = h/e' },
+      ],
     },
   },
   {
@@ -480,8 +532,8 @@ The Zener dissipates $V_ZI_Z = 25$ mW. As long as $I_Z > 0$ (i.e. load current b
   {
     subject: 'PHYSICS', section: 'A',
     text: `In a hydrogen atom, an electron makes a transition from the level $n = 4$ to the level $n = 2$. The wavelength of the emitted photon is closest to:`,
-    options: ['486 nm', '656 nm', '121 nm', '1875 nm'],
-    correctAnswer: 'A',
+    options: ['656 nm', '121 nm', '1875 nm', '486 nm'],
+    correctAnswer: 'D',
     solutionText: `For the hydrogen atom,
 $$\\frac{1}{\\lambda} = R\\left(\\frac{1}{n_1^2} - \\frac{1}{n_2^2}\\right), \\qquad R = 1.097\\times10^{7}\\ \\text{m}^{-1}$$
 
@@ -499,8 +551,8 @@ This is the $H_\\beta$ line of the Balmer series (blue-green).
   {
     subject: 'PHYSICS', section: 'A',
     text: `If force ($F$), velocity ($v$) and time ($T$) are chosen as the fundamental quantities, the dimensions of energy are:`,
-    options: ['$[F\\,v\\,T]$', '$[F\\,v\\,T^{-1}]$', '$[F\\,v^{2}\\,T]$', '$[F\\,v^{-1}\\,T]$'],
-    correctAnswer: 'A',
+    options: ['$[F\\,v\\,T^{-1}]$', '$[F\\,v\\,T]$', '$[F\\,v^{2}\\,T]$', '$[F\\,v^{-1}\\,T]$'],
+    correctAnswer: 'B',
     solutionText: `We need energy expressed in the new base $\{F, v, T\}$.
 
 **Dimensions of the base choices:**
@@ -522,8 +574,8 @@ $$E \\sim F\\,(vT) \\implies [E] = [F\\,v\\,T]$$
   {
     subject: 'PHYSICS', section: 'A',
     text: `A spherical metal ball of radius $r$ and density $\\rho$ falls through a liquid of density $\\sigma$ ($\\sigma < \\rho$) and attains a terminal velocity $v$. Another ball of the same material but radius $2r$ falling in the same liquid attains a terminal velocity of:`,
-    options: ['$4v$', '$2v$', '$8v$', '$v/4$'],
-    correctAnswer: 'A',
+    options: ['$2v$', '$8v$', '$4v$', '$v/4$'],
+    correctAnswer: 'C',
     solutionText: `At **terminal velocity** the net force is zero — weight $=$ buoyancy $+$ viscous drag (Stokes):
 $$\\frac{4}{3}\\pi r^3\\rho g = \\frac{4}{3}\\pi r^3\\sigma g + 6\\pi\\eta r v_t$$
 

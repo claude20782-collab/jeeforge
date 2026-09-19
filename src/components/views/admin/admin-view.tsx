@@ -33,7 +33,7 @@ import { useEffect, useState } from 'react'
 import {
   ShieldCheck, LayoutDashboard, ListChecks, Users, Flag, MessagesSquare, BarChart3,
   Megaphone, Search, CheckCircle2, XCircle, AlertTriangle, RefreshCw, ChevronLeft,
-  KeyRound, Ban, PauseCircle, PlayCircle, Trash2, FileText, Plus,
+  KeyRound, Ban, PauseCircle, PlayCircle, Trash2, FileText, Plus, ClipboardList,
 } from 'lucide-react'
 
 export function AdminView({ subpath }: { subpath: string }) {
@@ -62,6 +62,7 @@ export function AdminView({ subpath }: { subpath: string }) {
     { id: 'mocks', label: 'Mocks', icon: ListChecks },
     { id: 'questions', label: 'Questions', icon: FileText },
     { id: 'users', label: 'Users', icon: Users },
+    { id: 'attempts', label: 'Attempts', icon: ClipboardList },
     { id: 'reports', label: 'Reports', icon: Flag },
     { id: 'community', label: 'Community', icon: MessagesSquare },
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
@@ -92,6 +93,7 @@ export function AdminView({ subpath }: { subpath: string }) {
         <TabsContent value="mocks"><MocksTab qc={qc} /></TabsContent>
         <TabsContent value="questions"><QuestionsTab qc={qc} /></TabsContent>
         <TabsContent value="users"><UsersTab /></TabsContent>
+        <TabsContent value="attempts"><AttemptsTab qc={qc} /></TabsContent>
         <TabsContent value="reports"><ReportsTab qc={qc} /></TabsContent>
         <TabsContent value="community"><CommunityTab qc={qc} /></TabsContent>
         <TabsContent value="analytics"><AnalyticsTab /></TabsContent>
@@ -613,6 +615,114 @@ function UsersTab() {
     try { await api.post(`/admin/users/${u.id}/status`, { status, note: `admin action from panel` }); toast.success(`@${u.username} → ${status}`); refetch() }
     catch (e) { toast.error((e as ApiError).message) }
   }
+}
+
+// ================= ATTEMPTS =================
+type AdminAttempt = {
+  id: string; username: string; email: string; mockNumber: number; status: string
+  score: number | null; subjectScores: Array<number | null> | null
+  startedAt: string; submittedAt: string | null; autoSubmitted: boolean; answered: number
+}
+function AttemptsTab({ qc }: { qc: ReturnType<typeof useQueryClient> }) {
+  const [page, setPage] = useState(0)
+  const [mockFilter, setMockFilter] = useState('ALL')
+  const [statusFilter, setStatusFilter] = useState('ALL')
+  const { data, isLoading, isFetching, refetch } = useQuery({
+    queryKey: ['admin-attempts', page, mockFilter, statusFilter],
+    queryFn: () => api.get<{ total: number; attempts: AdminAttempt[] }>(`/admin/attempts?page=${page}&mockNumber=${mockFilter}&status=${statusFilter}`),
+  })
+  const mocksQ = useQuery({ queryKey: ['admin-mocks'], queryFn: () => api.get<{ mocks: Array<{ mockNumber: number; status: string }> }>('/admin/mocks') })
+  const published = (mocksQ.data?.mocks ?? []).filter(m => m.status === 'PUBLISHED')
+
+  async function deleteAttempt(a: AdminAttempt) {
+    if (!confirm(`Delete @${a.username}'s attempt on Mock ${String(a.mockNumber).padStart(2, '0')} (${a.status === 'SUBMITTED' ? `score ${a.score ?? '—'}/300, ` : 'in progress, '}no undo)?\nThey will be able to retake the mock.`)) return
+    try {
+      await api.del('/admin/attempts', { attemptId: a.id })
+      toast.success(`Deleted @${a.username}'s attempt — mock ${String(a.mockNumber).padStart(2, '0')} retake unlocked`)
+      refetch()
+      qc.invalidateQueries({ queryKey: ['admin-overview'] })
+    } catch (e) { toast.error((e as ApiError).message) }
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center gap-2">
+          <Select value={mockFilter} onValueChange={(v) => { setMockFilter(v); setPage(0) }}>
+            <SelectTrigger className="h-8 w-[130px] text-xs"><SelectValue placeholder="Mock" /></SelectTrigger>
+            <SelectContent>
+              <SelectItem value="ALL">All mocks</SelectItem>
+              {published.map(m => <SelectItem key={m.mockNumber} value={String(m.mockNumber)}>Mock {String(m.mockNumber).padStart(2, '0')}</SelectItem>)}
+            </SelectContent>
+          </Select>
+          <Select value={statusFilter} onValueChange={(v) => { setStatusFilter(v); setPage(0) }}>
+            <SelectTrigger className="h-8 w-[140px] text-xs"><SelectValue placeholder="Status" /></SelectTrigger>
+            <SelectContent>
+              <SelectItem value="ALL">All statuses</SelectItem>
+              <SelectItem value="SUBMITTED">Submitted</SelectItem>
+              <SelectItem value="IN_PROGRESS">In progress</SelectItem>
+            </SelectContent>
+          </Select>
+          <Button size="sm" variant="ghost" onClick={() => refetch()}><RefreshCw className={`h-3.5 w-3.5 ${isFetching ? 'animate-spin' : ''}`} /></Button>
+        </div>
+        <span className="text-xs text-muted-foreground">{data ? `${data.total} attempts` : ''}</span>
+      </div>
+      {isLoading ? <div className="p-10 text-center text-sm text-muted-foreground">Loading attempts…</div> : (
+        <Card><CardContent className="p-0">
+          <ScrollArea className="max-h-[62vh]">
+            <Table>
+              <TableHeader><TableRow>
+                <TableHead>User</TableHead><TableHead>Mock</TableHead><TableHead>Status</TableHead>
+                <TableHead>Score</TableHead><TableHead>Answered</TableHead><TableHead>Started</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+              </TableRow></TableHeader>
+              <TableBody>
+                {(data?.attempts ?? []).map(a => (
+                  <TableRow key={a.id}>
+                    <TableCell>
+                      <div className="text-sm font-medium">@{a.username}</div>
+                      <div className="text-[11px] text-muted-foreground">{a.email}</div>
+                    </TableCell>
+                    <TableCell className="text-xs">{String(a.mockNumber).padStart(2, '0')}</TableCell>
+                    <TableCell>
+                      <Badge variant="secondary" className={a.status === 'SUBMITTED' ? 'bg-[var(--correct)]/15 text-[var(--correct)]' : 'bg-[var(--chart-5)]/15 text-[var(--chart-5)]'}>
+                        {a.status === 'SUBMITTED' ? (a.autoSubmitted ? 'auto-submitted' : 'submitted') : 'in progress'}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-xs">
+                      {a.score != null ? (
+                        <div>
+                          <span className="font-semibold">{a.score}/300</span>
+                          {a.subjectScores && <div className="text-[11px] text-muted-foreground">P {a.subjectScores[0] ?? '—'} · C {a.subjectScores[1] ?? '—'} · M {a.subjectScores[2] ?? '—'}</div>}
+                        </div>
+                      ) : '—'}
+                    </TableCell>
+                    <TableCell className="text-xs">{a.answered}/75</TableCell>
+                    <TableCell className="text-xs text-muted-foreground">{fmtDateTimeIST(a.startedAt)}</TableCell>
+                    <TableCell className="text-right">
+                      <Button size="sm" variant="ghost" title="Delete attempt (unlocks retake)" onClick={() => deleteAttempt(a)}>
+                        <Trash2 className="h-4 w-4 text-[var(--wrong)]" />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+                {(data?.attempts ?? []).length === 0 && (
+                  <TableRow><TableCell colSpan={7} className="py-8 text-center text-sm text-muted-foreground">No attempts match the filters.</TableCell></TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </ScrollArea>
+        </CardContent></Card>
+      )}
+      <div className="flex items-center justify-between text-xs text-muted-foreground">
+        <span>Deleting an attempt permanently removes its answers and lets the user retake the mock.</span>
+        <div className="flex gap-2">
+          <Button size="sm" variant="outline" disabled={page === 0} onClick={() => setPage(p => p - 1)}>Previous</Button>
+          <Button size="sm" variant="outline" disabled={!data || (page + 1) * 20 >= data.total} onClick={() => setPage(p => p + 1)}>Next</Button>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 // ================= REPORTS =================

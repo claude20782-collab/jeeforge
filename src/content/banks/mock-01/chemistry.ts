@@ -10,8 +10,8 @@ export const CHEMISTRY_MOCK01: SeedQuestion[] = [
   {
     subject: 'CHEMISTRY', section: 'A',
     text: `25 mL of 0.5 M HCl is mixed with 75 mL of 0.1 M NaOH solution. The pH of the resulting solution is:`,
-    options: ['1.30', '1.00', '2.00', '1.48'],
-    correctAnswer: 'A',
+    options: ['1.00', '1.30', '2.00', '1.48'],
+    correctAnswer: 'B',
     solutionText: `**Moles of acid and base:**
 $$n_{\\text{HCl}} = 0.025 \\times 0.5 = 0.0125\\ \\text{mol}$$
 $$n_{\\text{NaOH}} = 0.075 \\times 0.1 = 0.0075\\ \\text{mol}$$
@@ -34,20 +34,20 @@ $$\\text{pH} = -\\log(0.05) = 2 - \\log 5 = 2 - 0.699 = 1.30$$
   {
     subject: 'CHEMISTRY', section: 'A',
     text: `Which of the following sets of quantum numbers $(n,\\ l,\\ m_l,\\ m_s)$ is **NOT** possible for an electron in an atom?`,
-    options: ['$(2, 2, 1, +\\tfrac{1}{2})$', '$(3, 2, -2, -\\tfrac{1}{2})$', '$(2, 1, 0, -\\tfrac{1}{2})$', '$(4, 3, -3, +\\tfrac{1}{2})$'],
-    correctAnswer: 'A',
+    options: ['$(3, 2, -2, -\\tfrac{1}{2})$', '$(2, 1, 0, -\\tfrac{1}{2})$', '$(4, 3, -3, +\\tfrac{1}{2})$', '$(2, 2, 1, +\\tfrac{1}{2})$'],
+    correctAnswer: 'D',
     solutionText: `Apply the quantum-number rules:
 1. $l = 0, 1, 2, \\dots, (n-1)$ — the azimuthal quantum number cannot equal or exceed $n$.
 2. $m_l = -l, \\dots, 0, \\dots, +l$.
 3. $m_s = \\pm\\tfrac{1}{2}$.
 
 **Check each option:**
-- **(A) $(2, 2, 1, +\\tfrac{1}{2})$**: $l = 2$ with $n = 2$ — but $l_{\\max} = n-1 = 1$. **Impossible** ✗
-- (B) $(3, 2, -2, -\\tfrac{1}{2})$: $l = 2 \\le n-1 = 2$, $|m_l| \\le 2$ ✓ — a $3d$ electron.
-- (C) $(2, 1, 0, -\\tfrac{1}{2})$: a $2p$ electron ✓
-- (D) $(4, 3, -3, +\\tfrac{1}{2})$: a $4f$ electron ✓
+- (A) $(3, 2, -2, -\\tfrac{1}{2})$: $l = 2 \\le n-1 = 2$, $|m_l| \\le 2$ ✓ — a $3d$ electron.
+- (B) $(2, 1, 0, -\\tfrac{1}{2})$: a $2p$ electron ✓
+- (C) $(4, 3, -3, +\\tfrac{1}{2})$: a $4f$ electron ✓
+- **(D) $(2, 2, 1, +\\tfrac{1}{2})$**: $l = 2$ with $n = 2$ — but $l_{\\max} = n-1 = 1$. **Impossible** ✗
 
-Hence option (A) violates the rule $l \\le n-1$ and is the impossible set.`,
+Hence option (D) violates the rule $l \\le n-1$ and is the impossible set.`,
     formulaConcept: 'Quantum number rules: l ∈ {0, …, n−1}; m_l ∈ {−l, …, +l}; m_s = ±½.',
     difficulty: 'MODERATE', chapterSlug: 'atomic-structure', topicSlug: 'quantum-numbers-orbitals',
     sourceType: 'ORIGINAL', sourceNote: 'Quantum-number validity check.',
@@ -55,8 +55,8 @@ Hence option (A) violates the rule $l \\le n-1$ and is the impossible set.`,
   {
     subject: 'CHEMISTRY', section: 'A',
     text: `The shape of the $\\text{SF}_4$ molecule (shown) and the hybridisation of sulphur in it are:`,
-    options: ['see-saw, $sp^3d$', 'square planar, $sp^3d^2$', 'tetrahedral, $sp^3$', 'trigonal bipyramidal, $sp^3d$'],
-    correctAnswer: 'A',
+    options: ['square planar, $sp^3d^2$', 'tetrahedral, $sp^3$', 'see-saw, $sp^3d$', 'trigonal bipyramidal, $sp^3d$'],
+    correctAnswer: 'C',
     solutionText: `**Count the electron domains on S:**
 - Bond pairs: 4 (four S–F bonds)
 - Lone pairs: 1 (S has 6 valence electrons; 4 are used in bonding, 2 remain as one lone pair)
@@ -74,17 +74,17 @@ $$\\text{SF}_4:\\ \\text{see-saw shape},\\ \\text{S is } sp^3d$$
     diagram: {
       kind: 'molecule',
       atoms: [
-        { sym: 'S', x: 0, y: 0 },
-        { sym: 'F', x: 0, y: -70 },
-        { sym: 'F', x: 0, y: 70 },
-        { sym: 'F', x: -78, y: 22 },
-        { sym: 'F', x: 78, y: 22 },
+        { sym: 'S', x: 0, y: 0, label: 'S (sp³d)' },
+        { sym: 'F', x: 0, y: -70, label: 'F_ax' },
+        { sym: 'F', x: 0, y: 70, label: 'F_ax' },
+        { sym: 'F', x: -78, y: 22, label: 'F_eq' },
+        { sym: 'F', x: 78, y: 22, label: 'F_eq' },
       ],
       bonds: [
         { a: 0, b: 1 }, { a: 0, b: 2 }, { a: 0, b: 3 }, { a: 0, b: 4 },
       ],
       lonePairs: [{ atom: 0, count: 1, angles: [-90] }],
-      caption: 'SF₄ — see-saw (lone pair occupies an equatorial position)',
+      caption: 'SF₄ — see-saw · lone pair equatorial · F_ax–S–F_ax ≈ 173°, F_eq–S–F_eq ≈ 102°',
     },
   },
   {
@@ -109,8 +109,8 @@ For the oxygen family (O₂: 16 electrons), the highest occupied orbitals are th
   {
     subject: 'CHEMISTRY', section: 'A',
     text: `The enthalpy of neutralisation of a strong acid with a strong base is $-57.3\\ \\text{kJ mol}^{-1}$. The enthalpy of ionisation of a weak monobasic acid is $+1.9\\ \\text{kJ mol}^{-1}$. The enthalpy of neutralisation of this weak acid with the strong base is:`,
-    options: ['$-55.4\\ \\text{kJ mol}^{-1}$', '$-57.3\\ \\text{kJ mol}^{-1}$', '$-59.2\\ \\text{kJ mol}^{-1}$', '$-52.1\\ \\text{kJ mol}^{-1}$'],
-    correctAnswer: 'A',
+    options: ['$-57.3\\ \\text{kJ mol}^{-1}$', '$-55.4\\ \\text{kJ mol}^{-1}$', '$-59.2\\ \\text{kJ mol}^{-1}$', '$-52.1\\ \\text{kJ mol}^{-1}$'],
+    correctAnswer: 'B',
     solutionText: `Neutralisation of a strong acid by a strong base is simply
 $$\\text{H}^+ + \\text{OH}^- \\to \\text{H}_2\\text{O}, \\qquad \\Delta H = -57.3\\ \\text{kJ/mol}$$
 
@@ -130,8 +130,8 @@ The weak-acid neutralisation is **less exothermic** by exactly the ionisation en
   {
     subject: 'CHEMISTRY', section: 'A',
     text: `For the equilibrium $A \\rightleftharpoons B$ at temperature $T$, the equilibrium constant is $K_c = 4$. The equilibrium constant for the reaction $2B \\rightleftharpoons 2A$ at the same temperature is:`,
-    options: ['$1/16$', '$1/4$', '$16$', '$4$'],
-    correctAnswer: 'A',
+    options: ['$1/4$', '$16$', '$4$', '$1/16$'],
+    correctAnswer: 'D',
     solutionText: `Manipulating equilibria changes $K_c$ in two standard ways:
 - **Reversing** a reaction inverts the constant: $K' = 1/K_c$
 - **Doubling** all coefficients squares the constant: $K'' = (K')^2$
@@ -152,8 +152,8 @@ $$K = \\frac{[A]^2}{[B]^2} = \\left(\\frac{[A]}{[B]}\\right)^2 = \\left(\\frac{1
   {
     subject: 'CHEMISTRY', section: 'A',
     text: `For the cell reaction $\\text{Zn}(s) + \\text{Cu}^{2+}(aq) \\to \\text{Zn}^{2+}(aq) + \\text{Cu}(s)$, $E^\\circ_{\\text{cell}} = 1.10\\ \\text{V}$. The EMF of the cell with $[\\text{Zn}^{2+}] = 0.1\\ M$ and $[\\text{Cu}^{2+}] = 0.01\\ M$ at 298 K is:`,
-    options: ['1.07 V', '1.10 V', '1.13 V', '1.04 V'],
-    correctAnswer: 'A',
+    options: ['1.10 V', '1.13 V', '1.07 V', '1.04 V'],
+    correctAnswer: 'C',
     solutionText: `Apply the **Nernst equation** at 298 K for the 2-electron process ($n = 2$):
 $$E = E^\\circ - \\frac{0.059}{n}\\log\\frac{[\\text{Zn}^{2+}]}{[\\text{Cu}^{2+}]}$$
 
@@ -192,8 +192,8 @@ $$T_{1/2} = \\frac{0.693}{0.03466} = 20.0\\ \\text{min}\\ \\checkmark$$
   {
     subject: 'CHEMISTRY', section: 'A',
     text: `Among the hydrides of group 15 elements — $\\text{NH}_3$, $\\text{PH}_3$, $\\text{AsH}_3$ and $\\text{BiH}_3$ — the **strongest reducing agent** is:`,
-    options: ['$\\text{BiH}_3$', '$\\text{NH}_3$', '$\\text{PH}_3$', '$\\text{AsH}_3$'],
-    correctAnswer: 'A',
+    options: ['$\\text{NH}_3$', '$\\text{BiH}_3$', '$\\text{PH}_3$', '$\\text{AsH}_3$'],
+    correctAnswer: 'B',
     solutionText: `Down group 15, the E–H bond becomes **longer and weaker** (E grows larger, orbital overlap poorer). A weaker E–H bond releases hydrogen more readily, so the hydride is more easily oxidised — i.e. a **stronger reducing agent**.
 
 **Trend of reducing character:**
@@ -209,8 +209,8 @@ $\\text{BiH}_3$ has the weakest Bi–H bonds and is the **strongest reducing age
   {
     subject: 'CHEMISTRY', section: 'A',
     text: `The complex $K_3[\\text{Fe(CN)}_6]$ contains the octahedral ion $[\\text{Fe(CN)}_6]^{3-}$ (shown). The number of unpaired electrons and the hybridisation of iron in this complex are:`,
-    options: ['1, $d^2sp^3$', '5, $sp^3d^2$', '0, $d^2sp^3$', '4, $sp^3d^2$'],
-    correctAnswer: 'A',
+    options: ['5, $sp^3d^2$', '0, $d^2sp^3$', '1, $d^2sp^3$', '4, $sp^3d^2$'],
+    correctAnswer: 'C',
     solutionText: `**Oxidation state of Fe:** $3(+1) + x + 6(-1) = 0 \\implies x = +3$ → $\\text{Fe}^{3+}$: $3d^5$ configuration.
 
 **Effect of the strong-field ligand $\\text{CN}^-$:** it pairs up the $3d$ electrons in the lower $t_{2g}$ set (octahedral crystal field):
@@ -227,23 +227,23 @@ So: **1 unpaired electron, $d^2sp^3$**. (5 unpaired with $sp^3d^2$ describes wea
     diagram: {
       kind: 'molecule',
       atoms: [
-        { sym: 'Fe', x: 0, y: 0 },
-        { sym: 'CN', x: 0, y: -80 }, { sym: 'CN', x: 0, y: 80 },
-        { sym: 'CN', x: -90, y: 0 }, { sym: 'CN', x: 90, y: 0 },
-        { sym: 'CN', x: -58, y: 52 }, { sym: 'CN', x: 58, y: -52 },
+        { sym: 'Fe', x: 0, y: 0, label: 'Fe³⁺', charge: '3+' },
+        { sym: 'CN', x: 0, y: -80, label: 'CN⁻ (trans pair)' }, { sym: 'CN', x: 0, y: 80, label: 'CN⁻' },
+        { sym: 'CN', x: -90, y: 0, label: 'CN⁻ (trans pair)' }, { sym: 'CN', x: 90, y: 0, label: 'CN⁻' },
+        { sym: 'CN', x: -58, y: 52, label: 'CN⁻' }, { sym: 'CN', x: 58, y: -52, label: 'CN⁻' },
       ],
       bonds: [
         { a: 0, b: 1 }, { a: 0, b: 2 }, { a: 0, b: 3 }, { a: 0, b: 4 },
         { a: 0, b: 5, type: 'wedge' }, { a: 0, b: 6, type: 'hash' },
       ],
-      caption: '[Fe(CN)₆]³⁻ — octahedral (wedge/hash = bonds toward/away from viewer)',
+      caption: '[Fe(CN)₆]³⁻ — octahedral · 6 strong-field CN⁻ · low-spin t²g⁵e⁰ (1 unpaired e⁻) · d²sp³',
     },
   },
   {
     subject: 'CHEMISTRY', section: 'A',
     text: `The reaction of tert-butyl bromide, $(\\text{CH}_3)_3\\text{C–Br}$ (shown), with aqueous NaOH proceeds predominantly by:`,
-    options: ['SN1, with rate independent of $[\\text{OH}^-]$', 'SN2, with rate $\\propto [(\\text{CH}_3)_3\\text{CBr}][\\text{OH}^-]$', 'SN2, with rate $\\propto [(\\text{CH}_3)_3\\text{CBr}]$ only', 'E2 only, no substitution product'],
-    correctAnswer: 'A',
+    options: ['SN2, with rate $\\propto [(\\text{CH}_3)_3\\text{CBr}][\\text{OH}^-]$', 'SN2, with rate $\\propto [(\\text{CH}_3)_3\\text{CBr}]$ only', 'E2 only, no substitution product', 'SN1, with rate independent of $[\\text{OH}^-]$'],
+    correctAnswer: 'D',
     solutionText: `**Steric environment:** tert-butyl bromide is a **3° alkyl halide** — the carbon bearing Br carries three methyl groups. Backside attack (SN2) is **blocked** by steric hindrance.
 
 **SN1 pathway instead:** the C–Br bond ionises in the slow, unimolecular step:
@@ -255,27 +255,27 @@ The carbocation intermediate is well stabilised (3°; hyperconjugation from nine
 **Rate law:**
 $$\\text{rate} = k[(\\text{CH}_3)_3\\text{CBr}]$$
 
-— **independent of $[\\text{OH}^-]$**, because the nucleophile participates only *after* the rate-determining ionisation. Hence option (A). (SN2 options are excluded by sterics; some elimination competes, but in aqueous medium substitution dominates — so "E2 only" is wrong.)`,
+— **independent of $[\\text{OH}^-]$**, because the nucleophile participates only *after* the rate-determining ionisation. Hence option (D). (SN2 options are excluded by sterics; some elimination competes, but in aqueous medium substitution dominates — so "E2 only" is wrong.)`,
     formulaConcept: '3° halides + weak/basic nucleophiles → SN1 (carbocation); rate = k[RX], nucleophile-independent.',
     difficulty: 'MODERATE', chapterSlug: 'haloalkanes-haloarenes', topicSlug: 'nucleophilic-substitution',
     sourceType: 'ORIGINAL', sourceNote: 'tert-Butyl halide mechanism selection.',
     diagram: {
       kind: 'molecule',
       atoms: [
-        { sym: 'CH₃', x: -95, y: 30 }, { sym: 'CH₃', x: -50, y: -60 }, { sym: 'CH₃', x: 40, y: -60 },
-        { sym: 'C', x: 0, y: 0 }, { sym: 'Br', x: 85, y: 35 },
+        { sym: 'CH₃', x: -95, y: 30, label: '3 × CH₃ (9 β-H)' }, { sym: 'CH₃', x: -50, y: -60 }, { sym: 'CH₃', x: 40, y: -60 },
+        { sym: 'C', x: 0, y: 0, label: '3° C⁺-forming' }, { sym: 'Br', x: 85, y: 35, label: 'Br (leaves as Br⁻)' },
       ],
       bonds: [
-        { a: 0, b: 3 }, { a: 1, b: 3 }, { a: 2, b: 3 }, { a: 3, b: 4 },
+        { a: 0, b: 3, type: 'wedge' }, { a: 1, b: 3 }, { a: 2, b: 3, type: 'hash' }, { a: 3, b: 4 },
       ],
-      caption: 'tert-Butyl bromide, (CH₃)₃C–Br',
+      caption: 'tert-Butyl bromide, (CH₃)₃C–Br — crowded 3° carbon → SN1 (rate = k[RX])',
     },
   },
   {
     subject: 'CHEMISTRY', section: 'A',
     text: `The four compounds shown are: (A) phenol, (B) $p$-nitrophenol, (C) $p$-cresol ($p$-methylphenol) and (D) ethanol. The **most acidic** among them is:`,
-    options: ['$p$-Nitrophenol', 'Phenol', '$p$-Cresol', 'Ethanol'],
-    correctAnswer: 'A',
+    options: ['Phenol', '$p$-Nitrophenol', '$p$-Cresol', 'Ethanol'],
+    correctAnswer: 'B',
     solutionText: `Acidity of phenols is decided by the **stability of the phenoxide ion** formed on losing H⁺.
 
 - **$p$-Nitrophenol:** $-\\text{NO}_2$ is a strong **electron-withdrawing group** ($-R$ and $-I$). It delocalises the negative charge of the phenoxide ion through the ring onto the nitro group, strongly stabilising the conjugate base → **most acidic** ($pK_a \\approx 7.1$).
@@ -293,18 +293,22 @@ Hence $p$-nitrophenol is the most acidic.`,
     diagram: {
       kind: 'organic',
       parts: [
-        { type: 'ring', x: 100, y: 90, label: '(A)', substituents: [{ position: 0, label: 'OH' }] },
-        { type: 'ring', x: 260, y: 90, label: '(B)', substituents: [{ position: 0, label: 'OH' }, { position: 3, label: 'NO₂' }] },
-        { type: 'ring', x: 420, y: 90, label: '(C)', substituents: [{ position: 0, label: 'OH' }, { position: 3, label: 'CH₃' }] },
+        { type: 'ring', x: 100, y: 90, label: '(A) phenol', substituents: [{ position: 0, label: 'OH' }] },
+        { type: 'ring', x: 260, y: 90, label: '(B) p-nitrophenol', substituents: [{ position: 0, label: 'OH' }, { position: 3, label: 'NO₂' }] },
+        { type: 'ring', x: 420, y: 90, label: '(C) p-cresol', substituents: [{ position: 0, label: 'OH' }, { position: 3, label: 'CH₃' }] },
         { type: 'text', x: 545, y: 90, text: '(D) CH₃CH₂OH', bold: true },
+        { type: 'text', x: 100, y: 130, text: 'pKₐ ≈ 10.0' },
+        { type: 'text', x: 260, y: 130, text: 'pKₐ ≈ 7.1 ← most acidic' },
+        { type: 'text', x: 420, y: 130, text: 'pKₐ ≈ 10.2' },
+        { type: 'text', x: 545, y: 130, text: 'pKₐ ≈ 16' },
       ],
     },
   },
   {
     subject: 'CHEMISTRY', section: 'A',
     text: `Which of the following compounds does **NOT** give a positive iodoform test?`,
-    options: ['Benzaldehyde', 'Acetone', 'Ethanol', 'Acetaldehyde'],
-    correctAnswer: 'A',
+    options: ['Acetone', 'Ethanol', 'Benzaldehyde', 'Acetaldehyde'],
+    correctAnswer: 'C',
     solutionText: `The iodoform test requires a methyl ketone unit $\\text{CH}_3\\text{CO–}$, or a compound oxidisable to it ($\\text{CH}_3\\text{CH(OH)–}$):
 
 - **Acetone** $\\text{CH}_3\\text{COCH}_3$: contains $\\text{CH}_3\\text{CO–}$ → **positive** (yellow CHI₃).
@@ -341,8 +345,8 @@ i.e. **2° > 3° > 1° > NH₃** — option (A).
   {
     subject: 'CHEMISTRY', section: 'A',
     text: `In proteins, the $\\alpha$-helix structure is stabilised by:`,
-    options: ['hydrogen bonds between the C=O of one amino acid residue and the N–H of the fourth residue along the chain', 'peptide bonds between adjacent amino acid residues', 'disulphide bridges between cysteine residues', 'hydrophobic interactions between non-polar side chains'],
-    correctAnswer: 'A',
+    options: ['peptide bonds between adjacent amino acid residues', 'hydrogen bonds between the C=O of one amino acid residue and the N–H of the fourth residue along the chain', 'disulphide bridges between cysteine residues', 'hydrophobic interactions between non-polar side chains'],
+    correctAnswer: 'B',
     solutionText: `The $\\alpha$-helix is a **secondary structure** — a right-handed coil with about 3.6 amino acid residues per turn (rise ≈ 1.5 Å per residue).
 
 **Stabilisation:** each backbone carbonyl oxygen (C=O) of residue $n$ forms a **hydrogen bond** with the amide N–H of residue $n + 4$ — i.e. the N–H of the **fourth amino acid** along the chain. All the interior N–H and C=O groups participate, with the bonds running roughly parallel to the helix axis.
@@ -358,8 +362,8 @@ i.e. **2° > 3° > 1° > NH₃** — option (A).
   {
     subject: 'CHEMISTRY', section: 'A',
     text: `Aniline is immiscible with water and volatile with steam. The technique shown in the figure — used to purify aniline from an aniline–water mixture — is:`,
-    options: ['steam distillation', 'simple distillation', 'fractional distillation', 'vacuum distillation'],
-    correctAnswer: 'A',
+    options: ['simple distillation', 'fractional distillation', 'vacuum distillation', 'steam distillation'],
+    correctAnswer: 'D',
     solutionText: `**Steam distillation** is used to purify liquids that are:
 - immiscible with water,
 - volatile with steam (appreciable vapour pressure near 100 °C),
@@ -377,15 +381,17 @@ Aniline (b.p. 184 °C) co-distils with steam at ~98–100 °C, so the figure sho
     diagram: {
       kind: 'apparatus',
       parts: [
-        { type: 'flask', x: 120, y: 150, label: 'aniline + water', fill: 0.4 },
-        { type: 'burner', x: 120, y: 252 },
+        { type: 'flask', x: 120, y: 150, label: 'aniline + water (immiscible)', fill: 0.4 },
+        { type: 'burner', x: 120, y: 252, label: 'heat' },
         { type: 'tube', x: 225, y: 95, w: 100, label: 'steam in →' },
-        { type: 'condenser', x: 345, y: 95, label: 'condenser' },
-        { type: 'beaker', x: 440, y: 165, fill: 0.3, label: 'distillate' },
+        { type: 'condenser', x: 345, y: 95, label: 'condenser (cold)' },
+        { type: 'beaker', x: 440, y: 165, fill: 0.3, label: 'distillate: 2 layers' },
         { type: 'arrow', x1: 452, y1: 55, x2: 452, y2: 125, label: 'water out' },
         { type: 'arrow', x1: 238, y1: 128, x2: 238, y2: 58, label: 'water in' },
+        { type: 'label', x: 265, y: 135, text: 'co-distils at ≈ 98 °C (P_H₂O + P_org ≥ 1 atm)' },
+        { type: 'label', x: 440, y: 210, text: 'aniline layer + water layer' },
       ],
-      caption: 'Purification of aniline from an aniline–water mixture',
+      caption: 'Steam distillation of aniline — P_total = P_water + P_aniline',
     },
   },
   {
@@ -412,22 +418,22 @@ Hence **0.1 M K₂SO₄** has the highest boiling point. (Urea at 0.2 M merely t
     sourceType: 'ORIGINAL', sourceNote: 'Colligative comparison from a data table.',
     diagram: {
       kind: 'table',
-      headers: ['Solution', 'Molality (m)', 'i (complete dissoc.)', 'i × m'],
+      headers: ['Solution', 'Molality (m)', 'i (complete dissoc.)', 'i × m ∝ ΔT_b'],
       rows: [
-        ['K₂SO₄', '0.1', '3', '0.30'],
-        ['NaCl', '0.1', '2', '0.20'],
-        ['Urea', '0.2', '1', '0.20'],
-        ['MgCl₂', '0.05', '3', '0.15'],
+        ['K₂SO₄ → 2K⁺ + SO₄²⁻', '0.1', '3', '0.30 ← highest'],
+        ['NaCl → Na⁺ + Cl⁻', '0.1', '2', '0.20'],
+        ['Urea (non-electrolyte)', '0.2', '1', '0.20'],
+        ['MgCl₂ → Mg²⁺ + 2Cl⁻', '0.05', '3', '0.15'],
       ],
-      caption: 'Given data',
-      highlightCells: [[0, 3]],
+      caption: 'Given data — compare i × m: the largest product boils highest',
+      highlightCells: [[0, 0], [0, 1], [0, 2], [0, 3]],
     },
   },
   {
     subject: 'CHEMISTRY', section: 'A',
     text: `The species $\\text{N}^{3-}$, $\\text{O}^{2-}$, $\\text{F}^-$ and $\\text{Na}^+$ are isoelectronic (10 electrons each). The correct order of their **ionic radii** is:`,
-    options: ['$\\text{N}^{3-} > \\text{O}^{2-} > \\text{F}^- > \\text{Na}^+$', '$\\text{Na}^+ > \\text{F}^- > \\text{O}^{2-} > \\text{N}^{3-}$', '$\\text{F}^- > \\text{O}^{2-} > \\text{N}^{3-} > \\text{Na}^+$', 'All are equal since they are isoelectronic'],
-    correctAnswer: 'A',
+    options: ['$\\text{Na}^+ > \\text{F}^- > \\text{O}^{2-} > \\text{N}^{3-}$', '$\\text{F}^- > \\text{O}^{2-} > \\text{N}^{3-} > \\text{Na}^+$', '$\\text{N}^{3-} > \\text{O}^{2-} > \\text{F}^- > \\text{Na}^+$', 'All are equal since they are isoelectronic'],
+    correctAnswer: 'C',
     solutionText: `For **isoelectronic species**, the number of electrons is identical (here 10), so the size is controlled purely by the **nuclear charge Z**:
 - Larger Z pulls the same electron cloud in more tightly → **smaller radius**.
 - Lower Z with more negative charge → the cloud expands → **larger radius**.
@@ -445,8 +451,8 @@ $$\\text{N}^{3-} > \\text{O}^{2-} > \\text{F}^- > \\text{Na}^+$$
   {
     subject: 'CHEMISTRY', section: 'A',
     text: `For an **ideal** binary solution of liquids A and B, which one of the following statements is **false**?`,
-    options: ['The A–B intermolecular interactions are stronger than both A–A and B–B interactions', 'The enthalpy of mixing is zero', 'The volume change on mixing is zero', `It obeys Raoult's law over the entire range of composition`],
-    correctAnswer: 'A',
+    options: ['The enthalpy of mixing is zero', 'The volume change on mixing is zero', `It obeys Raoult's law over the entire range of composition`, 'The A–B intermolecular interactions are stronger than both A–A and B–B interactions'],
+    correctAnswer: 'D',
     solutionText: `An **ideal solution** is defined by the following properties:
 
 1. It obeys **Raoult's law** over the whole composition range: $p_A = x_A p_A^\\circ$, $p_B = x_B p_B^\\circ$ ✓ (true)
@@ -456,7 +462,7 @@ $$\\text{N}^{3-} > \\text{O}^{2-} > \\text{F}^- > \\text{Na}^+$$
 
 If A–B interactions were *stronger* than A–A and B–B, mixing would release heat ($\\Delta H_{\\text{mix}} < 0$) and the vapour pressures would fall **below** Raoult's-law values — a **negative deviation** (e.g. chloroform + acetone, with H-bonding). Such a solution is NOT ideal.
 
-Hence the **false** statement is (A).
+Hence the **false** statement is (D).
 
 (Note: mixing of an ideal solution is still spontaneous because $\\Delta S_{\\text{mix}} > 0$, making $\\Delta G_{\\text{mix}} = -T\\Delta S_{\\text{mix}} < 0$.)`,
     formulaConcept: 'Ideal solution: ΔH_mix = 0, ΔV_mix = 0, Raoult\'s law obeyed exactly; A–B = A–A = B–B interactions.',
@@ -486,9 +492,13 @@ Hence **toluene** undergoes electrophilic substitution most readily — the meth
       kind: 'organic',
       parts: [
         { type: 'ring', x: 100, y: 95, label: '(A) toluene', substituents: [{ position: 0, label: 'CH₃' }] },
-        { type: 'ring', x: 260, y: 95, label: '(B)', substituents: [{ position: 0, label: 'Cl' }] },
-        { type: 'ring', x: 420, y: 95, label: '(C)', substituents: [{ position: 0, label: 'NO₂' }] },
-        { type: 'ring', x: 560, y: 95, label: '(D)' },
+        { type: 'ring', x: 260, y: 95, label: '(B) chlorobenzene', substituents: [{ position: 0, label: 'Cl' }] },
+        { type: 'ring', x: 420, y: 95, label: '(C) nitrobenzene', substituents: [{ position: 0, label: 'NO₂' }] },
+        { type: 'ring', x: 560, y: 95, label: '(D) benzene' },
+        { type: 'text', x: 100, y: 135, text: 'activating (+I, hyperconj.)' },
+        { type: 'text', x: 260, y: 135, text: 'deactivating, o/p-director' },
+        { type: 'text', x: 420, y: 135, text: 'strongly deactivating, meta-dir.' },
+        { type: 'text', x: 560, y: 135, text: 'reference' },
       ],
     },
   },

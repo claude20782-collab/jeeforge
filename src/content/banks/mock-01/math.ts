@@ -10,8 +10,8 @@ export const MATHEMATICS_MOCK01: SeedQuestion[] = [
   {
     subject: 'MATHEMATICS', section: 'A',
     text: `If $\\alpha$ and $\\beta$ are the roots of $x^2 - x + 1 = 0$, then the value of $\\alpha^{2057} + \\beta^{2057}$ is:`,
-    options: ['1', '−1', '2', '−2'],
-    correctAnswer: 'A',
+    options: ['−1', '2', '−2', '1'],
+    correctAnswer: 'D',
     solutionText: `The roots of $x^2 - x + 1 = 0$ are
 $$\\alpha, \\beta = \\frac{1 \\pm i\\sqrt{3}}{2} = e^{\\pm i\\pi/3}$$
 
@@ -33,8 +33,8 @@ $$s_{2057} = s_5 = \\boxed{1}$$`,
   {
     subject: 'MATHEMATICS', section: 'A',
     text: `The sum $\\displaystyle\\sum_{n=1}^{\\infty} \\frac{n(n+1)}{2^n}$ equals:`,
-    options: ['8', '4', '6', '16'],
-    correctAnswer: 'A',
+    options: ['4', '8', '6', '16'],
+    correctAnswer: 'B',
     solutionText: `Use the standard generating-function identity (valid for $|x| < 1$):
 $$\\sum_{n=1}^{\\infty} n(n+1)x^n = \\frac{2x}{(1-x)^3}$$
 
@@ -51,8 +51,8 @@ $$\\sum_{n=1}^{\\infty} \\frac{n(n+1)}{2^n} = \\frac{2\\times\\tfrac{1}{2}}{\\le
   {
     subject: 'MATHEMATICS', section: 'A',
     text: `The number of ways to distribute 10 identical candies among 4 children such that each child receives at least one candy and no child receives more than 4 is:`,
-    options: ['44', '84', '80', '40'],
-    correctAnswer: 'A',
+    options: ['84', '80', '44', '40'],
+    correctAnswer: 'C',
     solutionText: `We count integer solutions of
 $$x_1 + x_2 + x_3 + x_4 = 10, \\qquad 1 \\le x_i \\le 4$$
 
@@ -97,8 +97,8 @@ Hence the required coefficient is $\\binom{51}{6} = 18{,}009{,}460$.
   {
     subject: 'MATHEMATICS', section: 'A',
     text: `If $A$ is a $3 \\times 3$ matrix with $\\det(A) = 2$, then $\\det\\left(\\text{adj}\\left(A^{-1}\\right)\\right)$ equals:`,
-    options: ['$\\dfrac{1}{4}$', '$4$', '$\\dfrac{1}{2}$', '$2$'],
-    correctAnswer: 'A',
+    options: ['$4$', '$\\dfrac{1}{4}$', '$\\dfrac{1}{2}$', '$2$'],
+    correctAnswer: 'B',
     solutionText: `**Key facts** (for $n \\times n$ matrices):
 1. $\\det(A^{-1}) = \\dfrac{1}{\\det A}$
 2. $\\det(\\text{adj}\\, B) = (\\det B)^{n-1}$
@@ -117,8 +117,8 @@ $$\\det\\left(\\text{adj}\\left(A^{-1}\\right)\\right) = \\left(\\det(A^{-1})\\r
   {
     subject: 'MATHEMATICS', section: 'A',
     text: `If $z$ is a complex number with $|z| = 2$, then the **maximum** value of $|z + \\tfrac{1}{z}|$ is:`,
-    options: ['$\\dfrac{5}{2}$', '$2$', '$3$', '$4$'],
-    correctAnswer: 'A',
+    options: ['$2$', '$3$', '$4$', '$\\dfrac{5}{2}$'],
+    correctAnswer: 'D',
     solutionText: `Write $z = 2(\\cos\\theta + i\\sin\\theta)$. Then
 $$\\frac{1}{z} = \\frac{1}{2}(\\cos\\theta - i\\sin\\theta)$$
 
@@ -134,12 +134,21 @@ attained at $\\theta = 0$ or $\\pi$ (i.e. $z = \\pm 2$). (2 is the minimum on th
     sourceType: 'ORIGINAL', sourceNote: 'Ellipse-locus maximisation.',
     diagram: {
       kind: 'geometry',
-      xRange: [-3, 3], yRange: [-2, 2], showGrid: true,
+      xRange: [-3.2, 3.2], yRange: [-2.6, 2.6], showGrid: true,
       title: 'Locus of w = z + 1/z for |z| = 2',
       elements: [
+        { type: 'circle', cx: 0, cy: 0, r: 2, dashed: true, color: 'var(--chart-5)', label: 'circle |z| = 2' },
         { type: 'ellipse', cx: 0, cy: 0, a: 2.5, b: 1.5, label: 'w-plane locus' },
-        { type: 'point', x: 2.5, y: 0, label: 'max |w| = 5/2', labelPos: 'SE' },
-        { type: 'point', x: 0, y: 1.5, label: '3/2', labelPos: 'E' },
+        { type: 'line', from: [-3, 0], to: [3, 0], dashed: true, color: 'var(--muted-foreground)' },
+        { type: 'line', from: [0, -2.4], to: [0, 2.4], dashed: true, color: 'var(--muted-foreground)' },
+        { type: 'point', x: 2, y: 0, label: 'z = 2', labelPos: 'SE', color: 'var(--chart-5)' },
+        { type: 'point', x: 2.5, y: 0, label: 'w = 5/2 (max |w|)', labelPos: 'SE' },
+        { type: 'point', x: -2, y: 0, label: 'z = −2', labelPos: 'SW', color: 'var(--chart-5)' },
+        { type: 'point', x: -2.5, y: 0, label: 'w = −5/2', labelPos: 'SW' },
+        { type: 'point', x: 0, y: 2, label: 'z = 2i', labelPos: 'W', color: 'var(--chart-5)' },
+        { type: 'point', x: 0, y: 1.5, label: 'w = 3i/2', labelPos: 'E' },
+        { type: 'segment', from: [2, 0], to: [2.5, 0], label: 'a = 2.5', color: 'var(--gold)' },
+        { type: 'segment', from: [0, 0], to: [0, 1.5], label: 'b = 1.5', color: 'var(--chart-2)' },
       ],
     },
   },
@@ -165,8 +174,8 @@ $$2^{10} = 1024$$
   {
     subject: 'MATHEMATICS', section: 'A',
     text: `$\\displaystyle\\lim_{x \\to 0} \\frac{\\sin x - x + \\dfrac{x^3}{6}}{x^5}$ equals:`,
-    options: ['$\\dfrac{1}{120}$', '$-\\dfrac{1}{120}$', '$\\dfrac{1}{6}$', '$0$'],
-    correctAnswer: 'A',
+    options: ['$-\\dfrac{1}{120}$', '$\\dfrac{1}{6}$', '$\\dfrac{1}{120}$', '$0$'],
+    correctAnswer: 'C',
     solutionText: `Use the Maclaurin expansion of $\\sin x$:
 $$\\sin x = x - \\frac{x^3}{6} + \\frac{x^5}{120} - \\dots$$
 
@@ -184,8 +193,8 @@ $$\\lim_{x\\to 0}\\frac{\\frac{x^5}{120} + O(x^7)}{x^5} = \\frac{1}{120}$$
   {
     subject: 'MATHEMATICS', section: 'A',
     text: `The minimum value of $(x-1)^4 + (x+3)^4$ for real $x$ is:`,
-    options: ['32', '16', '8', '64'],
-    correctAnswer: 'A',
+    options: ['16', '8', '64', '32'],
+    correctAnswer: 'D',
     solutionText: `Let
 $$f(x) = (x-1)^4 + (x+3)^4$$
 
@@ -229,8 +238,8 @@ $$I = \\frac{\\pi}{4}$$
   {
     subject: 'MATHEMATICS', section: 'A',
     text: `The area of the region bounded by the parabola $y^2 = 4x$ and the line $y = 2x - 4$ (shown) is:`,
-    options: ['9', '18', '$\\dfrac{32}{3}$', '$\\dfrac{16}{3}$'],
-    correctAnswer: 'A',
+    options: ['18', '$\\dfrac{32}{3}$', '9', '$\\dfrac{16}{3}$'],
+    correctAnswer: 'C',
     solutionText: `**Find the intersections.** Write the parabola as $x = \\dfrac{y^2}{4}$ and the line as $x = \\dfrac{y+4}{2}$:
 $$\\frac{y^2}{4} = \\frac{y+4}{2} \\implies y^2 = 2y + 8 \\implies y^2 - 2y - 8 = 0 \\implies (y-4)(y+2) = 0$$
 
@@ -252,13 +261,16 @@ $$A = \\frac{20}{3} - \\left(-\\frac{7}{3}\\right) = \\frac{27}{3} = 9$$`,
     sourceType: 'ORIGINAL', sourceNote: 'Parabola–line area by horizontal strips.',
     diagram: {
       kind: 'geometry',
-      xRange: [-1, 6], yRange: [-3, 5], showGrid: true,
+      xRange: [-1.5, 6], yRange: [-3, 5], showGrid: true,
       title: 'y² = 4x and y = 2x − 4',
       elements: [
         { type: 'parabola', vertex: [0, 0], a: 0.25, xRange: [0, 6], label: 'y² = 4x' },
-        { type: 'line', from: [2, 0], to: [4.5, 5], label: 'y = 2x−4' },
+        { type: 'line', from: [0.5, -3], to: [4.5, 5], label: 'y = 2x − 4' },
+        { type: 'polygon', points: [[1, -2], [2.5, 1], [4, 4], [1, 2], [0, 0]], color: 'var(--gold)', fill: 'var(--gold)', label: 'A = 9' },
         { type: 'point', x: 1, y: -2, label: '(1, −2)', labelPos: 'SW' },
         { type: 'point', x: 4, y: 4, label: '(4, 4)', labelPos: 'NE' },
+        { type: 'segment', from: [0.25, 1], to: [2.5, 1], dashed: true, color: 'var(--chart-2)', label: 'strip: x from y²/4 to (y+4)/2' },
+        { type: 'label', x: 3.2, y: -2.2, text: 'integrate (right − left) dy' },
       ],
     },
   },
@@ -267,8 +279,8 @@ $$A = \\frac{20}{3} - \\left(-\\frac{7}{3}\\right) = \\frac{27}{3} = 9$$`,
     text: `The order and degree of the differential equation
 $$\\left(\\frac{d^2y}{dx^2}\\right)^{3/2} - \\left(\\frac{dy}{dx}\\right)^{1/2} = 0$$
 (after removing the fractional powers) are respectively:`,
-    options: ['2 and 3', '2 and 2', '1 and 3', '3 and 2'],
-    correctAnswer: 'A',
+    options: ['2 and 2', '2 and 3', '1 and 3', '3 and 2'],
+    correctAnswer: 'B',
     solutionText: `The **order** is the highest derivative present: $\\dfrac{d^2y}{dx^2}$ → order $= 2$.
 
 The **degree** is the power of the highest-order derivative *after* the equation is made a polynomial in derivatives (no fractional powers).
@@ -315,20 +327,23 @@ $$P' = (2\\cdot3 - 1,\\ 2\\cdot4 - 6) = (5, 2)$$
       xRange: [-1, 7], yRange: [-1, 8], showGrid: true, square: true,
       title: 'Reflection of P(1, 6) in y = x + 1',
       elements: [
-        { type: 'line', from: [0, 1], to: [7, 8], label: 'y = x + 1' },
+        { type: 'line', from: [0, 1], to: [7, 8], label: 'y = x + 1 (mirror, slope 1)' },
         { type: 'point', x: 1, y: 6, label: 'P(1, 6)', labelPos: 'N' },
         { type: 'point', x: 5, y: 2, label: "P'(5, 2)", labelPos: 'E' },
-        { type: 'segment', from: [1, 6], to: [5, 2], dashed: true },
-        { type: 'point', x: 3, y: 4, label: 'M(3, 4)', labelPos: 'W' },
+        { type: 'segment', from: [1, 6], to: [5, 2], dashed: true, label: "PP' (slope −1)" },
+        { type: 'point', x: 3, y: 4, label: 'M(3, 4) = midpoint', labelPos: 'W' },
         { type: 'angleArc', at: [3, 4], fromDeg: 135, toDeg: 180, r: 20, label: '90°' },
+        { type: 'segment', from: [1, 6], to: [3, 4], label: 'd', color: 'var(--chart-2)', dashed: true },
+        { type: 'segment', from: [3, 4], to: [5, 2], label: 'd', color: 'var(--chart-2)', dashed: true },
+        { type: 'label', x: 5.8, y: 6.5, text: "P' = 2M − P" },
       ],
     },
   },
   {
     subject: 'MATHEMATICS', section: 'A',
     text: `The radical axis of the circles $x^2 + y^2 = 4$ and $x^2 + y^2 - 4x + 2y - 4 = 0$ is:`,
-    options: ['$2x - y = 0$', '$2x + y = 0$', '$x - 2y = 0$', '$x + 2y = 0$'],
-    correctAnswer: 'A',
+    options: ['$2x + y = 0$', '$x - 2y = 0$', '$x + 2y = 0$', '$2x - y = 0$'],
+    correctAnswer: 'D',
     solutionText: `The **radical axis** of two circles $S_1 = 0$ and $S_2 = 0$ is $S_1 - S_2 = 0$.
 
 Here:
@@ -337,7 +352,7 @@ $$S_1 = x^2 + y^2 - 4, \\qquad S_2 = x^2 + y^2 - 4x + 2y - 4$$
 **Subtract:**
 $$S_1 - S_2 = 4x - 2y = 0 \\implies 2x - y = 0$$
 
-The radical axis is the line $2x - y = 0$ (i.e. $y = 2x$), which passes through the origin — as expected, since both circles pass through the origin's neighbourhood... in fact both circles pass through $(0, \\pm)$-type common points would make the radical axis their common chord. *(Check: subtracting cancels the quadratic terms — always true for two circles, so the radical axis is always a straight line.)*`,
+The radical axis is the line $2x - y = 0$ (i.e. $y = 2x$). *(Check: subtracting cancels the quadratic terms — always true for two circles, so the radical axis is always a straight line. Here the two circles actually intersect — putting $y = 2x$ into $x^2 + y^2 = 4$ gives $x = \\pm\\tfrac{2}{\\sqrt{5}}$ — so the radical axis is precisely their common chord.)*`,
     formulaConcept: 'Radical axis: $S_1 - S_2 = 0$ (quadratic terms cancel → a line).',
     difficulty: 'MODERATE', chapterSlug: 'circles', topicSlug: 'radical-axis',
     sourceType: 'ORIGINAL', sourceNote: 'Radical axis by subtraction.',
@@ -345,8 +360,8 @@ The radical axis is the line $2x - y = 0$ (i.e. $y = 2x$), which passes through 
   {
     subject: 'MATHEMATICS', section: 'A',
     text: `For the parabola $y^2 = 12x$ (shown), the focal distance of the point on it whose ordinate is 6 is:`,
-    options: ['6', '3', '9', '4'],
-    correctAnswer: 'A',
+    options: ['3', '9', '6', '4'],
+    correctAnswer: 'C',
     solutionText: `Compare $y^2 = 12x$ with $y^2 = 4ax$:
 $$4a = 12 \\implies a = 3$$
 
@@ -366,34 +381,35 @@ The focal distance of any point $(x_1, y_1)$ on $y^2 = 4ax$ equals $x_1 + a$ —
     sourceType: 'ORIGINAL', sourceNote: 'Focal distance computation.',
     diagram: {
       kind: 'geometry',
-      xRange: [-1, 6], yRange: [-7, 7], showGrid: false,
+      xRange: [-4, 6.5], yRange: [-7, 7], showGrid: true,
       title: 'y² = 12x (a = 3)',
       elements: [
         { type: 'parabola', vertex: [0, 0], a: 0.25, xRange: [0, 6], label: 'y² = 12x' },
-        { type: 'point', x: 3, y: 0, label: 'S(3, 0)', labelPos: 'S' },
+        { type: 'line', from: [-3, 3], to: [-3, -3], dashed: true, color: 'var(--chart-4)', label: 'directrix x = −3' },
+        { type: 'point', x: 3, y: 0, label: 'S(3, 0) = focus', labelPos: 'S' },
         { type: 'point', x: 3, y: 6, label: 'P(3, 6)', labelPos: 'N' },
-        { type: 'segment', from: [3, 0], to: [3, 6], label: 'SP = 6' },
-        { type: 'line', from: [-1, 0], to: [6, 0], dashed: true },
+        { type: 'point', x: 0, y: 0, label: 'V(0, 0)', labelPos: 'SW' },
+        { type: 'segment', from: [3, 0], to: [3, 6], label: 'SP = x₁ + a = 6', color: 'var(--chart-3)' },
+        { type: 'segment', from: [-3, 6], to: [3, 6], dashed: true, color: 'var(--chart-2)', label: "dist. to directrix = x₁ + a = 6" },
+        { type: 'line', from: [-4, 0], to: [6, 0], dashed: true },
+        { type: 'point', x: -3, y: 6, label: 'M_d(−3, 6)', labelPos: 'NW', color: 'var(--chart-2)' },
       ],
     },
   },
   {
     subject: 'MATHEMATICS', section: 'A',
     text: `If the length of the latus rectum of an ellipse is equal to half of its minor axis, then the eccentricity of the ellipse is:`,
-    options: ['$\\dfrac{\\sqrt{3}}{2}$', '$\\dfrac{1}{2}$', '$\\dfrac{1}{\\sqrt{2}}$', '$\\dfrac{2}{\\sqrt{3}}$'],
-    correctAnswer: 'A',
+    options: ['$\\dfrac{1}{2}$', '$\\dfrac{\\sqrt{3}}{2}$', '$\\dfrac{1}{\\sqrt{2}}$', '$\\dfrac{2}{\\sqrt{3}}$'],
+    correctAnswer: 'B',
     solutionText: `For the ellipse $\\dfrac{x^2}{a^2} + \\dfrac{y^2}{b^2} = 1$ ($a > b$):
 - Latus rectum: $\\text{LR} = \\dfrac{2b^2}{a}$
 - Eccentricity: $e^2 = 1 - \\dfrac{b^2}{a^2}$
 
-**Given condition:**
-$$\\frac{2b^2}{a} = \\frac{b}{2} \\implies 4b^2 = ab \\implies b = \\frac{a}{4}b?$$
+**Given condition:** the latus rectum equals half the minor axis. The minor axis is $2b$, so half of it is $b$:
+$$\\frac{2b^2}{a} = b$$
 
-Wait — carefully: $\\dfrac{2b^2}{a} = \\dfrac{b}{2}$ gives $4b^2 = ab$, and since $b \\neq 0$:
-$$4b = a \\implies b = \\frac{a}{4}$$
-
-Hmm — check: LR $= \\tfrac{1}{2}(\\text{minor axis}) = \\tfrac{1}{2}(2b) = b$. So the condition is $\\tfrac{2b^2}{a} = b$, i.e.
-$$2b^2 = ab \\implies 2b = a \\implies b = \\frac{a}{2}$$
+Since $b \\neq 0$:
+$$\\frac{2b}{a} = 1 \\implies b = \\frac{a}{2}$$
 
 **Eccentricity:**
 $$e^2 = 1 - \\frac{b^2}{a^2} = 1 - \\frac{1}{4} = \\frac{3}{4} \\implies e = \\frac{\\sqrt{3}}{2}$$
@@ -404,14 +420,19 @@ $$e^2 = 1 - \\frac{b^2}{a^2} = 1 - \\frac{1}{4} = \\frac{3}{4} \\implies e = \\f
     sourceType: 'ORIGINAL', sourceNote: 'Latus-rectum condition on eccentricity.',
     diagram: {
       kind: 'geometry',
-      xRange: [-3, 3], yRange: [-2, 2], showGrid: false,
-      title: 'Ellipse with b = a/2',
+      xRange: [-3, 3], yRange: [-1.8, 1.8], showGrid: true,
+      title: 'Ellipse with b = a/2 (a = 2, b = 1)',
       elements: [
         { type: 'ellipse', cx: 0, cy: 0, a: 2, b: 1 },
-        { type: 'point', x: 2, y: 0, label: 'a', labelPos: 'SE' },
-        { type: 'point', x: 0, y: 1, label: 'b = a/2', labelPos: 'NW' },
-        { type: 'line', from: [2, 0], to: [0, 0], dashed: true },
-        { type: 'line', from: [0, 0], to: [0, 1], dashed: true },
+        { type: 'point', x: 2, y: 0, label: 'A(a, 0)', labelPos: 'SE' },
+        { type: 'point', x: -2, y: 0, label: "A'", labelPos: 'SW' },
+        { type: 'point', x: 0, y: 1, label: 'B(0, b = a/2)', labelPos: 'NW' },
+        { type: 'point', x: 1.73, y: 0, label: 'F₁(√3, 0)', labelPos: 'NE', color: 'var(--chart-3)' },
+        { type: 'point', x: -1.73, y: 0, label: 'F₂(−√3, 0)', labelPos: 'NW', color: 'var(--chart-3)' },
+        { type: 'line', from: [2, 0], to: [0, 0], dashed: true, label: 'a = 2' },
+        { type: 'line', from: [0, 0], to: [0, 1], dashed: true, label: 'b = 1' },
+        { type: 'segment', from: [1.73, 0.5], to: [1.73, -0.5], color: 'var(--chart-5)', label: 'LR = 2b²/a = 1' },
+        { type: 'segment', from: [-1.73, 0.5], to: [-1.73, -0.5], color: 'var(--chart-5)' },
       ],
     },
   },
@@ -429,7 +450,7 @@ $$= 1(1 - 0) - 1(0 - 1) + 0 = 1 + 1 = 2$$
 
 So $\\vec{a}\\cdot(\\vec{b}\\times\\vec{c}) = 2$.
 
-*(This is also twice the volume of the parallelepiped... — indeed $|[\\vec a\\,\\vec b\\,\\vec c]| = 2$, the volume of the unit-cube complement.)*`,
+*(Geometrically, $|[\\vec a\\,\\vec b\\,\\vec c]| = 2$ is the volume of the parallelepiped spanned by $\\vec a, \\vec b, \\vec c$.)*`,
     formulaConcept: 'Scalar triple product $[\\vec a\\,\\vec b\\,\\vec c]$ = determinant of components; geometrically the volume of the parallelepiped.',
     difficulty: 'MODERATE', chapterSlug: 'vector-algebra', topicSlug: 'scalar-triple-product',
     sourceType: 'ORIGINAL', sourceNote: 'Unit-vector triple product.',
@@ -437,8 +458,8 @@ So $\\vec{a}\\cdot(\\vec{b}\\times\\vec{c}) = 2$.
   {
     subject: 'MATHEMATICS', section: 'A',
     text: `The angle between two lines whose direction ratios are $(2, 3, 6)$ and $(1, 2, 2)$ (vectors shown) is:`,
-    options: ['$\\cos^{-1}\\left(\\dfrac{20}{21}\\right)$', '$\\sin^{-1}\\left(\\dfrac{20}{21}\\right)$', '$\\tan^{-1}\\left(\\dfrac{20}{21}\\right)$', '$\\cos^{-1}\\left(\\dfrac{2}{3}\\right)$'],
-    correctAnswer: 'A',
+    options: ['$\\sin^{-1}\\left(\\dfrac{20}{21}\\right)$', '$\\tan^{-1}\\left(\\dfrac{20}{21}\\right)$', '$\\cos^{-1}\\left(\\dfrac{2}{3}\\right)$', '$\\cos^{-1}\\left(\\dfrac{20}{21}\\right)$'],
+    correctAnswer: 'D',
     solutionText: `The angle $\\theta$ between directions $\\vec{u} = (2,3,6)$ and $\\vec{v} = (1,2,2)$ satisfies
 $$\\cos\\theta = \\frac{|\\vec{u}\\cdot\\vec{v}|}{|\\vec{u}||\\vec{v}|}$$
 
@@ -459,17 +480,23 @@ $$\\cos\\theta = \\frac{20}{7\\times3} = \\frac{20}{21} \\implies \\theta = \\co
       kind: 'v3d',
       axesLength: 4,
       vectors: [
-        { to: [2, 3, 6], label: 'u = (2,3,6)' },
-        { to: [1, 2, 2], label: 'v = (1,2,2)', color: 'var(--chart-5)' },
+        { to: [2, 3, 6], label: 'u = (2,3,6), |u| = 7' },
+        { to: [1, 2, 2], label: 'v = (1,2,2), |v| = 3', color: 'var(--chart-5)' },
       ],
-      showGrid: false,
+      planes: [
+        { points: [[0, 0, 0], [2, 3, 6], [1, 2, 2]], label: 'plane of u, v', color: 'var(--chart-4)', opacity: 0.25 },
+      ],
+      lines: [
+        { from: [2, 3, 6], to: [1, 2, 2], dashed: true, color: 'var(--muted-foreground)' },
+      ],
+      showGrid: true,
     },
   },
   {
     subject: 'MATHEMATICS', section: 'A',
     text: `A box contains three coins: two fair coins and one double-headed coin. A coin is selected at random and tossed. Given that it shows **heads**, the probability that the selected coin was the double-headed one is:`,
-    options: ['$\\dfrac{1}{2}$', '$\\dfrac{1}{3}$', '$\\dfrac{2}{3}$', '$\\dfrac{3}{4}$'],
-    correctAnswer: 'A',
+    options: ['$\\dfrac{1}{3}$', '$\\dfrac{1}{2}$', '$\\dfrac{2}{3}$', '$\\dfrac{3}{4}$'],
+    correctAnswer: 'B',
     solutionText: `Use **Bayes' theorem**. Events: $D$ = "double-headed coin chosen", $F$ = "fair coin chosen"; evidence $H$ = "toss shows heads".
 
 **Prior:**
@@ -492,8 +519,8 @@ $$P(D \\mid H) = \\frac{P(H \\mid D)P(D)}{P(H)} = \\frac{\\tfrac{1}{3}}{\\tfrac{
   {
     subject: 'MATHEMATICS', section: 'A',
     text: `The marks obtained by 30 students are shown in the frequency table. The mean of the data is:`,
-    options: ['5.9', '6.0', '5.8', '6.2'],
-    correctAnswer: 'A',
+    options: ['6.0', '5.8', '5.9', '6.2'],
+    correctAnswer: 'C',
     solutionText: `The mean of a frequency distribution is
 $$\\bar{x} = \\frac{\\sum f_i x_i}{\\sum f_i}$$
 
@@ -513,9 +540,12 @@ $$\\bar{x} = \\frac{177}{30} = 5.9$$
     diagram: {
       kind: 'table',
       headers: ['Marks (x)', '4', '5', '6', '7', '8'],
-      rows: [['No. of students (f)', '4', '7', '10', '6', '3']],
-      caption: 'Marks of 30 students',
-      highlightCells: [[0, 4]],
+      rows: [
+        ['No. of students (f)', '4', '7', '10', '6', '3'],
+        ['f · x', '16', '35', '60', '42', '24'],
+      ],
+      caption: 'Σf·x = 177, Σf = 30 → mean = 177/30 = 5.9',
+      highlightCells: [[0, 4], [1, 4]],
     },
   },
   // ---------------- SECTION B (numerical) Q71–Q75 ----------------
@@ -558,11 +588,7 @@ $$I = \\int_{-\\pi/4}^{\\pi/4}\\tan^2 x\\,dx = 2\\int_0^{\\pi/4}\\tan^2x\\,dx$$
 $$I = 2\\int_0^{\\pi/4}(\\sec^2x - 1)\\,dx = 2\\Big[\\tan x - x\\Big]_0^{\\pi/4} = 2\\left(1 - \\frac{\\pi}{4}\\right)$$
 
 **Numerically:**
-$$I = 2 - \\frac{3.1416}{4} = 2 - 0.7854 = 1.2146?$$
-
-Wait — recompute: $2\\left(1 - \\dfrac{\\pi}{4}\\right) = 2 - \\dfrac{\\pi}{2} = 2 - 1.5708 = 0.4292$.
-
-$$I = 2 - \\frac{\\pi}{2} \\approx 0.43$$
+$$I = 2\\left(1 - \\frac{\\pi}{4}\\right) = 2 - \\frac{\\pi}{2} = 2 - 1.5708 = 0.4292 \\approx 0.43$$
 
 *(The odd terms must be discarded first — integrating $x\\cos x$ by parts individually would give the same zero, at far more effort.)*`,
     formulaConcept: 'Odd functions integrate to zero on symmetric intervals; $\\tan^2 x = \\sec^2 x - 1$.',

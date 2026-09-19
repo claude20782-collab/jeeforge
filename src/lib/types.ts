@@ -68,6 +68,8 @@ export type CircuitComponent =
   | { type: 'battery' | 'cell' | 'acsource'; x1: number; y1: number; x2: number; y2: number; label?: string; value?: string }
   | { type: 'switch'; x1: number; y1: number; x2: number; y2: number; label?: string; closed?: boolean }
   | { type: 'ammeter' | 'voltmeter'; x1: number; y1: number; x2: number; y2: number; label?: string; value?: string }
+  | { type: 'arrow'; x1: number; y1: number; x2: number; y2: number; label?: string; color?: string } // current/direction arrow (R5-b2, additive)
+  | { type: 'diode'; x1: number; y1: number; x2: number; y2: number; label?: string; value?: string } // semiconductor diode, forward dir a→b (R5-b3, additive)
 
 export interface RayDiagram {
   kind: 'ray'
@@ -83,8 +85,9 @@ export interface RayDiagram {
 export interface FbdDiagram {
   kind: 'fbd'
   bodies: Array<{
-    type: 'block' | 'incline' | 'rod' | 'pulley' | 'string' | 'ground' | 'wall' | 'sphere' | 'cart'
+    type: 'block' | 'incline' | 'rod' | 'pulley' | 'string' | 'ground' | 'wall' | 'sphere' | 'cart' | 'spring'
     x: number; y: number; w?: number; h?: number; angle?: number; label?: string; r?: number
+    x2?: number; y2?: number // spring coil endpoint (R5-b3, additive; start = x,y)
   }>
   forces: Array<{ from: [number, number]; to: [number, number]; label?: string; color?: string; dashed?: boolean }>
   dims?: Array<{ from: [number, number]; to: [number, number]; label?: string }> // dimension lines
@@ -161,7 +164,7 @@ export interface OrganicDiagram {
 }
 export type OrganicPart =
   | { type: 'ring'; x: number; y: number; ringSize?: number; label?: string; hetero?: Array<[number, string]>; aromatic?: boolean; substituents?: Array<{ position: number; label: string; bond?: 'single' | 'double' | 'wedge' | 'hash' | 'plain' }> }
-  | { type: 'chain'; x: number; y: number; atoms: Array<{ sym: string; dir?: 'up' | 'down' }>; label?: string }
+  | { type: 'chain'; x: number; y: number; atoms: Array<{ sym: string; dir?: 'up' | 'down' }>; label?: string; double?: number[] } // double[i]: bond i→i+1 is double (R5-b2, additive)
   | { type: 'arrow'; x1: number; y1: number; x2: number; y2: number; label?: string; labelAbove?: boolean }
   | { type: 'text'; x: number; y: number; text: string; bold?: boolean }
   | { type: 'plus'; x: number; y: number }
