@@ -156,6 +156,8 @@ async function main() {
   const banks: SeedBank[] = []
   const { BANK: m01 } = await import('../src/content/banks/mock-01/index')
   banks.push(m01)
+  const { BANK: m02 } = await import('../src/content/banks/mock-02/index')
+  banks.push(m02)
   for (const bank of banks) {
     await seedBank(bank)
   }

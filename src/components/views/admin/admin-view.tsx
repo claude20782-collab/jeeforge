@@ -43,8 +43,8 @@ export function AdminView({ subpath }: { subpath: string }) {
 
   // keep tab in sync with direct hash navigation (#/admin/reports etc.)
   useEffect(() => {
-    const t = subpath.split('/')[0] || 'overview'
-    setTab(t)
+    const t = setTimeout(() => setTab(subpath.split('/')[0] || 'overview'), 0)
+    return () => clearTimeout(t)
   }, [subpath])
 
   if (user && user.role !== 'ADMIN') {

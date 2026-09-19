@@ -314,7 +314,8 @@ async function handleGroupMessage(ctx: HandlerCtx, args: unknown[]): Promise<voi
   const { socket, user, io } = ctx
   const ack = isAck(args[args.length - 1]) ? (args[args.length - 1] as Ack) : undefined
   const fail = (message: string) => {
-    ack ? ack({ ok: false, error: message }) : socket.emit('error', { scope: 'group:message', message })
+    if (ack) ack({ ok: false, error: message })
+    else socket.emit('error', { scope: 'group:message', message })
   }
   const groupId = validId(args[0])
   const content = validContent(args[1])
@@ -429,7 +430,8 @@ async function handleDmSend(ctx: HandlerCtx, args: unknown[]): Promise<void> {
   const { socket, user, io } = ctx
   const ack = isAck(args[args.length - 1]) ? (args[args.length - 1] as Ack) : undefined
   const fail = (message: string) => {
-    ack ? ack({ ok: false, error: message }) : socket.emit('error', { scope: 'dm:send', message })
+    if (ack) ack({ ok: false, error: message })
+    else socket.emit('error', { scope: 'dm:send', message })
   }
   const conversationId = validId(args[0])
   const content = validContent(args[1])

@@ -54,7 +54,7 @@ export function AppRoot() {
 
   // hydrate session once
   useEffect(() => {
-    setMounted(true)
+    const m = setTimeout(() => setMounted(true), 0)
     let cancelled = false
     api.get<{ user: PublicUser | null; accessToken: string | null }>('/auth/me')
       .then((res) => {
@@ -66,8 +66,7 @@ export function AppRoot() {
         }
       })
       .catch(() => { if (!cancelled) setUser(null, null) })
-    return () => { cancelled = true }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => { cancelled = true; clearTimeout(m) }
   }, [])
 
   const isCbt = route.path.startsWith('/test/')

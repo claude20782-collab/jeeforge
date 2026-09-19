@@ -15,7 +15,6 @@ export function Avatar({ username, displayName, avatarUrl, size = 36, className 
   const hue = [...(username ?? 'x')].reduce((a, c) => a + c.charCodeAt(0), 0) % 360
   if (avatarUrl) {
     return (
-      // eslint-disable-next-line @next/next/no-img-element
       <img
         src={avatarUrl}
         alt={displayName || username || 'avatar'}

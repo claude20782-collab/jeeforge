@@ -212,7 +212,11 @@ export function ChatInput({
       .slice(0, 6)
   }, [mention, members, myUsername])
 
-  useEffect(() => { setMentionIdx(0) }, [mention?.query, mention?.start])
+  useEffect(() => {
+    // reset highlight index only when the mention context actually changes
+    const t = setTimeout(() => setMentionIdx(0), 0)
+    return () => clearTimeout(t)
+  }, [mention?.query, mention?.start])
 
   const autoResize = () => {
     const el = taRef.current

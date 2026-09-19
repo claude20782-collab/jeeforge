@@ -95,6 +95,15 @@ export function ResultView({ attemptId }: { attemptId: string }) {
                     <Trophy className="mr-1 h-3.5 w-3.5" /> Rank {r.rank} of {r.totalParticipants}
                   </Badge>
                 )}
+                {r.rank != null && r.totalParticipants > 0 && (
+                  <Badge
+                    className="border-violet-400/40 bg-violet-400/10 px-2.5 py-1 text-sm font-bold text-violet-300"
+                    title="NTA-style percentile: 100 × (candidates with score equal to or below yours) ÷ total"
+                  >
+                    <Percent className="mr-1 h-3.5 w-3.5" />
+                    {(((r.totalParticipants - r.rank + 1) / r.totalParticipants) * 100).toFixed(r.totalParticipants > 1 ? 1 : 0)} percentile
+                  </Badge>
+                )}
                 <span className="text-sm text-muted-foreground">{verdict}</span>
               </div>
             </div>

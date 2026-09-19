@@ -19,8 +19,8 @@ import {
   fmtCountdown, mockState, nextActionableMock, startAttempt, useInvalidateMocks, useMocksQuery, useNow,
 } from '@/components/views/mocks/hooks'
 import {
-  CalendarClock, ChevronRight, Flame, ListChecks, Lock, PlayCircle, Radio, RefreshCw,
-  Rocket, Trophy, TrendingUp,
+  CalendarClock, CheckCircle2, ChevronRight, Flame, Hourglass, ListChecks, Lock, PlayCircle,
+  Radio, RefreshCw, Rocket, Trophy, TrendingUp,
 } from 'lucide-react'
 
 export function DashboardView() {
@@ -87,6 +87,15 @@ export function DashboardView() {
           <NextMockCard mock={nextMock} now={now} />
         ) : (
           <AllDoneCard />
+        )}
+      </section>
+
+      {/* 40-mock journey tracker */}
+      <section aria-label="Mock journey" className="mb-8">
+        {loading && !mocks.length ? (
+          <Skeleton className="h-44 w-full rounded-2xl" />
+        ) : (
+          <JourneyCard mocks={mocks} now={now} completed={profile?.stats.mocksCompleted ?? 0} />
         )}
       </section>
 
@@ -258,6 +267,86 @@ function AllDoneCard() {
   )
 }
 
+/* ------------------------------ journey card ------------------------------ */
+
+function JourneyCard({ mocks, now, completed }: { mocks: MockSummary[]; now: number; completed: number }) {
+  const published = mocks.filter(m => m.status === 'PUBLISHED')
+  const unlocked = published.filter(m => new Date(m.scheduledAt).getTime() <= now)
+  const nextUnlocks = published
+    .filter(m => new Date(m.scheduledAt).getTime() > now)
+    .sort((a, b) => a.scheduledAt.localeCompare(b.scheduledAt))
+    .slice(0, 3)
+  const lastUnlock = mocks.reduce((acc, m) => (m.scheduledAt > acc ? m.scheduledAt : acc), '')
+  const daysLeft = lastUnlock ? Math.max(0, Math.ceil((new Date(lastUnlock).getTime() - now) / 86_400_000)) : 0
+  const pct = mocks.length ? Math.round((unlocked.length / mocks.length) * 100) : 0
+
+  return (
+    <Card className="gap-0 overflow-hidden rounded-2xl p-0">
+      <div className="p-6 sm:p-8">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="flex items-center gap-2 text-lg font-semibold sm:text-xl">
+            <Hourglass className="h-5 w-5 text-primary" aria-hidden /> The 40-mock journey
+          </h2>
+          <span className="rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+            {daysLeft} {daysLeft === 1 ? 'day' : 'days'} left in the series
+          </span>
+        </div>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          One full-length mock unlocks at 12:00 AM IST every scheduled day — 19 Sept to 31 Dec 2026.
+          {completed > 0 && <> You’ve completed <span className="font-semibold text-foreground">{completed}</span> of the {unlocked.length} unlocked {unlocked.length === 1 ? 'mock' : 'mocks'}.</>}
+        </p>
+
+        {/* progress bar */}
+        <div className="mt-4">
+          <div className="mb-1.5 flex items-center justify-between text-xs font-medium text-muted-foreground">
+            <span>{unlocked.length} of {mocks.length || 40} mocks unlocked</span>
+            <span className="font-mono tabular-nums">{pct}%</span>
+          </div>
+          <div
+            className="h-2.5 w-full overflow-hidden rounded-full bg-secondary"
+            role="progressbar"
+            aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}
+            aria-label="Series unlock progress"
+          >
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-primary/70 to-primary transition-[width] duration-700"
+              style={{ width: `${Math.max(pct, 2)}%` }}
+            />
+          </div>
+        </div>
+
+        {/* next unlocks strip */}
+        {nextUnlocks.length > 0 && (
+          <ul className="mt-5 grid gap-2.5 sm:grid-cols-3" aria-label="Upcoming unlocks">
+            {nextUnlocks.map(m => {
+              const ms = new Date(m.scheduledAt).getTime() - now
+              return (
+                <li key={m.id} className="rounded-xl border border-border/70 bg-background/40 p-3 transition hover:border-primary/30">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-mono text-xs font-bold text-primary">Mock {String(m.mockNumber).padStart(2, '0')}</span>
+                    <Lock className="h-3.5 w-3.5 text-muted-foreground" aria-hidden />
+                  </div>
+                  <p className="mt-1.5 font-mono text-sm font-semibold tabular-nums">
+                    {fmtCountdown(ms)}
+                  </p>
+                  <p className="mt-0.5 text-[11px] text-muted-foreground">{fmtDateIST(m.scheduledAt)}</p>
+                </li>
+              )
+            })}
+          </ul>
+        )}
+      </div>
+
+      {unlocked.length > 0 && completed >= unlocked.length && (
+        <div className="flex items-center gap-2 border-t border-correct/20 bg-correct/10 px-6 py-2.5 text-sm font-medium text-correct sm:px-8">
+          <CheckCircle2 className="h-4 w-4" aria-hidden />
+          Every unlocked mock attempted — the next unlock is on the house.
+        </div>
+      )}
+    </Card>
+  )
+}
+
 /* -------------------------------- stat card ------------------------------- */
 
 function StatCard({ icon: Icon, label, value }: {
@@ -266,9 +355,13 @@ function StatCard({ icon: Icon, label, value }: {
   value: string
 }) {
   return (
-    <Card className="gap-0 rounded-xl p-5">
+    <Card className="group gap-0 relative overflow-hidden rounded-xl p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-md">
+      <span
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-primary/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      />
       <div className="flex items-center gap-2 text-muted-foreground">
-        <Icon className="h-4 w-4 text-primary" aria-hidden />
+        <Icon className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" aria-hidden />
         <span className="text-xs font-medium uppercase tracking-wide">{label}</span>
       </div>
       <p className="mt-2 text-2xl font-bold tabular-nums">{value}</p>
