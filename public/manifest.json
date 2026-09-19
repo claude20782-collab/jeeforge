@@ -1,0 +1,17 @@
+{
+  "name": "JEEForge — Free JEE Main Mock Test Series",
+  "short_name": "JEEForge",
+  "description": "40 full-length JEE Main mock tests with a realistic CBT interface, complete verified solutions, analytics, leaderboards and community. Free forever.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#171310",
+  "theme_color": "#171310",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

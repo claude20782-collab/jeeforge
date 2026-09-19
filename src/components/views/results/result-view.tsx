@@ -4,6 +4,7 @@
 // Hero score + rank, stat grid, per-subject cards, action buttons. Print-friendly.
 // ============================================================================
 import { motion } from 'framer-motion'
+import { toast } from 'sonner'
 import { useResultQuery, PageShell, ErrorPanel, ViewSkeleton, SubjectBadge, type QStatus } from './shared'
 import { Link, navigate } from '@/lib/router'
 import { fmtDateTimeIST, fmtDuration, fmtPercent } from '@/lib/format'
@@ -13,9 +14,52 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import {
   AlertTriangle, ArrowLeft, Award, Ban, BarChart3, Calendar, CheckCircle2, Clock,
-  MinusCircle, Percent, Printer, Target, Trophy, XCircle,
+  MinusCircle, Percent, Printer, Share2, Target, Trophy, XCircle,
 } from 'lucide-react'
-import type { SubjectScore } from '@/lib/types'
+import type { AttemptResult, SubjectScore } from '@/lib/types'
+
+/* ------------------------------ share score ------------------------------- */
+
+async function shareResult(r: AttemptResult) {
+  const pct = r.percentage.toFixed(1)
+  const rankBit = r.rank != null ? `, rank ${r.rank} of ${r.totalParticipants}` : ''
+  const text = `I scored ${r.score}/${r.maxScore} (${pct}%${rankBit}) on ${r.mock.title} — free JEE Main mock tests with complete solutions:`
+  const url = typeof window !== 'undefined'
+    ? `${window.location.origin}/#/mock/${r.mock.mockNumber}`
+    : 'https://jeeforge-static.onrender.com'
+
+  if (typeof navigator !== 'undefined' && navigator.share) {
+    try {
+      await navigator.share({ title: 'My JEEForge mock score', text, url })
+      return
+    } catch {
+      // user cancelled or share failed — fall through to clipboard
+    }
+  }
+  const full = `${text} ${url}`
+  let copied = false
+  try {
+    await navigator.clipboard.writeText(full)
+    copied = true
+  } catch {
+    // clipboard API can be blocked in sandboxed iframes — legacy fallback
+    try {
+      const ta = document.createElement('textarea')
+      ta.value = full
+      ta.style.position = 'fixed'
+      ta.style.opacity = '0'
+      document.body.appendChild(ta)
+      ta.focus()
+      ta.select()
+      copied = document.execCommand('copy')
+      document.body.removeChild(ta)
+    } catch {
+      copied = false
+    }
+  }
+  if (copied) toast.success('Score copied to clipboard — paste it anywhere!')
+  else toast.error(`Copy blocked by the browser — here is your text:\n${full.slice(0, 140)}…`, { duration: 8000 })
+}
 
 export function ResultView({ attemptId }: { attemptId: string }) {
   const q = useResultQuery(attemptId)
@@ -164,6 +208,9 @@ export function ResultView({ attemptId }: { attemptId: string }) {
         <div className="flex flex-wrap items-center gap-2.5 print:hidden">
           <Button onClick={() => navigate(`/solutions/${attemptId}`)}>
             View Solutions
+          </Button>
+          <Button variant="outline" onClick={() => shareResult(r)}>
+            <Share2 className="mr-2 h-4 w-4" /> Share score
           </Button>
           <Button variant="outline" onClick={() => navigate(`/analysis/${attemptId}`)}>
             <BarChart3 className="mr-2 h-4 w-4" /> Detailed Analysis
